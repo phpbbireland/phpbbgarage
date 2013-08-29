@@ -295,24 +295,24 @@ switch( $mode )
 		$garage_template->mileage_dropdown($data['mileage_units']);
 		$garage_template->year_dropdown($years, $data['made_year']);
 		$template->assign_vars(array(
-			'L_TITLE' 		=> $user->lang['CREATE_NEW_VEHICLE'],
-			'L_BUTTON' 		=> $user->lang['CREATE_NEW_VEHICLE'],
+			'L_TITLE' 				=> $user->lang['CREATE_NEW_VEHICLE'],
+			'L_BUTTON' 				=> $user->lang['CREATE_NEW_VEHICLE'],
 			'U_USER_SUBMIT_MAKE' 	=> "javascript:add_make()",
 			'U_USER_SUBMIT_MODEL' 	=> "javascript:add_model()",
-			'MAKE' 			=> $data['make'],
-			'MAKE_ID' 		=> $data['make_id'],
-			'MODEL' 		=> $data['model'],
-			'MODEL_ID' 		=> $data['model_id'],
-			'COLOUR' 		=> $data['colour'],
-			'MILEAGE' 		=> $data['mileage'],
-			'PRICE' 		=> $data['price'],
-			'PRICE_DECIMAL'		=> $data['price_decimal'],
-			'COMMENTS' 		=> $data['comments'],
-			'URL_IMAGE'		=> $data['url_image'],
+			'MAKE' 					=> $data['make'],
+			'MAKE_ID' 				=> $data['make_id'],
+			'MODEL' 				=> $data['model'],
+			'MODEL_ID' 				=> $data['model_id'],
+			'COLOUR' 				=> $data['colour'],
+			'MILEAGE' 				=> $data['mileage'],
+			'PRICE' 				=> $data['price'],
+			'PRICE_DECIMAL'			=> $data['price_decimal'],
+			'COMMENTS' 				=> $data['comments'],
+			'URL_IMAGE'				=> $data['url_image'],
 			'S_DISPLAY_SUBMIT_MAKE'	=> $garage_config['enable_user_submit_make'],
 			'S_DISPLAY_SUBMIT_MODEL'=> $garage_config['enable_user_submit_model'],
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_vehicle"))
+			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_vehicle"))
 		);
 		$garage_template->sidemenu();		
 	break;
@@ -457,25 +457,25 @@ switch( $mode )
 		$garage_template->year_dropdown($years, (!empty($store['made_year'])) ? $store['made_year'] : $data['made_year']);
 		$garage_template->attach_image('vehicle');
 		$template->assign_vars(array(
-       			'L_TITLE' 		=> $user->lang['EDIT_VEHICLE'],
-			'L_BUTTON' 		=> $user->lang['EDIT_VEHICLE'],
-			'U_EDIT_DATA' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid"),
-			'U_MANAGE_GALLERY' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=manage_vehicle_gallery&amp;VID=$vid"),
+       		'L_TITLE' 				=> $user->lang['EDIT_VEHICLE'],
+			'L_BUTTON' 				=> $user->lang['EDIT_VEHICLE'],
+			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid"),
+			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=manage_vehicle_gallery&amp;VID=$vid"),
 			'U_USER_SUBMIT_MAKE' 	=> "javascript:add_make('edit')",
 			'U_USER_SUBMIT_MODEL' 	=> "javascript:add_model('edit')",
-			'VID' 			=> $vid,
-			'MAKE_ID' 		=> (!empty($store['make_id'])) ? $store['make_id'] : $data['make_id'],
-			'MODEL_ID' 		=> (!empty($store['model_id'])) ? $store['model_id'] : $data['model_id'],
-			'COLOUR' 		=> (!empty($store['colour'])) ? $store['colour'] : $data['colour'],
-			'MILEAGE' 		=> (!empty($store['mileage'])) ? $store['mileage'] : $data['mileage'],
-			'PRICE' 		=> (!empty($store['price'])) ? $store['price'] : $data['price'],
-			'PRICE_DECIMAL'		=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
-			'COMMENTS' 		=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
-			'REDIRECT' 		=> $store['redirect'],
+			'VID' 					=> $vid,
+			'MAKE_ID' 				=> (!empty($store['make_id'])) ? $store['make_id'] : $data['make_id'],
+			'MODEL_ID' 				=> (!empty($store['model_id'])) ? $store['model_id'] : $data['model_id'],
+			'COLOUR' 				=> (!empty($store['colour'])) ? $store['colour'] : $data['colour'],
+			'MILEAGE' 				=> (!empty($store['mileage'])) ? $store['mileage'] : $data['mileage'],
+			'PRICE' 				=> (!empty($store['price'])) ? $store['price'] : $data['price'],
+			'PRICE_DECIMAL'			=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
+			'COMMENTS' 				=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
+			'REDIRECT' 				=> $store['redirect'],
 			'S_DISPLAY_SUBMIT_MAKE'	=> $garage_config['enable_user_submit_make'],
 			'S_DISPLAY_SUBMIT_MODEL'=> $garage_config['enable_user_submit_make'],
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=update_vehicle"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=update_vehicle"),
 			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_vehicle_image"),
 		));
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
@@ -1003,16 +1003,16 @@ switch( $mode )
                				} 
 				}
 				$template->assign_block_vars('year.month', array(
-					'MONTH'			=> $month,
-					'THUMB' 		=> $thumb_image,
-					'VEHICLE'		=> $vehicle_data['vehicle'],
-					'USERNAME' 		=> $vehicle_data['username'],
+					'MONTH'				=> $month,
+					'THUMB' 			=> $thumb_image,
+					'VEHICLE'			=> $vehicle_data['vehicle'],
+					'USERNAME' 			=> $vehicle_data['username'],
 					'IMAGE_TITLE'		=> $vehicle_data['attach_file'],
 					'U_VIEW_IMAGE'		=> append_sid("garage.$phpEx?mode=view_image&amp;image_id=".$vehicle_data['attach_id']),
 					'U_VIEW_VEHICLE' 	=> append_sid("garage_vehicle.$phpEx?mode=view_vehicle&amp;VID=".$vehicle_data['vehicle_id']),
 					'U_VIEW_PROFILE' 	=> append_sid("memberlist.$phpEx?mode=viewprofile&amp;u=".$vehicle_data['user_id']),
 					'USERNAME_COLOUR'	=> get_username_string('colour', $vehicle_data['user_id'], $vehicle_data['username'], $vehicle_data['user_colour']),
-					'RATING'		=> $vehicle_data['total_ratings'],
+					'RATING'			=> $vehicle_data['total_ratings'],
 				));
 			}
 			$tab_id++;
