@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -42,7 +42,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_vehicle.' . $phpEx);
 require($phpbb_root_path . 'includes/mods/class_garage_guestbook.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $vid = request_var('VID', '');
@@ -85,7 +85,7 @@ switch( $mode )
 		*/
 		$vehicle_data = $garage_vehicle->get_vehicle($vid);
 		$comment_data = $garage_guestbook->get_vehicle_comments($vid);
-		
+
 		/**
 		* Handle template declarations & assignments
 		*/
@@ -95,7 +95,7 @@ switch( $mode )
 			'body'   => 'garage_view_guestbook.html')
 		);
 		for ($i = 0, $count = sizeof($comment_data);$i < $count; $i++)
-		{	
+		{
 			$username = $comment_data[$i]['username'];
 			$temp_url = append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $comment_data[$i]['user_id']);
 			$poster = '<a href="' . $temp_url . '">' . $comment_data[$i]['username'] . '</a>';
@@ -117,10 +117,9 @@ switch( $mode )
 			$temp_url = append_sid("{$phpbb_root_path}privmsg.$phpEx", "mode=post&amp;u=".$comment_data[$i]['user_id']);
 			$pm = '<a href="' . $temp_url . '">' . $user->lang['SEND_PRIVATE_MESSAGE'] . '</a>';
 
-			if ( !empty($comment_data[$i]['user_viewemail']) || $auth->acl_get('m_') )
+			if (!empty($comment_data[$i]['user_viewemail']) || $auth->acl_get('m_'))
 			{
 				$email_uri = ( $config['board_email_form'] ) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=email&amp;u=" . $comment_data[$i]['user_id']) : 'mailto:' . $comment_data[$i]['user_email'];
-
 				$email = '<a href="' . $email_uri . '">' . $user->lang['SEND_EMAIL'] . '</a>';
 			}
 			else
@@ -152,17 +151,17 @@ switch( $mode )
 			}
 
 			$template->assign_block_vars('comments', array(
-				'POSTER_NAME' 		=> $poster,
+				'POSTER_NAME' 			=> $poster,
 				'POST_AUTHOR_COLOUR'	=> get_username_string('colour', $comment_data[$i]['user_id'], $comment_data[$i]['username'], $comment_data[$i]['user_colour']),
-				'POSTER_JOINED' 	=> $poster_joined,
-				'POSTER_POSTS' 		=> $poster_posts,
-				'POSTER_FROM' 		=> $poster_from,
-				'POSTER_CAR_MARK' 	=> $poster_car_mark,
-				'POSTER_CAR_MODEL' 	=> $poster_car_model,
-				'POSTER_CAR_YEAR' 	=> $poster_car_year,
-				'VIEW_POSTER_CARPROFILE'=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=$garage_id"),
-				'POSTER_AVATAR' 	=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
-				'PROFILE_IMG' 		=> $user->img('icon_user_profile', 'READ_PROFILE'),
+				'POSTER_JOINED' 		=> $poster_joined,
+				'POSTER_POSTS' 			=> $poster_posts,
+				'POSTER_FROM' 			=> $poster_from,
+				'POSTER_CAR_MARK' 		=> $poster_car_mark,
+				'POSTER_CAR_MODEL' 		=> $poster_car_model,
+				'POSTER_CAR_YEAR' 		=> $poster_car_year,
+				'VIEW_POSTER_CARPROFILE'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=$garage_id"),
+				'POSTER_AVATAR'				=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
+				'PROFILE_IMG' 	=> $user->img('icon_user_profile', 'READ_PROFILE'),
 				'PROFILE' 		=> $profile,
 				'PM_IMG' 		=> $user->img('icon_contact_pm', 'SEND_PRIVATE_MESSAGE'),
 				'PM'			=> $pm,
@@ -172,7 +171,7 @@ switch( $mode )
 				'WWW'			=> $www,
 				'EDIT_IMG'		=> $edit_img,
 				'EDIT' 			=> $edit,
-				'DELETE_IMG' 		=> $delpost_img,
+				'DELETE_IMG' 	=> $delpost_img,
 				'DELETE' 		=> $delpost,
 				'POSTER' 		=> $poster,
 				'POSTED' 		=> $posted,
@@ -218,7 +217,7 @@ switch( $mode )
 		/**
 		* Get vehicle & user notification data from DB
 		*/
-		$data = $garage_vehicle->get_vehicle($vid);		
+		$data = $garage_vehicle->get_vehicle($vid);
 		$notify_data = $garage_guestbook->notify_on_comment($data['user_id']);
 
 		/**
@@ -243,10 +242,10 @@ switch( $mode )
 				'enable_bbcode'			=> true,
 				'enable_smilies'		=> true,
 				'enable_urls'			=> false,
-				'icon_id'			=> 0,
+				'icon_id'				=> 0,
 				'bbcode_bitfield'		=> $message_parser->bbcode_bitfield,
 				'bbcode_uid'			=> $message_parser->bbcode_uid,
-				'message'			=> $message_parser->message,
+				'message'				=> $message_parser->message,
 				'address_list'			=> array('u' => array($data['user_id'] => 'to')),
 			);
 			submit_pm('post', $user->lang['GUESTBOOK_NOTIFY_SUBJECT'], $pm_data, false, false);
@@ -286,8 +285,8 @@ switch( $mode )
 		/**
 		* Get comment data from DB
 		*/
-		$data = $garage_guestbook->get_comment($comment_id);	
-		
+		$data = $garage_guestbook->get_comment($comment_id);
+
 		/**
 		* Handle template declarations & assignments
 		*/
@@ -317,7 +316,7 @@ switch( $mode )
 		* Handle text in the phpBB standard UTF8 way, allowing bbcode, urls & smilies
 		*/
 		$text = utf8_normalize_nfc(request_var('comments', '', true));
-		$uid = $bitfield = $flags = ''; 
+		$uid = $bitfield = $flags = '';
 		$allow_bbcode = $allow_urls = $allow_smilies = true;
 		generate_text_for_storage($text, $uid, $bitfield, $flags, $allow_bbcode, $allow_urls, $allow_smilies);
 		$data = array(

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -22,7 +22,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -42,7 +42,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_template.' . $phpEx);
 require($phpbb_root_path . 'includes/mods/class_garage_vehicle.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $vid = request_var('VID', '');
@@ -108,30 +108,34 @@ switch( $mode )
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
 			'header' => 'garage_header.html',
-			'body'   => 'garage_insurance.html')
-		);
+			'body'   => 'garage_insurance.html'
+		));
+
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle['vehicle'],
 			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['ADD_PREMIUM'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=add_premium&amp;VID=$vid"))
-		);
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=add_premium&amp;VID=$vid")
+		));
+
 		$garage_template->insurance_dropdown($insurance_business, $data['business_id']);
 		$garage_template->cover_dropdown($data['cover_type_id']);
+
 		$template->assign_vars(array(
-			'L_TITLE' 		=> $user->lang['ADD_PREMIUM'],
-			'L_BUTTON' 		=> $user->lang['ADD_PREMIUM'],
-			'CURRENCY'		=> $vehicle['currency'],
-			'PREMIUM' 		=> $data['premium'],
-			'PREMIUM_DECIMAL'	=> $data['premium_decimal'],
-			'COMMENTS' 		=> $data['comments'],
+			'L_TITLE' 				=> $user->lang['ADD_PREMIUM'],
+			'L_BUTTON' 				=> $user->lang['ADD_PREMIUM'],
+			'CURRENCY'				=> $vehicle['currency'],
+			'PREMIUM' 				=> $data['premium'],
+			'PREMIUM_DECIMAL'		=> $data['premium_decimal'],
+			'COMMENTS' 				=> $data['comments'],
 			'U_SUBMIT_BUSINESS' 	=> "javascript:add_insurer('')",
-			'VID' 			=> $vid,
+			'VID' 					=> $vid,
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_premium.$phpEx", "mode=insert_premium"),
+			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_premium.$phpEx", "mode=insert_premium"),
 		));
+
 		$garage_template->sidemenu();
 	break;
 
@@ -215,18 +219,22 @@ switch( $mode )
 		* Handle template declarations & assignments
 		*/
 		page_header($user->lang['GARAGE']);
+
 		$template->set_filenames(array(
 			'header' => 'garage_header.html',
-			'body'   => 'garage_insurance.html')
-		);
+			'body'   => 'garage_insurance.html'
+		));
+
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle_data['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
-		);
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid")
+		));
+
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['EDIT_PREMIUM'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid&amp;INS_ID=$ins_id"))
-		);
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid&amp;INS_ID=$ins_id")
+		));
+
 		$garage_template->insurance_dropdown($insurance_business, (!empty($store['business_id'])) ? $store['business_id'] : $data['business_id']);
 		$garage_template->cover_dropdown((!empty($store['cover_type_id'])) ? $store['cover_type_id'] : $data['cover_type_id']);
 		$template->assign_vars(array(
@@ -318,8 +326,8 @@ switch( $mode )
 $garage_template->version_notice();
 
 $template->set_filenames(array(
-	'garage_footer' => 'garage_footer.html')
-);
+	'garage_footer' => 'garage_footer.html'
+));
 
 page_footer();
 ?>

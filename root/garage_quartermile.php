@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -44,7 +44,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_template.' . $phpEx);
 require($phpbb_root_path . 'includes/mods/class_garage_vehicle.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $vid = request_var('VID', '');
@@ -190,7 +190,7 @@ switch( $mode )
 				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=4"));
 			}
 		}
-		else if ( ($garage_config['enable_quartermile_image_required'] == '1') AND ($data['quart'] <= $garage_config['quartermile_image_required_limit']))
+		else if ( ($garage_config['enable_quartermile_image_required'] == '1') && ($data['quart'] <= $garage_config['quartermile_image_required_limit']))
 		{
 			$garage_quartermile->delete_quartermile($qmid);
 			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=26"));
@@ -251,7 +251,7 @@ switch( $mode )
 			'FORUM_NAME'	=> $user->lang['EDIT_QUARTERMILE'],
 			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid&amp;QMID=$qmid"))
 		);
-		if (($data['dynorun_id'] > 0) AND (sizeof($dynoruns) > 0))
+		if (($data['dynorun_id'] > 0) && (sizeof($dynoruns) > 0))
 		{
 			$bhp_statement = $data['bhp'] . $user->lang['DECIMAL_SEPERATOR'] . $data['bhp_decimal'] . ' BHP @ ' . $data['bhp_unit'];
 			$template->assign_vars(array(
@@ -260,7 +260,7 @@ switch( $mode )
 			#$garage_template->dynorun_dropdown($dynoruns, $data['dynorun_id'], $bhp_statement, $vid);
 			$garage_template->dynorun_dropdown($dynoruns, $data['dynorun_id']);
 		}
-		else if (($data['dynorun_id'] == 0) AND (sizeof($dynoruns) > 0))
+		else if (($data['dynorun_id'] == 0) && (sizeof($dynoruns) > 0))
 		{
 			$template->assign_vars(array(
 				'S_DISPLAY_DYNORUNS' => true)
@@ -269,40 +269,40 @@ switch( $mode )
 		}
 		$garage_template->attach_image('quartermile');
 		$template->assign_vars(array(
-			'L_TITLE'			=> $user->lang['EDIT_TIME'],
-			'L_BUTTON'			=> $user->lang['EDIT_TIME'],
-			'U_EDIT_DATA' 		=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID=$qmid"),
-			'U_MANAGE_GALLERY' 	=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID=$qmid#images"),
-			'VID'				=> $vid,
-			'QMID'				=> $qmid,
-			'RT'				=> $data['rt'],
-			'RT_DECIMAL'		=> $data['rt_decimal'],
-			'SIXTY'				=> $data['sixty'],
-			'SIXTY_DECIMAL'		=> $data['sixty_decimal'],
-			'THREE' 			=> $data['three'],
-			'THREE_DECIMAL' 	=> $data['three_decimal'],
-			'EIGHTH' 			=> $data['eighth'],
-			'EIGHTH_DECIMAL' 	=> $data['eighth_decimal'],
-			'EIGHTHMPH' 		=> $data['eighthmph'],
-			'EIGHTHMPH_DECIMAL' => $data['eighthmph_decimal'],
-			'THOU' 				=> $data['thou'],
-			'THOU_DECIMAL' 		=> $data['thou_decimal'],
-			'QUART' 			=> $data['quart'],
-			'QUART_DECIMAL' 	=> $data['quart_decimal'],
-			'QUARTMPH' 			=> $data['quartmph'],
-			'QUARTMPH_DECIMAL'	=> $data['quartmph_decimal'],
-			'REDIRECT'			=> request_var('redirect', ''),
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=update_quartermile"),
+			'L_TITLE'				=> $user->lang['EDIT_TIME'],
+			'L_BUTTON'				=> $user->lang['EDIT_TIME'],
+			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID=$qmid"),
+			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID=$qmid#images"),
+			'VID'					=> $vid,
+			'QMID'					=> $qmid,
+			'RT'					=> $data['rt'],
+			'RT_DECIMAL'			=> $data['rt_decimal'],
+			'SIXTY'					=> $data['sixty'],
+			'SIXTY_DECIMAL'			=> $data['sixty_decimal'],
+			'THREE' 				=> $data['three'],
+			'THREE_DECIMAL' 		=> $data['three_decimal'],
+			'EIGHTH' 				=> $data['eighth'],
+			'EIGHTH_DECIMAL' 		=> $data['eighth_decimal'],
+			'EIGHTHMPH' 			=> $data['eighthmph'],
+			'EIGHTHMPH_DECIMAL'		=> $data['eighthmph_decimal'],
+			'THOU' 					=> $data['thou'],
+			'THOU_DECIMAL' 			=> $data['thou_decimal'],
+			'QUART' 				=> $data['quart'],
+			'QUART_DECIMAL' 		=> $data['quart_decimal'],
+			'QUARTMPH' 				=> $data['quartmph'],
+			'QUARTMPH_DECIMAL'		=> $data['quartmph_decimal'],
+			'REDIRECT'				=> request_var('redirect', ''),
+			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=update_quartermile"),
 			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=insert_quartermile_image"),
 		));
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
-				'U_IMAGE'	=> (($gallery_data[$i]['attach_id']) AND ($gallery_data[$i]['attach_is_image']) AND (!empty($gallery_data[$i]['attach_thumb_location'])) AND (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
-				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=remove_quartermile_image&amp;VID=$vid&amp;QMID=$qmid&amp;image_id=" . $gallery_data[$i]['attach_id']),
-				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=set_quartermile_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;QMID=$qmid") : '',
-				'IMAGE' 	=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
-				'IMAGE_TITLE' 	=> $gallery_data[$i]['attach_file'])
+				'U_IMAGE'			=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
+				'U_REMOVE_IMAGE'	=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=remove_quartermile_image&amp;VID=$vid&amp;QMID=$qmid&amp;image_id=" . $gallery_data[$i]['attach_id']),
+				'U_SET_HILITE'		=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=set_quartermile_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;QMID=$qmid") : '',
+				'IMAGE' 			=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
+				'IMAGE_TITLE' 		=> $gallery_data[$i]['attach_file'])
 			);
 		}
 		$garage_template->sidemenu();
@@ -523,45 +523,47 @@ switch( $mode )
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
 			'header' => 'garage_header.html',
-			'body'   => 'garage_view_quartermile.html')
-		);
+			'body'   => 'garage_view_quartermile.html'
+		));
+
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $data['vehicle'],
 			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid"))
 		);
-       		for ( $i = 0; $i < count($gallery_data); $i++ )
-        	{
-			if ( (empty($gallery_data[$i]['attach_thumb_location']) == false) AND ($gallery_data[$i]['attach_thumb_location'] != $gallery_data[$i]['attach_location']) )
+
+		for ($i = 0; $i < count($gallery_data); $i++)
+		{
+			if ((empty($gallery_data[$i]['attach_thumb_location']) == false) && ($gallery_data[$i]['attach_thumb_location'] != $gallery_data[$i]['attach_location']))
 			{
 				$template->assign_vars(array(
 					'S_DISPLAY_GALLERIES' 	=> true,
 				));
 
 				$template->assign_block_vars('quartermile_image', array(
-					'U_IMAGE' 	=> append_sid('garage.'.$phpEx.'?mode=view_image&amp;image_id='. $gallery_data[$i]['attach_id']),
+					'U_IMAGE' 		=> append_sid('garage.'.$phpEx.'?mode=view_image&amp;image_id='. $gallery_data[$i]['attach_id']),
 					'IMAGE_NAME'	=> $gallery_data[$i]['attach_file'],
 					'IMAGE_SOURCE'	=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'])
 				);
-               		} 
+			}
 		}
 
 		$template->assign_vars(array(
 			'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data['user_id']),
-			'USERNAME' 		=> $data['username'],
+			'USERNAME' 			=> $data['username'],
 			'USERNAME_COLOUR'	=> get_username_string('colour', $data['user_id'], $data['username'], $data['user_colour']),
-			'YEAR' 			=> $data['made_year'],
-			'MAKE' 			=> $data['make'],
-			'MODEL' 		=> $data['model'],
+			'YEAR' 				=> $data['made_year'],
+			'MAKE' 				=> $data['make'],
+			'MODEL' 			=> $data['model'],
             'AVATAR_IMG' 		=> ($user->optionget('viewavatars')) ? get_user_avatar($data['user_avatar'], $data['user_avatar_type'], $data['user_avatar_width'], $data['user_avatar_height']) : '',
-            'DATE_UPDATED' 		=> $user->format_date($data['date_updated']),
-            'RT' 			=> $data['rt'] . $user->lang['DECIMAL_SEPERATOR'] . $data['rt_decimal'],
-            'SIXTY' 		=> $data['sixty'] . $user->lang['DECIMAL_SEPERATOR'] . $data['sixty_decimal'],
-            'THREE'	 		=> $data['three'] . $user->lang['DECIMAL_SEPERATOR'] . $data['three_decimal'],
-            'EIGHTH' 		=> $data['eighth'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighth_decimal'],
+            'DATE_UPDATED'		=> $user->format_date($data['date_updated']),
+            'RT' 				=> $data['rt'] . $user->lang['DECIMAL_SEPERATOR'] . $data['rt_decimal'],
+            'SIXTY' 			=> $data['sixty'] . $user->lang['DECIMAL_SEPERATOR'] . $data['sixty_decimal'],
+            'THREE'	 			=> $data['three'] . $user->lang['DECIMAL_SEPERATOR'] . $data['three_decimal'],
+            'EIGHTH' 			=> $data['eighth'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighth_decimal'],
             'EIGHTHMPH' 		=> $data['eighthmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighthmph_decimal'],
-            'THOU'	 		=> $data['thou'] . $user->lang['DECIMAL_SEPERATOR'] . $data['thou_decimal'],
-			'QUART' 		=> $data['quart'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quart_decimal'],
-			'QUARTMPH' 		=> $data['quartmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quartmph_decimal'],
+            'THOU'	 			=> $data['thou'] . $user->lang['DECIMAL_SEPERATOR'] . $data['thou_decimal'],
+			'QUART' 			=> $data['quart'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quart_decimal'],
+			'QUARTMPH' 			=> $data['quartmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quartmph_decimal'],
 		));
 		$garage_template->sidemenu();
 	break;

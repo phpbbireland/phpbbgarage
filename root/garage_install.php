@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage_install
 * @version $Id: garage_install.php 643 2008-11-07 16:28:54Z poyntesm $
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -35,7 +35,7 @@ $language_file = 'mods/garage_install';
 * Uses the acp_board style of outputting information, with some extras (such as the 'default' and 'select_user' options)
 */
 $options = array(
-	'install_makes'		=> array('lang' => 'INSERT_MAKES', 'type' => 'radio:yes_no', 'default' => true),
+	'install_makes'			=> array('lang' => 'INSERT_MAKES', 'type' => 'radio:yes_no', 'default' => true),
 	'install_categories'	=> array('lang' => 'INSERT_CATEGORIES', 'type' => 'radio:yes_no', 'default' => true),
 );
 
@@ -48,39 +48,39 @@ $versions = array(
 		// Now to add a table (this uses the layout from develop/create_schema_files.php and from phpbb_db_tools)
 		'table_add' => array(
 			array('phpbb_garage_vehicles', array(
-				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'user_id'		=> array('UINT', 0),
-					'made_year'		=> array('UINT', '2007'),
+				'COLUMNS'				=> array(
+					'id'				=> array('UINT', NULL, 'auto_increment'),
+					'user_id'			=> array('UINT', 0),
+					'made_year'			=> array('UINT', '2007'),
 					'engine_type'		=> array('TINT:2', 0),
-					'colour'		=> array('XSTEXT_UNI', ''),
-					'mileage'		=> array('UINT', 0),
+					'colour'			=> array('XSTEXT_UNI', ''),
+					'mileage'			=> array('UINT', 0),
 					'mileage_unit'		=> array('VCHAR:32', 'Miles'),
-					'price'			=> array('DECIMAL:10', 0),
-					'currency'		=> array('VCHAR:32', 'EUR'),
-					'comments'		=> array('MTEXT_UNI', ''),
+					'price'				=> array('DECIMAL:10', 0),
+					'currency'			=> array('VCHAR:32', 'EUR'),
+					'comments'			=> array('MTEXT_UNI', ''),
 					'bbcode_bitfield'	=> array('VCHAR:255', ''),
 					'bbcode_uid'		=> array('VCHAR:8', ''),
 					'bbcode_options'	=> array('UINT', 7),
-					'views'			=> array('UINT', 0),
+					'views'				=> array('UINT', 0),
 					'date_created'		=> array('TIMESTAMP', 0),
 					'date_updated'		=> array('TIMESTAMP', 0),
-					'make_id'		=> array('UINT', 0),
-					'model_id'		=> array('UINT', 0),
+					'make_id'			=> array('UINT', 0),
+					'model_id'			=> array('UINT', 0),
 					'main_vehicle'		=> array('BOOL', 0),
 					'weighted_rating'	=> array('DECIMAL:4', 0),
-					'pending'		=> array('BOOL', 0),
+					'pending'			=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'date_created'		=> array('INDEX', 'date_created'),
-					'date_updated'		=> array('INDEX', 'date_updated'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'date_created'	=> array('INDEX', 'date_created'),
+					'date_updated'	=> array('INDEX', 'date_updated'),
 					'user_id'		=> array('INDEX', 'user_id'),
 					'views'			=> array('INDEX', 'views'),
 				),
 			)),
 			array('phpbb_garage_business', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
 					'title'			=> array('XSTEXT_UNI', ''),
 					'address'		=> array('VCHAR', ''),
@@ -88,28 +88,28 @@ $versions = array(
 					'fax'			=> array('VCHAR:100', ''),
 					'website'		=> array('VCHAR', ''),
 					'email'			=> array('VCHAR:100', ''),
-					'opening_hours'		=> array('VCHAR', ''),
+					'opening_hours'	=> array('VCHAR', ''),
 					'insurance'		=> array('BOOL', 0),
 					'garage'		=> array('BOOL', 0),
 					'retail'		=> array('BOOL', 0),
 					'product'		=> array('BOOL', 0),
-					'dynocentre'		=> array('BOOL', 0),
+					'dynocentre'	=> array('BOOL', 0),
 					'pending'		=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
 					'insurance'		=> array('INDEX', 'insurance'),
 					'garage'		=> array('INDEX', 'garage'),
 					'retail'		=> array('INDEX', 'retail'),
 					'product'		=> array('INDEX', 'product'),
-					'dynocentre'		=> array('INDEX', 'dynocentre'),
+					'dynocentre'	=> array('INDEX', 'dynocentre'),
 				),
 			)),
 			array('phpbb_garage_categories', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
 					'title'			=> array('TEXT_UNI', ''),
-					'field_order'		=> array('USINT', 0),
+					'field_order'	=> array('USINT', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 			)),
@@ -121,97 +121,97 @@ $versions = array(
 				'PRIMARY_KEY'	=> 'config_name',
 			)),
 			array('phpbb_garage_vehicles_gallery', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'image_id'		=> array('UINT', 0),
 					'hilite'		=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'image_id'		=> array('INDEX', 'image_id'),
 				),
 			)),
 			array('phpbb_garage_modifications_gallery', array(
-				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
+				'COLUMNS'				=> array(
+					'id'				=> array('UINT', NULL, 'auto_increment'),
 					'vehicle_id'		=> array('UINT', 0),
 					'modification_id'	=> array('UINT', 0),
-					'image_id'		=> array('UINT', 0),
-					'hilite'		=> array('BOOL', 0),
+					'image_id'			=> array('UINT', 0),
+					'hilite'			=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'image_id'		=> array('INDEX', 'image_id'),
 				),
 			)),
 			array('phpbb_garage_quartermiles_gallery', array(
-				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
+				'COLUMNS'				=> array(
+					'id'				=> array('UINT', NULL, 'auto_increment'),
 					'vehicle_id'		=> array('UINT', 0),
 					'quartermile_id'	=> array('UINT', 0),
-					'image_id'		=> array('UINT', 0),
-					'hilite'		=> array('BOOL', 0),
+					'image_id'			=> array('UINT', 0),
+					'hilite'			=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'image_id'		=> array('INDEX', 'image_id'),
 				),
 			)),
 			array('phpbb_garage_dynoruns_gallery', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
-					'dynorun_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
+					'dynorun_id'	=> array('UINT', 0),
 					'image_id'		=> array('UINT', 0),
 					'hilite'		=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'image_id'		=> array('INDEX', 'image_id'),
 				),
 			)),
 			array('phpbb_garage_laps_gallery', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'lap_id'		=> array('UINT', 0),
 					'image_id'		=> array('UINT', 0),
 					'hilite'		=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'image_id'		=> array('INDEX', 'image_id'),
 				),
 			)),
 			array('phpbb_garage_guestbooks', array(
-				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
+				'COLUMNS'				=> array(
+					'id'				=> array('UINT', NULL, 'auto_increment'),
 					'vehicle_id'		=> array('UINT', 0),
-					'author_id'		=> array('UINT', 0),
-					'post_date'		=> array('TIMESTAMP', 0),
+					'author_id'			=> array('UINT', 0),
+					'post_date'			=> array('TIMESTAMP', 0),
 					'ip_address'		=> array('VCHAR:40', ''),
 					'bbcode_bitfield'	=> array('VCHAR:255', ''),
 					'bbcode_uid'		=> array('VCHAR:8', ''),
 					'bbcode_options'	=> array('UINT', 7),
-					'pending'		=> array('BOOL', 0),
-					'post'			=> array('MTEXT_UNI', ''),
+					'pending'			=> array('BOOL', 0),
+					'post'				=> array('MTEXT_UNI', ''),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'author_id'		=> array('INDEX', 'author_id'),
 					'post_date'		=> array('INDEX', 'post_date'),
 				),
 			)),
 			array('phpbb_garage_images', array(
-				'COLUMNS'		=> array(
-					'attach_id'		=> array('UINT', NULL, 'auto_increment'),
+				'COLUMNS'				=> array(
+					'attach_id'			=> array('UINT', NULL, 'auto_increment'),
 					'vehicle_id'		=> array('UINT', 0),
 					'attach_location'	=> array('VCHAR', ''),
 					'attach_hits'		=> array('UINT', 0),
@@ -220,19 +220,19 @@ $versions = array(
 					'attach_thumb_location'	=> array('VCHAR', ''),
 					'attach_thumb_width'	=> array('USINT', 0),
 					'attach_thumb_height'	=> array('USINT', 0),
-					'attach_is_image'	=> array('BOOL', 0),
-					'attach_date'		=> array('TIMESTAMP', 0),
-					'attach_filesize'	=> array('UINT:20', 0),
+					'attach_is_image'		=> array('BOOL', 0),
+					'attach_date'			=> array('TIMESTAMP', 0),
+					'attach_filesize'		=> array('UINT:20', 0),
 					'attach_thumb_filesize'	=> array('UINT:20', 0),
 				),
 				'PRIMARY_KEY'	=> 'attach_id',
 			)),
 			array('phpbb_garage_premiums', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
-					'business_id'		=> array('UINT', 0),
-					'cover_type_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
+					'business_id'	=> array('UINT', 0),
+					'cover_type_id'	=> array('UINT', 0),
 					'premium'		=> array('DECIMAL:10', 0),
 					'comments'		=> array('MTEXT_UNI', ''),
 				),
@@ -240,42 +240,42 @@ $versions = array(
 			)),
 			array('phpbb_garage_makes', array(
 				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'make'			=> array('VCHAR', ''),
-					'pending'		=> array('BOOL', 0),
+					'id'		=> array('UINT', NULL, 'auto_increment'),
+					'make'		=> array('VCHAR', ''),
+					'pending'	=> array('BOOL', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 				'KEYS'			=> array(
-					'make'			=> array('INDEX', 'make'),
+					'make'		=> array('INDEX', 'make'),
 				),
 			)),
 			array('phpbb_garage_models', array(
 				'COLUMNS'		=> array(
-					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'make_id'		=> array('UINT', 0),
-					'model'			=> array('VCHAR', ''),
-					'pending'		=> array('BOOL', 0),
+					'id'		=> array('UINT', NULL, 'auto_increment'),
+					'make_id'	=> array('UINT', 0),
+					'model'		=> array('VCHAR', ''),
+					'pending'	=> array('BOOL', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 				'KEYS'			=> array(
-					'make_id'		=> array('INDEX', 'make_id'),
+					'make_id'	=> array('INDEX', 'make_id'),
 				),
 			)),
 			array('phpbb_garage_modifications', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'user_id'		=> array('UINT', 0),
-					'category_id'		=> array('UINT', 0),
-					'product_id'		=> array('UINT', 0),
-					'price'			=> array('DECIMAL:10', 0),
+					'category_id'	=> array('UINT', 0),
+					'product_id'	=> array('UINT', 0),
+					'price'				=> array('DECIMAL:10', 0),
 					'install_price'		=> array('DECIMAL:10', 0),
 					'product_rating'	=> array('TINT:2', 0),
 					'purchase_rating'	=> array('TINT:2', 0),
 					'install_rating'	=> array('TINT:2', 0),
-					'shop_id'		=> array('UINT', 0),
+					'shop_id'			=> array('UINT', 0),
 					'installer_id'		=> array('UINT', 0),
-					'comments'		=> array('MTEXT_UNI', ''),
+					'comments'			=> array('MTEXT_UNI', ''),
 					'bbcode_bitfield'	=> array('VCHAR:255', ''),
 					'bbcode_uid'		=> array('VCHAR:8', ''),
 					'bbcode_options'	=> array('UINT', 7),
@@ -283,34 +283,34 @@ $versions = array(
 					'date_created'		=> array('TIMESTAMP', 0),
 					'date_updated'		=> array('TIMESTAMP', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
 					'user_id'		=> array('INDEX', 'user_id'),
-					'vehicle_id_2'		=> array('INDEX', array('vehicle_id', 'category_id')),
-					'category_id'		=> array('INDEX', 'category_id'),
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
-					'date_created'		=> array('INDEX', 'date_created'),
-					'date_updated'		=> array('INDEX', 'date_updated'),
+					'vehicle_id_2'	=> array('INDEX', array('vehicle_id', 'category_id')),
+					'category_id'	=> array('INDEX', 'category_id'),
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
+					'date_created'	=> array('INDEX', 'date_created'),
+					'date_updated'	=> array('INDEX', 'date_updated'),
 				),
 			)),
 			array('phpbb_garage_products', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'			=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'business_id'		=> array('UINT', 0),
-					'category_id'		=> array('UINT', 0),
+					'business_id'	=> array('UINT', 0),
+					'category_id'	=> array('UINT', 0),
 					'title'			=> array('VCHAR', ''),
 					'pending'		=> array('BOOL', 0),
 				),
-				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'business_id'		=> array('INDEX', 'business_id'),
-					'category_id'		=> array('INDEX', 'category_id'),
+				'PRIMARY_KEY'		=> 'id',
+				'KEYS'				=> array(
+					'business_id'	=> array('INDEX', 'business_id'),
+					'category_id'	=> array('INDEX', 'category_id'),
 				),
 			)),
 			array('phpbb_garage_quartermiles', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'rt'			=> array('PDECIMAL', 0),
 					'sixty'			=> array('PDECIMAL', 0),
 					'three'			=> array('PDECIMAL', 0),
@@ -320,35 +320,35 @@ $versions = array(
 					'quart'			=> array('PDECIMAL', 0),
 					'quartmph'		=> array('PDECIMAL', 0),
 					'pending'		=> array('BOOL', 0),
-					'dynorun_id'		=> array('UINT', 0),
-					'date_created'		=> array('TIMESTAMP', 0),
-					'date_updated'		=> array('TIMESTAMP', 0),
+					'dynorun_id'	=> array('UINT', 0),
+					'date_created'	=> array('TIMESTAMP', 0),
+					'date_updated'	=> array('TIMESTAMP', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 			)),
 			array('phpbb_garage_dynoruns', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
-					'dynocentre_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
+					'dynocentre_id'	=> array('UINT', 0),
 					'bhp'			=> array('DECIMAL:6', 0),
 					'bhp_unit'		=> array('VCHAR:32', ''),
 					'torque'		=> array('DECIMAL:6', 0),
-					'torque_unit'		=> array('VCHAR:32', ''),
+					'torque_unit'	=> array('VCHAR:32', ''),
 					'boost'			=> array('DECIMAL:6', 0),
-					'boost_unit'		=> array('VCHAR:32', ''),
+					'boost_unit'	=> array('VCHAR:32', ''),
 					'nitrous'		=> array('UINT', 0),
 					'peakpoint'		=> array('PDECIMAL:7', 0),
-					'date_created'		=> array('TIMESTAMP', 0),
-					'date_updated'		=> array('TIMESTAMP', 0),
+					'date_created'	=> array('TIMESTAMP', 0),
+					'date_updated'	=> array('TIMESTAMP', 0),
 					'pending'		=> array('BOOL', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 			)),
 			array('phpbb_garage_ratings', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'rating'		=> array('TINT:2', 0),
 					'user_id'		=> array('UINT', 0),
 					'rate_date'		=> array('TIMESTAMP', 0),
@@ -356,57 +356,57 @@ $versions = array(
 				'PRIMARY_KEY'	=> 'id',
 			)),
 			array('phpbb_garage_tracks', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
 					'title'			=> array('VCHAR', ''),
 					'length'		=> array('VCHAR:32', ''),
-					'mileage_unit'		=> array('VCHAR:32', ''),
+					'mileage_unit'	=> array('VCHAR:32', ''),
 					'pending'		=> array('BOOL', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
 			)),
 			array('phpbb_garage_laps', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'track_id'		=> array('UINT', 0),
-					'condition_id'		=> array('UINT', 0),
+					'condition_id'	=> array('UINT', 0),
 					'type_id'		=> array('UINT', 0),
 					'minute'		=> array('UINT:2', 0),
 					'second'		=> array('UINT:2', 0),
-					'millisecond'		=> array('UINT:2', 0),
+					'millisecond'	=> array('UINT:2', 0),
 					'pending'		=> array('BOOL', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'KEYS'	=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'track_id'		=> array('INDEX', 'track_id'),
 				),
 			)),
 			array('phpbb_garage_service_history', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'garage_id'		=> array('UINT', 0),
 					'type_id'		=> array('UINT', 0),
 					'price'			=> array('DECIMAL:10', 0),
 					'rating'		=> array('TINT:2', 0),
 					'mileage'		=> array('UINT', 0),
-					'date_created'		=> array('TIMESTAMP', 0),
-					'date_updated'		=> array('TIMESTAMP', 0),
+					'date_created'	=> array('TIMESTAMP', 0),
+					'date_updated'	=> array('TIMESTAMP', 0),
 				),
 				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'KEYS'	=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'garage_id'		=> array('INDEX', 'garage_id'),
 				),
 			)),
 			array('phpbb_garage_blog', array(
-				'COLUMNS'		=> array(
+				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
-					'vehicle_id'		=> array('UINT', 0),
+					'vehicle_id'	=> array('UINT', 0),
 					'user_id'		=> array('UINT', 0),
-					'blog_title'		=> array('XSTEXT_UNI', ''),
+					'blog_title'	=> array('XSTEXT_UNI', ''),
 					'blog_text'		=> array('MTEXT_UNI', ''),
 					'blog_date'		=> array('TIMESTAMP', 0),
 					'bbcode_bitfield'	=> array('VCHAR:255', ''),
@@ -414,8 +414,8 @@ $versions = array(
 					'bbcode_options'	=> array('UINT', 7),
 				),
 				'PRIMARY_KEY'	=> 'id',
-				'KEYS'			=> array(
-					'vehicle_id'		=> array('INDEX', 'vehicle_id'),
+				'KEYS'	=> array(
+					'vehicle_id'	=> array('INDEX', 'vehicle_id'),
 					'user_id'		=> array('INDEX', 'user_id'),
 				),
 			)),
@@ -586,49 +586,49 @@ function garage_config_entries($action, $version)
 	global $db, $table_prefix, $umil, $phpbb_root_path, $phpEx;
 
 	$config_data = array(
-		'version' 				=> '2.0.B5-DEV',
+		'version' 					=> '2.0.B5-DEV',
 		'cars_per_page' 			=> '30',
 		'year_start' 				=> '1980',
-		'year_end' 				=> '1',
-		'enable_user_submit_make' 		=> '1',
-		'enable_user_submit_model' 		=> '1',
+		'year_end' 					=> '1',
+		'enable_user_submit_make' 	=> '1',
+		'enable_user_submit_model' 	=> '1',
 		'dateformat' 				=> 'dMYH:i',
 		'default_make_id' 			=> '',
 		'default_model_id' 			=> '',
-		'integrate_memberlist' 			=> '1',
-		'integrate_viewtopic' 			=> '1',
-		'integrate_profile' 			=> '1',
+		'integrate_memberlist' 		=> '1',
+		'integrate_viewtopic' 		=> '1',
+		'integrate_profile' 		=> '1',
 		'profile_thumbs' 			=> '1',
-		'enable_pm_pending_notify' 		=> '1',
-		'enable_email_pending_notify' 		=> '1',
-		'enable_pm_pending_notify_optout' 	=> '1',
+		'enable_pm_pending_notify' 				=> '1',
+		'enable_email_pending_notify' 			=> '1',
+		'enable_pm_pending_notify_optout' 		=> '1',
 		'enable_email_pending_notify_optout' 	=> '1',
-		'enable_vehicle_approval'		=> '0',
-		'enable_index_menu' 			=> '1',
-		'enable_browse_menu' 			=> '1',
-		'enable_search_menu' 			=> '1',
+		'enable_vehicle_approval'				=> '0',
+		'enable_index_menu' 				=> '1',
+		'enable_browse_menu' 				=> '1',
+		'enable_search_menu' 				=> '1',
 		'enable_insurance_review_menu' 		=> '1',
 		'enable_garage_review_menu' 		=> '1',
-		'enable_shop_review_menu' 		=> '1',
-		'enable_quartermile_menu' 		=> '1',
-		'enable_dynorun_menu' 			=> '1',
-		'enable_lap_menu' 			=> '1',
-		'enable_garage_header' 			=> '1',
+		'enable_shop_review_menu' 			=> '1',
+		'enable_quartermile_menu' 			=> '1',
+		'enable_dynorun_menu' 				=> '1',
+		'enable_lap_menu' 					=> '1',
+		'enable_garage_header' 				=> '1',
 		'enable_quartermile_header' 		=> '1',
-		'enable_dynorun_header' 		=> '1',
+		'enable_dynorun_header' 			=> '1',
 		'enable_latest_vehicle_index'		=> '1',
 		'latest_vehicle_index_limit' 		=> '10',
-		'enable_featured_vehicle' 		=> '1',
-		'index_columns' 			=> '2',
+		'enable_featured_vehicle' 			=> '1',
+		'index_columns' 					=> '2',
 		'enable_user_index_columns' 		=> '1',
-		'featured_vehicle_id' 			=> '1',
-		'featured_vehicle_random' 		=> '0',
+		'featured_vehicle_id' 				=> '1',
+		'featured_vehicle_random' 			=> '0',
 		'featured_vehicle_from_block' 		=> '',
 		'featured_vehicle_description' 		=> '',
-		'enable_newest_vehicle' 		=> '1',
-		'newest_vehicle_limit' 			=> '5',
-		'enable_updated_vehicle' 		=> '1',
-		'updated_vehicle_limit' 		=> '5',
+		'enable_newest_vehicle' 			=> '1',
+		'newest_vehicle_limit' 				=> '5',
+		'enable_updated_vehicle' 			=> '1',
+		'updated_vehicle_limit' 			=> '5',
 		'enable_newest_modification' 		=> '1',
 		'newest_modification_limit' 		=> '5',
 		'enable_updated_modification' 		=> '1',
@@ -636,82 +636,82 @@ function garage_config_entries($action, $version)
 		'enable_most_modified' 			=> '1',
 		'most_modified_limit' 			=> '5',
 		'enable_most_spent' 			=> '1',
-		'most_spent_limit' 			=> '5',
+		'most_spent_limit' 				=> '5',
 		'enable_most_viewed' 			=> '1',
 		'most_viewed_limit' 			=> '5',
 		'enable_last_commented' 		=> '1',
 		'last_commented_limit' 			=> '5',
 		'enable_top_dynorun'			=> '1',
-		'top_dynorun_limit'			=> '5',
+		'top_dynorun_limit'				=> '5',
 		'enable_top_quartermile'		=> '1',
 		'top_quartermile_limit'			=> '5',
-		'enable_top_rating'			=> '1',
-		'top_rating_limit'			=> '5',
-		'enable_top_lap' 			=> '1',
-		'top_lap_limit' 			=> '5',
-		'enable_images' 			=> '1',
+		'enable_top_rating'				=> '1',
+		'top_rating_limit'				=> '5',
+		'enable_top_lap' 				=> '1',
+		'top_lap_limit' 				=> '5',
+		'enable_images' 				=> '1',
 		'enable_vehicle_images' 		=> '1',
-		'enable_modification_images' 		=> '1',
-		'enable_quartermile_images' 		=> '1',
+		'enable_modification_images' 	=> '1',
+		'enable_quartermile_images' 	=> '1',
 		'enable_dynorun_images' 		=> '1',
 		'enable_lap_images' 			=> '1',
 		'enable_uploaded_images' 		=> '1',
 		'enable_remote_images' 			=> '1',
-		'remote_timeout' 			=> '60',
+		'remote_timeout' 				=> '60',
 		'enable_mod_gallery' 			=> '1',
-		'enable_quartermile_gallery' 		=> '1',
+		'enable_quartermile_gallery' 	=> '1',
 		'enable_dynorun_gallery' 		=> '1',
 		'enable_lap_gallery' 			=> '1',
-		'gallery_limit' 			=> '10',
-		'max_image_kbytes' 			=> '1024',
+		'gallery_limit' 				=> '10',
+		'max_image_kbytes' 				=> '1024',
 		'max_image_resolution' 			=> '1024',
 		'thumbnail_resolution' 			=> '150',
-		'enable_watermark' 			=> '0',
-		'watermark_type' 			=> 'non_permanent',
-		'watermark_source' 			=> 'watermark.png',
+		'enable_watermark' 				=> '0',
+		'watermark_type' 				=> 'non_permanent',
+		'watermark_source' 				=> 'watermark.png',
 		'enable_quartermile' 			=> '1',
-		'enable_quartermile_approval' 		=> '0',
+		'enable_quartermile_approval' 			=> '0',
 		'enable_quartermile_image_required' 	=> '1',
-		'quartermile_image_required_limit' 	=> '13',
-		'enable_dynorun' 			=> '1',
-		'enable_dynorun_approval' 		=> '0',
-		'enable_dynorun_image_required' 	=> '1',
-		'dynorun_image_required_limit' 		=> '300',
-		'enable_tracktime' 			=> '1',
+		'quartermile_image_required_limit'		=> '13',
+		'enable_dynorun' 						=> '1',
+		'enable_dynorun_approval' 				=> '0',
+		'enable_dynorun_image_required' 		=> '1',
+		'dynorun_image_required_limit' 			=> '300',
+		'enable_tracktime' 				=> '1',
 		'enable_user_add_track' 		=> '1',
 		'enable_track_approval' 		=> '0',
 		'enable_lap_approval' 			=> '0',
-		'enable_insurance' 			=> '1',
+		'enable_insurance' 				=> '1',
 		'enable_insurance_search' 		=> '1',
-		'enable_user_submit_business' 		=> '1',
+		'enable_user_submit_business' 	=> '1',
 		'enable_business_approval' 		=> '0',
-		'rating_permanent' 			=> '0',
+		'rating_permanent' 				=> '0',
 		'rating_always_updateable' 		=> '1',
 		'minimum_ratings_required' 		=> '5',
 		'enable_guestbooks' 			=> '1',
 		'enable_guestbooks_bbcode' 		=> '1',
 		'enable_guestbooks_comment_approval' 	=> '0',
-		'enable_user_submit_product' 		=> '1',
+		'enable_user_submit_product' 			=> '1',
 		'enable_product_approval' 		=> '0',
 		'enable_product_search' 		=> '1',
-		'enable_service' 			=> '1',
-		'enable_blogs' 				=> '1',
+		'enable_service' 				=> '1',
+		'enable_blogs' 					=> '1',
 		'enable_blogs_bbcode' 			=> '1',
 		'default_vehicle_quota' 		=> '1',
 		'default_upload_quota' 			=> '5',
 		'default_remote_quota' 			=> '5',
-		'add_groups' 				=> '',
+		'add_groups' 					=> '',
 		'add_groups_quotas' 			=> '',
-		'upload_groups' 			=> '',
+		'upload_groups' 				=> '',
 		'upload_groups_quotas' 			=> '',
-		'remote_groups' 			=> '',
+		'remote_groups' 				=> '',
 		'remote_groups_quotas' 			=> '',
 		'enable_blogs_smilies' 			=> '1',
-		'enable_blogs_url' 			=> '1',
+		'enable_blogs_url' 				=> '1',
 		'enable_make_approval' 			=> '0',
 		'enable_model_approval' 		=> '0',
 		'enable_guestbooks_url' 		=> '1',
-		'enable_guestbooks_smilies' 		=> '1',
+		'enable_guestbooks_smilies' 	=> '1',
 	);
 
 	switch ($action)
@@ -752,15 +752,15 @@ function garage_category_entries($action, $version)
 	global $db, $table_prefix, $umil, $phpbb_root_path, $phpEx;
 
 	$category_data = array(
-		'Engine'		=> 1,
+		'Engine'			=> 1,
 		'Transmission'		=> 2,
 		'Suspension'		=> 3,
-		'Brakes'		=> 4,
-		'Interior'		=> 5,
-		'Exterior'		=> 6,
-		'Audio'			=> 7,
+		'Brakes'			=> 4,
+		'Interior'			=> 5,
+		'Exterior'			=> 6,
+		'Audio'				=> 7,
 		'Alloys &amp; Tyres'	=> 8,
-		'Security'		=> 9,
+		'Security'				=> 9,
 	);
 
 	switch ($action)
@@ -842,10 +842,10 @@ function garage_model_entries($action, $version)
 				'Spider',
 				'Sportwagon',
 				'Sprint',
-				'S2',	
+				'S2',
 			),
 		'Asia' 		=> array(
-				'Rocsta',	
+				'Rocsta',
 			),
 		'Aston-Martin' 	=> array(
 				'DB2',
@@ -891,8 +891,8 @@ function garage_model_entries($action, $version)
 				'S6 Avant',
 				'S8',
 				'TT',
-				'V8',		
-				'R8',		
+				'V8',
+				'R8',
 			),
 		'Austin' 	=> array(
 				'Allegro',
@@ -902,7 +902,7 @@ function garage_model_entries($action, $version)
 				'Metro',
 				'Mini',
 				'Montego',
-				'Princess',		
+				'Princess',
 			),
 		'Bentley' 	=> array(
 				'Arnage',
@@ -914,7 +914,7 @@ function garage_model_entries($action, $version)
 				'Mulsanne',
 				'Series II',
 				'T Series',
-				'Turbo R',		
+				'Turbo R',
 			),
 		'BMW' 		=> array(
 				'1 Series',
@@ -947,7 +947,7 @@ function garage_model_entries($action, $version)
 			),
 		'Caterham' 	=> array(
 				'Super 7',
-				'Super Sprint',		
+				'Super Sprint',
 			),
 		'Chevrolet' 	=> array(
 				'210',
@@ -959,7 +959,7 @@ function garage_model_entries($action, $version)
 				'S10',
 				'Silverado',
 				'Suburban',
-				'Tahoe',		
+				'Tahoe',
 			),
 		'Chrysler' 	=> array(
 				'Cherokee',
@@ -971,7 +971,7 @@ function garage_model_entries($action, $version)
 				'Sebring',
 				'Viper',
 				'Voyager',
-				'Wrangler',		
+				'Wrangler',
 			),
 		'Citroen' 	=> array(
 				'2CV',
@@ -991,7 +991,7 @@ function garage_model_entries($action, $version)
 				'XM',
 				'Xsara',
 				'Xsara Picasso',
-				'ZX',		
+				'ZX',
 			),
 		'Daewoo' 	=> array(
 				'Espero',
@@ -1003,7 +1003,7 @@ function garage_model_entries($action, $version)
 				'Musso',
 				'Nexia',
 				'Nubira',
-				'Tacuma',		
+				'Tacuma',
 			),
 		'Daihatsu' 	=> array(
 				'Applause',
@@ -1018,9 +1018,9 @@ function garage_model_entries($action, $version)
 				'Sirion',
 				'Sportrak',
 				'Terios',
-				'YRV',		
+				'YRV',
 			),
-		'Daimler' 	=> array(
+		'Daimler'	=> array(
 				'Double Six',
 				'Empress',
 				'Limousine',
@@ -1029,20 +1029,20 @@ function garage_model_entries($action, $version)
 				'Super V8',
 				'V8',
 				'XJ Series',
-				'XJ12',	
+				'XJ12',
 			),
 		'Datsun'	=> array(
-				'Patrol',		
+				'Patrol',
 			),
-		'Delorian' 	=> array(
-				'DMZ',	
+		'Delorian'	=> array(
+				'DMZ',
 			),
-		'Dodge' 	=> array(
+		'Dodge' => array(
 				'Dakota',
 				'Durango',
-				'Ram',		
+				'Ram',
 			),
-		'Ferrari' 	=> array(
+		'Ferrari'	=> array(
 				'246',
 				'250',
 				'308',
@@ -1068,9 +1068,9 @@ function garage_model_entries($action, $version)
 				'F40',
 				'Mondial',
 				'Testarossa',
-				'F50',		
+				'F50',
 			),
-		'Fiat' 		=> array(
+		'Fiat' 	=> array(
 				'124',
 				'126',
 				'130',
@@ -1095,9 +1095,9 @@ function garage_model_entries($action, $version)
 				'Tipo',
 				'Ulysse',
 				'Uno',
-				'X19',		
+				'X19',
 			),
-		'Ford' 		=> array(
+		'Ford' 	=> array(
 				'Capri',
 				'Consul',
 				'Cortina',
@@ -1124,23 +1124,23 @@ function garage_model_entries($action, $version)
 				'Scorpio',
 				'Sierra',
 				'Streetka',
-				'Taurus',		
+				'Taurus',
 			),
 		'FSO' 		=> array(
-				'Caro',		
+				'Caro',
 			),
 		'Ginetta' 	=> array(
-				'G Series',	
+				'G Series',
 			),
 		'Griffon' 	=> array(
-				'110',	
+				'110',
 			),
 		'Hillman' 	=> array(
 				'Imp',
-				'Minx',		
+				'Minx',
 			),
 		'HMC' 		=> array(
-				'Mark IV SE',		
+				'Mark IV SE',
 			),
 		'Honda' 	=> array(
 				'Accord',
@@ -1161,12 +1161,12 @@ function garage_model_entries($action, $version)
 				'Prelude',
 				'S2000',
 				'Shuttle',
-				'Stream',		
+				'Stream',
 			),
 		'Hummer' 	=> array(
-				'H1',	
-				'H2',	
-				'H3',	
+				'H1',
+				'H2',
+				'H3',
 			),
 		'Hyundai' 	=> array(
 				'Accent',
@@ -1184,15 +1184,15 @@ function garage_model_entries($action, $version)
 				'Stellar',
 				'Trajet',
 				'X2',
-				'XG30',		
+				'XG30',
 			),
 		'ISO' 		=> array(
-				'Lele',		
+				'Lele',
 			),
 		'Isuzu' 	=> array(
 				'Piazza',
 				'TF',
-				'Trooper',	
+				'Trooper',
 			),
 		'Jaguar' 	=> array(
 				'E-Type',
@@ -1204,17 +1204,17 @@ function garage_model_entries($action, $version)
 				'X-Type',
 				'XJ Series',
 				'XJS',
-				'XK',		
+				'XK',
 			),
 		'Jeep' 		=> array(
 				'Cherokee',
 				'Grand Cherokee',
 				'Renegade',
-				'Wrangler',		
+				'Wrangler',
 			),
 		'Jensen' 	=> array(
 				'Interceptor',
-				'S-V8',		
+				'S-V8',
 			),
 		'Kia' 		=> array(
 				'Carens',
@@ -1226,20 +1226,20 @@ function garage_model_entries($action, $version)
 				'Sedona',
 				'Shuma',
 				'Sorento',
-				'Sportage',		
+				'Sportage',
 			),
 		'Lada' 		=> array(
 				'1500',
 				'Niva',
 				'Riva',
-				'Samara',		
+				'Samara',
 			),
 		'Lamborghini' 	=> array(
 				'Countach',
 				'Diablo',
 				'LM',
 				'Murcielago',
-				'urraco',		
+				'urraco',
 			),
 		'Lancia' 	=> array(
 				'Beta',
@@ -1248,7 +1248,7 @@ function garage_model_entries($action, $version)
 				'Monte Carlo',
 				'Prisma',
 				'Thema',
-				'Y10',		
+				'Y10',
 			),
 		'Land Rover' 	=> array(
 				'Defender',
@@ -1257,7 +1257,7 @@ function garage_model_entries($action, $version)
 				'Lightweight',
 				'Range Rover',
 				'Series II',
-				'Series III',		
+				'Series III',
 			),
 		'Lexus' 	=> array(
 				'GS 300',
@@ -1269,15 +1269,15 @@ function garage_model_entries($action, $version)
 				'ES 300',
 				'GS 430',
 				'GX 470',
-				'LX 470',		
+				'LX 470',
 			),
 		'Ligier' 	=> array(
-				'Ambra',		
+				'Ambra',
 			),
 		'Lincoln' 	=> array(
 				'Blackwood',
 				'Navigator',
-				'Towncar',		
+				'Towncar',
 			),
 		'Lotus' 	=> array(
 				'340R',
@@ -1288,7 +1288,7 @@ function garage_model_entries($action, $version)
 				'Elite',
 				'Esprit',
 				'Excel',
-				'Exige',		
+				'Exige',
 			),
 		'Marcos' 	=> array(
 				'LM',
@@ -1296,7 +1296,7 @@ function garage_model_entries($action, $version)
 				'Mantaray',
 				'Mantis',
 				'Mantula',
-				'Martina',		
+				'Martina',
 			),
 		'Maserati' 	=> array(
 				'222',
@@ -1307,11 +1307,11 @@ function garage_model_entries($action, $version)
 				'Ghibli',
 				'Kharif',
 				'Quaddroporte',
-				'Spyder',		
+				'Spyder',
 			),
 		'Maybach' 	=> array(
 				'57',
-				'62',		
+				'62',
 			),
 		'Mazda' 	=> array(
 				'121',
@@ -1328,12 +1328,12 @@ function garage_model_entries($action, $version)
 				'Premacy',
 				'RX-7',
 				'Tribute',
-				'Xedos',		
+				'Xedos',
 			),
 		'McLaren' 	=> array(
 				'M6',
-				'F1',		
-				'SLR',		
+				'F1',
+				'SLR',
 			),
 		'Mercedes-Benz' => array(
 				'180',
@@ -1370,7 +1370,7 @@ function garage_model_entries($action, $version)
 				'SL Class',
 				'SLK',
 				'V Class',
-				'Vaneo',		
+				'Vaneo',
 			),
 		'MG' 		=> array(
 				'MGB',
@@ -1382,15 +1382,15 @@ function garage_model_entries($action, $version)
 				'ZR',
 				'ZS',
 				'ZT',
-				'ZT-T',		
+				'ZT-T',
 			),
 		'Microcar' 	=> array(
-				'Virgo',		
+				'Virgo',
 			),
 		'Mini' 		=> array(
 				'Cooper',
 				'Mini',
-				'One',		
+				'One',
 			),
 		'Mitsubishi' 	=> array(
 				'3000GT',
@@ -1415,21 +1415,21 @@ function garage_model_entries($action, $version)
 				'Space Star',
 				'Space Wagon',
 				'Starion',
-				'Strada',		
+				'Strada',
 			),
 		'Morgan' 	=> array(
 				'4/4',
 				'Aero',
 				'Plus 4',
-				'Plus 8',		
+				'Plus 8',
 			),
 		'Morris' 	=> array(
 				'Ital',
 				'Mini',
-				'Minor',		
+				'Minor',
 			),
 		'Noble' 	=> array(
-				'M12',		
+				'M12',
 			),
 		'Opel' 		=> array(
 				'Commodore',
@@ -1438,18 +1438,18 @@ function garage_model_entries($action, $version)
 				'Manta',
 				'Monza',
 				'Omega',
-				'Zafira',		
+				'Zafira',
 			),
 		'Pagani' 	=> array(
-				'Zonda',		
+				'Zonda',
 			),
 		'Panther' 	=> array(
-				'Kallista',		
+				'Kallista',
 			),
 		'Perodua' 	=> array(
 				'Kelisa',
 				'Kenari',
-				'Nippa',		
+				'Nippa',
 			),
 		'Peugeot' 	=> array(
 				'104',
@@ -1467,11 +1467,11 @@ function garage_model_entries($action, $version)
 				'605',
 				'607',
 				'806',
-				'807',		
+				'807',
 			),
 		'Pontiac' 	=> array(
 				'Firebird',
-				'Trans Am',		
+				'Trans Am',
 			),
 		'Porsche'	=> array(
 				'356',
@@ -1483,7 +1483,7 @@ function garage_model_entries($action, $version)
 				'968',
 				'Boxster',
 				'Carrera GT',
-				'Cayenne',		
+				'Cayenne',
 			),
 		'Proton' 	=> array(
 				'Compact',
@@ -1493,13 +1493,13 @@ function garage_model_entries($action, $version)
 				'Impian',
 				'Persona',
 				'Satria',
-				'Wira',		
+				'Wira',
 			),
 		'Reliant' 	=> array(
 				'Rialto',
 				'Robin',
 				'Sabre',
-				'Scimitar',		
+				'Scimitar',
 			),
 		'Renault' 	=> array(
 				'4',
@@ -1532,11 +1532,11 @@ function garage_model_entries($action, $version)
 				'Scenic',
 				'Scenic RX4',
 				'Sport Spider',
-				'Vel Satis',		
+				'Vel Satis',
 			),
 		'Riley' 	=> array(
 				'Elf',
-				'RM Series',		
+				'RM Series',
 			),
 		'Rolls Royce' 	=> array(
 				'20/25',
@@ -1550,7 +1550,7 @@ function garage_model_entries($action, $version)
 				'Silver Shadow',
 				'Silver Spirit',
 				'Silver Spur',
-				'Silver Wraith',		
+				'Silver Wraith',
 			),
 		'Rover' 	=> array(
 				'100',
@@ -1574,7 +1574,7 @@ function garage_model_entries($action, $version)
 				'Montego',
 				'Sterling',
 				'Tourer',
-				'Vitesse',		
+				'Vitesse',
 			),
 		'Saab' 		=> array(
 				'9-3',
@@ -1583,10 +1583,10 @@ function garage_model_entries($action, $version)
 				'900',
 				'9000',
 				'96',
-				'99',		
+				'99',
 			),
 		'Sao' 		=> array(
-				'Penza',		
+				'Penza',
 			),
 		'Seat' 		=> array(
 				'Alhambra',
@@ -1597,17 +1597,17 @@ function garage_model_entries($action, $version)
 				'Malaga',
 				'Marbella',
 				'Toledo',
-				'Vario',		
+				'Vario',
 			),
 		'Singer' 	=> array(
-				'Gazelle',		
+				'Gazelle',
 			),
 		'Skoda' 	=> array(
 				'Fabia',
 				'Favorit',
 				'Felicia',
 				'Octavia',
-				'Superb',		
+				'Superb',
 			),
 		'Smart' 	=> array(
 				'Car',
@@ -1616,11 +1616,11 @@ function garage_model_entries($action, $version)
 				'Edition',
 				'Passion',
 				'Pulse',
-				'Pure',		
+				'Pure',
 			),
 		'SsangYong' 	=> array(
 				'Korando',
-				'Musso',		
+				'Musso',
 			),
 		'Subaru' 	=> array(
 				'1600',
@@ -1631,10 +1631,10 @@ function garage_model_entries($action, $version)
 				'Legacy',
 				'SVX',
 				'Vivio',
-				'XT',		
+				'XT',
 			),
 		'Sunbeam' 	=> array(
-				'Alpine',	
+				'Alpine',
 			),
 		'Suzuki' 	=> array(
 				'Alto',
@@ -1649,7 +1649,7 @@ function garage_model_entries($action, $version)
 				'Swift',
 				'Vitara',
 				'Wagon-R',
-				'X-90',	
+				'X-90',
 			),
 		'Talbot' 	=> array(
 				'Alpine',
@@ -1657,10 +1657,10 @@ function garage_model_entries($action, $version)
 				'Horizon',
 				'Samba',
 				'Solara',
-				'Sunbeam',		
+				'Sunbeam',
 			),
 		'Tata' 		=> array(
-				'Safari',	
+				'Safari',
 			),
 		'Toyota' 	=> array(
 				'4 Runner',
@@ -1695,7 +1695,7 @@ function garage_model_entries($action, $version)
 				'Surf',
 				'Tercel',
 				'Townace',
-				'Yaris',		
+				'Yaris',
 			),
 		'Triumph' 	=> array(
 				'Dolomite',
@@ -1705,7 +1705,7 @@ function garage_model_entries($action, $version)
 				'TR4',
 				'TR6',
 				'TR7',
-				'TR8',		
+				'TR8',
 			),
 		'TVR' 		=> array(
 				'280I',
@@ -1723,11 +1723,11 @@ function garage_model_entries($action, $version)
 				'Tamora',
 				'Tasmin',
 				'Tuscan',
-				'Tuscan S',		
+				'Tuscan S',
 			),
 		'Ultima' 	=> array(
 				'Sport',
-				'Spyder',	
+				'Spyder',
 			),
 		'Vauxhall' 	=> array(
 				'Agila',
@@ -1749,7 +1749,7 @@ function garage_model_entries($action, $version)
 				'Vectra',
 				'Viva',
 				'VX220',
-				'Zafira',		
+				'Zafira',
 			),
 		'Volkswagen' 	=> array(
 				'Beetle',
@@ -1770,7 +1770,7 @@ function garage_model_entries($action, $version)
 				'Scirocco',
 				'Sharan',
 				'Touareg',
-				'Vento',		
+				'Vento',
 			),
 		'Volvo' 	=> array(
 				'121',
@@ -1803,7 +1803,7 @@ function garage_model_entries($action, $version)
 				'V70',
 				'V90',
 				'XC70',
-				'XC90',		
+				'XC90',
 			),
 		'Westfield' 	=> array(
 				'1600',
@@ -1812,11 +1812,11 @@ function garage_model_entries($action, $version)
 				'Mega',
 				'Megabird',
 				'Megablade',
-				'Sei',		
+				'Sei',
 			),
 		'Yugo' 		=> array(
 				'45',
-				'Tempo',		
+				'Tempo',
 			),
 		'Nissan' 	=> array(
 				'DC-3', '100NX', '1200', '210', '310', '180SX', '200SX', 'B10', 'B110', 'B-210', '240SX', '240Z', '280ZX', '300C', '300ZX', '350Z', '370Z', '510', '720', '810', 'Almera', 'Almera Tino', 'Altima', 'Aprio', 'Armada', 'Avenir', 'Be-1', 'Bluebird', 'Caravan', 'Cedric', 'Cefiro', 'Cherry', 'Cima', 'Crew', 'Cube', 'Elgrand', 'Fairlady', 'Figaro', 'Frontier', 'Fuga', 'Gazelle', 'Gloria', 'GT-R', 'Hardbody Truck', 'Hypermini', 'Laurel', 'Leopard', 'Lafesta', 'Liberty', 'Livina Geniss', 'Maxima', 'March', 'Multi', 'Murano', 'Navara', 'Note', 'NX', 'Paladin', 'Pao', 'Pathfinder', 'Patrol', 'Pintara', 'Platina', 'Prairie', 'Presage', 'Presea', 'Primera', 'President', 'Pulsar', 'Pulsar GTI-R', 'Qashqai', 'Quest', 'R390 GT1', 'R\'nessa', 'Rasheen', 'Roadster-Road Star', 'Rogue', 'S-Cargo', 'Saurus Jr', 'Sentra', 'Serena', 'Silvia', 'Skyline', 'Skyline GT-R', 'Stanza', 'Stagea', 'Sunny', 'Teana', 'Terrano', 'Terrano II', 'Tiida', 'Titan', 'Urvan', 'Versa', 'Wingroad', 'X-Trail', 'Xterra'
@@ -1833,7 +1833,7 @@ function garage_model_entries($action, $version)
 			// Run this when installing/updating
 			if ($umil->table_exists(GARAGE_MAKES_TABLE) && $umil->table_exists(GARAGE_MODELS_TABLE))
 			{
-				$make_id = 1; 
+				$make_id = 1;
 				foreach ($model_data as $make => $model_ary)
 				{
 					$make_ary[] = array(

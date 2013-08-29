@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -22,7 +22,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -42,7 +42,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_template.' . $phpEx);
 require($phpbb_root_path . 'includes/mods/class_garage_vehicle.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $vid = request_var('VID', '');
@@ -121,15 +121,18 @@ switch( $mode )
 		$garage_template->rating_dropdown('rating', $data['rating']);
 		$garage_template->service_type_dropdown($data['type_id']);
 		$template->assign_vars(array(
-			'L_TITLE'  			=> $user->lang['ADD_SERVICE'],
-			'L_BUTTON'  			=> $user->lang['ADD_SERVICE'],
+
+			'VID' 			=> $vid,
+			'PRICE'			=> $data['price'],
+			'PRICE_DECIMAL'	=> $data['price_decimal'],
+			'MILEAGE'		=> $data['mileage'],
+			'CURRENCY'		=> $vehicle['currency'],
+
+			'L_TITLE'  		=> $user->lang['ADD_SERVICE'],
+			'L_BUTTON'  	=> $user->lang['ADD_SERVICE'],
+
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('')",
-			'VID' 				=> $vid,
-			'PRICE'				=> $data['price'],
-			'PRICE_DECIMAL'			=> $data['price_decimal'],
-			'MILEAGE'			=> $data['mileage'],
-			'CURRENCY'			=> $vehicle['currency'],
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=insert_service"),
+			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=insert_service"),
 			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
          	));
 		$garage_template->sidemenu();
@@ -227,17 +230,19 @@ switch( $mode )
 		$garage_template->rating_dropdown('rating', (!empty($store['rating'])) ? $store['rating'] : $data['rating']);
 		$garage_template->service_type_dropdown((!empty($store['type_id'])) ? $store['type_id'] : $data['type_id']);
 		$template->assign_vars(array(
+			'CURRENCY'			=> $vehicle['currency'],
+			'MILEAGE'			=> (!empty($store['mileage'])) ? $store['mileage'] : $data['mileage'],
+			'PRICE'				=> (!empty($store['price'])) ? $store['price'] : $data['price'],
+			'PRICE_DECIMAL'		=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
+			'SVID'				=> $svid,
+			'VID'				=> $vid,
+
 			'L_TITLE'			=> $user->lang['EDIT_SERVICE'],
 			'L_BUTTON'			=> $user->lang['EDIT_SERVICE'],
+
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('edit')",
-			'PRICE'				=> (!empty($store['price'])) ? $store['price'] : $data['price'],
-			'PRICE_DECIMAL'			=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
-			'MILEAGE'			=> (!empty($store['mileage'])) ? $store['mileage'] : $data['mileage'],
-			'CURRENCY'			=> $vehicle['currency'],
-			'VID'				=> $vid,
-			'SVID'				=> $svid,
 			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=update_service"))
+			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=update_service"))
 		);
 		$garage_template->sidemenu();
 	break;

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -22,7 +22,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -41,7 +41,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_template.' . $phpEx);
 require($phpbb_root_path . 'includes/mods/class_garage_vehicle.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $vid = request_var('VID', '');
@@ -52,8 +52,8 @@ $bid = request_var('BID', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx"))
-);
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx")
+));
 
 /**
 * Display the moderator control panel link if authorised
@@ -92,13 +92,15 @@ switch( $mode )
 		*/
 		$text = utf8_normalize_nfc(request_var('blog_text', '', true));
 		$uid = $bitfield = $options = '';
+
 		generate_text_for_storage($text, $uid, $bitfield, $options, $garage_config['enable_blogs_bbcode'], $garage_config['enable_blogs_url'], $garage_config['enable_blogs_smilies']);
+
 		$data = array(
 			'blog_title'		=> request_var('blog_title', '', true),
-			'blog_text'		=> $text,
-			'bbcode_uid'        	=> $uid,
-		    	'bbcode_bitfield'   	=> $bitfield,
-		    	'bbcode_options'      	=> $options,
+			'blog_text'			=> $text,
+			'bbcode_uid'		=> $uid,
+		    'bbcode_bitfield'	=> $bitfield,
+		    'bbcode_options'	=> $options,
 		);
 
 		/**
@@ -144,10 +146,11 @@ switch( $mode )
 		* Handle template declarations & assignments
 		*/
 		page_header($user->lang['GARAGE']);
+
 		$template->set_filenames(array(
 			'header' => 'garage_header.html',
-			'body'   => 'garage_blog.html')
-		);
+			'body'   => 'garage_blog.html'
+		));
 
 		decode_message($data['blog_text'], $data['bbcode_uid']);
 
@@ -156,10 +159,11 @@ switch( $mode )
 			'L_BUTTON'		=> $user->lang['EDIT_BLOG'],
 			'VID'			=> $vid,
 			'BID'			=> $bid,
-			'BLOG_TITLE'		=> $data['blog_title'],
+			'BLOG_TITLE'	=> $data['blog_title'],
 			'BLOG_TEXT'		=> $data['blog_text'],
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_blog.$phpEx", "mode=update_blog"))
-		);
+			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_blog.$phpEx", "mode=update_blog")
+		));
+
 		$garage_template->sidemenu();
 	break;
 
@@ -186,12 +190,13 @@ switch( $mode )
 		$text = utf8_normalize_nfc(request_var('blog_text', '', true));
 		$uid = $bitfield = $options = '';
 		generate_text_for_storage($text, $uid, $bitfield, $options, $garage_config['enable_blogs_bbcode'], $garage_config['enable_blogs_url'], $garage_config['enable_blogs_smilies']);
+
 		$data = array(
 			'blog_title'		=> request_var('blog_title', '', true),
-			'blog_text'		=> $text,
-			'bbcode_uid'        	=> $uid,
-		    	'bbcode_bitfield'   	=> $bitfield,
-		    	'bbcode_options'      	=> $options,
+			'blog_text'			=> $text,
+			'bbcode_uid'		=> $uid,
+		    'bbcode_bitfield'	=> $bitfield,
+		    'bbcode_options'	=> $options,
 		);
 
 		/**
@@ -248,8 +253,8 @@ switch( $mode )
 $garage_template->version_notice();
 
 $template->set_filenames(array(
-	'garage_footer' => 'garage_footer.html')
-);
+	'garage_footer' => 'garage_footer.html'
+));
 
 page_footer();
 ?>

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -22,7 +22,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 /**
-* Setup user session, authorisation & language 
+* Setup user session, authorisation & language
 */
 $user->session_begin();
 $auth->acl($user->data);
@@ -52,7 +52,7 @@ require($phpbb_root_path . 'includes/mods/class_garage_blog.' . $phpEx);
 require($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 /**
-* Setup variables 
+* Setup variables
 */
 $mode = request_var('mode', '');
 $sort = request_var('sort', '');
@@ -62,7 +62,7 @@ $mode = request_var('mode', '');
 $cid = request_var('CID', '');
 $vid = request_var('VID', '');
 $image_id = request_var('image_id', '');
-$vid = (!empty($cid)) ? $cid : $vid; 
+$vid = (!empty($cid)) ? $cid : $vid;
 
 /**
 * Build inital navlink..we use the standard phpBB3 breadcrumb process
@@ -272,7 +272,7 @@ switch( $mode )
 
 		/**
 		* Lets try new way of remembering any data entered before user heads to create some needed item(s)
-		*/ 
+		*/
 		$params = array('made_year' => '', 'make_id' => $garage_config['default_make_id'], 'model_id' => $garage_config['default_model_id'], 'mileage' => '', 'mileage_units' => '', 'price' => '', 'price_decimal' => '', 'currency' => '', 'engine_type' => '', 'url_image' => '');
 		$data = $garage->process_vars($params);
 		$params = array('colour' => '', 'comments' => '');
@@ -314,7 +314,7 @@ switch( $mode )
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
 			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_vehicle"))
 		);
-		$garage_template->sidemenu();		
+		$garage_template->sidemenu();
 	break;
 
 	/**
@@ -345,7 +345,7 @@ switch( $mode )
 		/**
 		* Check vehicle quota
 		*/
-		if ($user_vehicle_count >= $garage_vehicle->get_user_add_quota()) 
+		if ($user_vehicle_count >= $garage_vehicle->get_user_add_quota())
 		{
 			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=5"));
 		}
@@ -481,7 +481,7 @@ switch( $mode )
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
-				'U_IMAGE'	=> (($gallery_data[$i]['attach_id']) AND ($gallery_data[$i]['attach_is_image']) AND (!empty($gallery_data[$i]['attach_thumb_location'])) AND (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
+				'U_IMAGE'	=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
 				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=remove_vehicle_image&amp;&amp;VID=$vid&amp;image_id=" . $gallery_data[$i]['attach_id']),
 				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=set_vehicle_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid") : '',
 				'IMAGE' 	=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
@@ -522,7 +522,7 @@ switch( $mode )
 		* Perform required DB work to update vehicle
 		*/
 		$garage_vehicle->update_vehicle($data);
-	
+
 		/**
 		* Updates timestamp on vehicle, indicating it has been updated.
 		* Updated vehicles are displayed on statistics page
@@ -969,14 +969,14 @@ switch( $mode )
 		$start_year =date("Y", $first_rating['rate_date']);
 		$current_year = $time['tm_year'] + 1900;
 
-		if ( $start_year > $current_year ) 
+		if ( $start_year > $current_year )
 		{
 			echo "OH NO TIME MACHINE";
 			return;
-		}	
-		
-		$tab_id = 0;	
-		for ( $year = $current_year; $year >= $start_year; $year-- ) 
+		}
+
+		$tab_id = 0;
+		for ( $year = $current_year; $year >= $start_year; $year-- )
 		{
 			$template->assign_block_vars('year', array(
 				'YEAR'		=> $year,
@@ -995,12 +995,12 @@ switch( $mode )
 				$vehicle_data = $garage_vehicle->get_month_toprated_vehicle($month, $year);
 
 				$thumb_image = null;
-				if ( (empty($vehicle_data['attach_id']) == false) AND ($vehicle_data['attach_is_image'] == 1) ) 
+				if ( (empty($vehicle_data['attach_id']) == false) && ($vehicle_data['attach_is_image'] == 1) )
 				{
-	        		        if ( (empty($vehicle_data['attach_thumb_location']) == false) AND ($vehicle_data['attach_thumb_location'] != $vehicle_data['attach_location']) AND (@file_exists($phpbb_root_path . GARAGE_UPLOAD_PATH."/".$vehicle_data['attach_thumb_location'])) )
+	        		        if ( (empty($vehicle_data['attach_thumb_location']) == false) && ($vehicle_data['attach_thumb_location'] != $vehicle_data['attach_location']) && (@file_exists($phpbb_root_path . GARAGE_UPLOAD_PATH."/".$vehicle_data['attach_thumb_location'])) )
 		               		{
 					   	$thumb_image = $phpbb_root_path . GARAGE_UPLOAD_PATH . $vehicle_data['attach_thumb_location'];
-               				} 
+               				}
 				}
 				$template->assign_block_vars('year.month', array(
 					'MONTH'				=> $month,
