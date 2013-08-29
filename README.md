@@ -1,6 +1,4 @@
 phpbbgarage
-===========  
-phpbbgarage
 -----------
 
 phpBB Garage
