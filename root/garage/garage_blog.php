@@ -16,7 +16,7 @@ define('IN_PHPBB', true);
 /**
 * Set root path & include standard phpBB files required
 */
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
@@ -117,7 +117,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -148,8 +148,8 @@ switch( $mode )
 		page_header($user->lang['GARAGE']);
 
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_blog.html'
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_blog.html'
 		));
 
 		decode_message($data['blog_text'], $data['bbcode_uid']);
@@ -161,7 +161,7 @@ switch( $mode )
 			'BID'			=> $bid,
 			'BLOG_TITLE'	=> $data['blog_title'],
 			'BLOG_TEXT'		=> $data['blog_text'],
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_blog.$phpEx", "mode=update_blog")
+			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_blog.$phpEx", "mode=update_blog")
 		));
 
 		$garage_template->sidemenu();
@@ -213,7 +213,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -247,7 +247,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 }
 $garage_template->version_notice();

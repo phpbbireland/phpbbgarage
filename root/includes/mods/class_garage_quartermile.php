@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -95,9 +95,9 @@ class garage_quartermile
 	function delete_quartermile($qmid)
 	{
 		global $vid, $garage, $garage_image;
-	
+
 		$images	= $garage_image->get_quartermile_gallery($qmid);
-	
+
 		for ($i = 0, $count = sizeof($images);$i < $count; $i++)
 		{
 			$garage_image->delete_quartermile_image($images[$i]['image_id']);
@@ -122,7 +122,7 @@ class garage_quartermile
 		{
 			$hilite = 0;
 		}
-	
+
 		return $hilite;
 	}
 
@@ -138,7 +138,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'COUNT(qg.id) as total',
 			'FROM'		=> array(
@@ -167,7 +167,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'q.vehicle_id, MIN(q.quart) as quart',
 			'FROM'		=> array(
@@ -176,8 +176,8 @@ class garage_quartermile
 				GARAGE_MAKES_TABLE		=> 'mk',
 				GARAGE_MODELS_TABLE		=> 'md',
 			),
-			'WHERE'		=>  "q.pending = 0 
-						AND (q.sixty IS NOT NULL OR q.three IS NOT NULL OR q.eighth IS NOT NULL OR q.eighthmph IS NOT NULL OR q.thou IS NOT NULL OR q.rt IS NOT NULL OR q.quartmph IS NOT NULL) 
+			'WHERE'		=>  "q.pending = 0
+						AND (q.sixty IS NOT NULL OR q.three IS NOT NULL OR q.eighth IS NOT NULL OR q.eighthmph IS NOT NULL OR q.thou IS NOT NULL OR q.rt IS NOT NULL OR q.quartmph IS NOT NULL)
 						AND q.vehicle_id = v.id
 						AND (v.make_id = mk.id AND mk.pending = 0)
 						AND (v.model_id =md.id AND md.pending = 0)",
@@ -209,7 +209,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'v.id, v.user_id, q.id as qmid, qg.image_id, u.username, u.user_colour, v.made_year, mk.make, md.model, q.rt, q.sixty, q.three, q.eighth, q.eighthmph, q.thou, q.quart, q.quartmph, q.dynorun_id, d.bhp, d.bhp_unit, d.torque, d.torque_unit, d.boost, d.boost_unit, d.nitrous',
 			'FROM'		=> array(
@@ -233,7 +233,7 @@ class garage_quartermile
 					'ON'	=> 'i.attach_id = qg.image_id'
 				)
 			),
-			'WHERE'		=>  "q.quart = $quart 
+			'WHERE'		=>  "q.quart = $quart
 						AND q.vehicle_id = $vehicle_id
 						AND q.vehicle_id = v.id
 						AND v.user_id = u.user_id
@@ -261,7 +261,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'v.id as vehicle_id, u.user_id, u.user_colour, v.user_id, q.id as qmid, qg.image_id, u.username, v.made_year, mk.make, md.model, q.rt, q.sixty, q.three, q.eighth, q.eighthmph, q.thou, q.quart, q.quartmph, q.dynorun_id',
 			'FROM'		=> array(
@@ -315,7 +315,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'v.id',
 			'FROM'		=> array(
@@ -345,7 +345,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'q.*, d.id, d.bhp, d.bhp_unit, i.*, v.made_year, mk.make, md.model, v.made_year, mk.make, md.model, u.*',
 			'FROM'		=> array(
@@ -429,7 +429,7 @@ class garage_quartermile
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'q.*, i.attach_id, i.attach_hits, i.attach_ext, i.attach_file, i.attach_thumb_location, i.attach_is_image, i.attach_location',
 			'FROM'		=> array(
@@ -449,7 +449,7 @@ class garage_quartermile
 			'GROUP_BY'	=>	'q.id',
 			'ORDER_BY'	=>	'q.id'
 		));
-	
+
 	       	$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -466,7 +466,7 @@ class garage_quartermile
 	function show_topquartermile()
 	{
 		global $required_position, $user, $template, $db, $SID, $phpEx, $phpbb_root_path, $garage_config, $board_config;
-	
+
 		if ( $garage_config['enable_top_quartermile'] != true )
 		{
 			return;
@@ -480,7 +480,7 @@ class garage_quartermile
 			'COLUMN_2_TITLE'=> $user->lang['OWNER'],
 			'COLUMN_3_TITLE'=> $user->lang['QUARTERMILE'])
 		);
-	
+
 		$limit = $garage_config['top_quartermile_limit'] ? $garage_config['top_quartermile_limit'] : 10;
 
 		$times = $this->get_top_quartermiles($limit);
@@ -488,21 +488,21 @@ class garage_quartermile
 		for($i = 0; $i < count($times); $i++)
 		{
 			$data = $this->get_quartermile_by_vehicle_quart($times[$i]['vehicle_id'], $times[$i]['quart']);
-	
+
 			$mph = (empty($data['quartmph'])) ? 'N/A' : $data['quartmph'];
 	            	$quartermile = $data['quart'] .' @ ' . $mph . ' '. $user->lang['QUARTERMILE_SPEED_UNIT'];
-	
+
 			$template->assign_block_vars($template_block_row, array(
-				'U_COLUMN_1' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=".$data['id']),
+				'U_COLUMN_1' 		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=".$data['id']),
 				'U_COLUMN_2' 		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=".$data['user_id']),
-				'U_COLUMN_3' 		=> append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=view_quartermile&amp;VID=".$data['id']."&amp;QMID=".$data['qmid']),
+				'U_COLUMN_3' 		=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=view_quartermile&amp;VID=".$data['id']."&amp;QMID=".$data['qmid']),
 				'COLUMN_1_TITLE'	=> $data['vehicle'],
 				'COLUMN_2_TITLE'	=> $data['username'],
 				'COLUMN_3_TITLE'	=> $quartermile,
 				'USERNAME_COLOUR'	=> get_username_string('colour', $data['user_id'], $data['username'], $data['user_colour']),
 			));
 	 	}
-	
+
 		$required_position++;
 		return ;
 	}

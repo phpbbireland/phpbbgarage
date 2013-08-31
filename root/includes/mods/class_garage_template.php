@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -49,11 +49,11 @@ class garage_template
 
 		// Set Garage Version Messages.....DO NOT REMOVE....No Support For Any Garage Without It
 		$template->assign_vars(array(
-			'L_GARAGE' 		=> $user->lang['GARAGE'],
+			'L_GARAGE' 				=> $user->lang['GARAGE'],
 			'L_POWERED_BY_GARAGE'	=> 'Powered By phpBB Garage' . $user->lang['Translation_Link'],
-			'U_GARAGE' 		=> append_sid("{$phpbb_root_path}garage.$phpEx"),
-			'GARAGE_LINK' 		=> 'http://www.phpbbgarage.com/',
-			'GARAGE_VERSION'	=> $garage_config['version'])
+			'U_GARAGE' 				=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"),
+			'GARAGE_LINK' 			=> 'http://www.phpbbireland.com/',
+			'GARAGE_VERSION'		=> $garage_config['version'])
 		);
 
 		return;
@@ -65,44 +65,44 @@ class garage_template
 	function sidemenu()
 	{
 		global $user, $template, $phpEx, $phpbb_root_path, $garage_config, $garage, $garage_vehicle, $auth;
-	
+
 		$template->set_filenames(array(
-			'menu' => 'garage_menu.html')
+			'menu' => 'garage/garage_menu.html')
 		);
 
 		$template->assign_vars(array(
-			'U_GARAGE_MAIN' 			=> append_sid("{$phpbb_root_path}garage.$phpEx"),
-			'U_GARAGE_BROWSE' 			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=browse"),
-			'U_GARAGE_SEARCH' 			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=search"),
-			'U_GARAGE_INSURANCE_REVIEW' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insurance_review"),
-			'U_GARAGE_SHOP_REVIEW' 			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=shop_review"),
-			'U_GARAGE_GARAGE_REVIEW' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=garage_review"),
-			'U_GARAGE_QUARTERMILE_TABLE' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=quartermile_table"),
-			'U_GARAGE_DYNORUN_TABLE' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=dynorun_table"),
-			'U_GARAGE_LAP_TABLE' 			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=lap_table"),
-			'U_GARAGE_CREATE_VEHICLE' 		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=add_vehicle"),
-			'U_GARAGE_USER_GARAGE'	 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_garage"),
-			'MAIN' 					=> ($garage_config['enable_images']) ? $user->img('garage_main_menu', 'MAIN_MENU') : $user->lang['MAIN_MENU'],
-			'BROWSE' 				=> ($garage_config['enable_images']) ? $user->img('garage_browse', 'BROWSE_GARAGE') : $user->lang['BROWSE_GARAGE'],
-			'SEARCH' 				=> ($garage_config['enable_images']) ? $user->img('garage_search', 'SEARCH_GARAGE') : $user->lang['SEARCH_GARAGE'],
-			'INSURANCE_REVIEW' 			=> ($garage_config['enable_images']) ? $user->img('garage_insurance_review', 'INSURANCE_SUMMARY') : $user->lang['INSURANCE_SUMMARY'],
-			'SHOP_REVIEW' 				=> ($garage_config['enable_images']) ? $user->img('garage_shop_review', 'SHOP_REVIEW') : $user->lang['SHOP_REVIEW'],
-			'GARAGE_REVIEW' 			=> ($garage_config['enable_images']) ? $user->img('garage_garage_review', 'GARAGE_REVIEW') : $user->lang['GARAGE_REVIEW'],
-			'QUARTERMILE_TABLE' 			=> ($garage_config['enable_images']) ? $user->img('garage_quartermile_table', 'QUARTERMILE_TABLE') : $user->lang['QUARTERMILE_TABLE'],
-			'DYNORUN_TABLE' 			=> ($garage_config['enable_images']) ? $user->img('garage_dynorun_table', 'DYNORUN_TABLE') : $user->lang['DYNORUN_TABLE'],
-			'LAP_TABLE' 				=> ($garage_config['enable_images']) ? $user->img('garage_lap_table', 'LAP_TABLE') : $user->lang['LAP_TABLE'],
-			'CREATE_VEHICLE' 			=> ($garage_config['enable_images']) ? $user->img('garage_create_vehicle', 'CREATE_VEHICLE') : $user->lang['CREATE_VEHICLE'],
-			'S_GARAGE_DISPLAY_MAIN' 		=> ($garage_config['enable_index_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_BROWSE' 		=> ($garage_config['enable_browse_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_SEARCH' 		=> ($garage_config['enable_search_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_INSURANCE_REVIEW' 	=> ($garage_config['enable_insurance_review_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_SHOP_REVIEW' 		=> ($garage_config['enable_shop_review_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_GARAGE_REVIEW'	=> ($garage_config['enable_garage_review_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_QUARTERMILE_TABLE' 	=> ($garage_config['enable_quartermile_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_DYNORUN_TABLE' 	=> ($garage_config['enable_dynorun_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_LAP_TABLE' 		=> ($garage_config['enable_lap_menu']) ? true : false,
-			'S_GARAGE_DISPLAY_UPDATED_VEHICLES' 	=> ($garage_config['enable_latest_vehicle_index']) ? true : false,
-			'S_GARAGE_DISPLAY_CREATE_VEHICLE'	=> ($auth->acl_get('u_garage_add_vehicle')) ? true : false)
+			'U_GARAGE_MAIN'					=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"),
+			'U_GARAGE_BROWSE'				=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=browse"),
+			'U_GARAGE_SEARCH'				=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=search"),
+			'U_GARAGE_INSURANCE_REVIEW'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insurance_review"),
+			'U_GARAGE_SHOP_REVIEW'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review"),
+			'U_GARAGE_GARAGE_REVIEW'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=garage_review"),
+			'U_GARAGE_QUARTERMILE_TABLE'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=quartermile_table"),
+			'U_GARAGE_DYNORUN_TABLE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=dynorun_table"),
+			'U_GARAGE_LAP_TABLE'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=lap_table"),
+			'U_GARAGE_CREATE_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=add_vehicle"),
+			'U_GARAGE_USER_GARAGE'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_garage"),
+			'MAIN'							=> ($garage_config['enable_images']) ? $user->img('garage_main_menu', 'MAIN_MENU') : $user->lang['MAIN_MENU'],
+			'BROWSE'						=> ($garage_config['enable_images']) ? $user->img('garage_browse', 'BROWSE_GARAGE') : $user->lang['BROWSE_GARAGE'],
+			'SEARCH'						=> ($garage_config['enable_images']) ? $user->img('garage_search', 'SEARCH_GARAGE') : $user->lang['SEARCH_GARAGE'],
+			'INSURANCE_REVIEW'				=> ($garage_config['enable_images']) ? $user->img('garage_insurance_review', 'INSURANCE_SUMMARY') : $user->lang['INSURANCE_SUMMARY'],
+			'SHOP_REVIEW'					=> ($garage_config['enable_images']) ? $user->img('garage_shop_review', 'SHOP_REVIEW') : $user->lang['SHOP_REVIEW'],
+			'GARAGE_REVIEW'					=> ($garage_config['enable_images']) ? $user->img('garage_garage_review', 'GARAGE_REVIEW') : $user->lang['GARAGE_REVIEW'],
+			'QUARTERMILE_TABLE'				=> ($garage_config['enable_images']) ? $user->img('garage_quartermile_table', 'QUARTERMILE_TABLE') : $user->lang['QUARTERMILE_TABLE'],
+			'DYNORUN_TABLE'					=> ($garage_config['enable_images']) ? $user->img('garage_dynorun_table', 'DYNORUN_TABLE') : $user->lang['DYNORUN_TABLE'],
+			'LAP_TABLE'						=> ($garage_config['enable_images']) ? $user->img('garage_lap_table', 'LAP_TABLE') : $user->lang['LAP_TABLE'],
+			'CREATE_VEHICLE'				=> ($garage_config['enable_images']) ? $user->img('garage_create_vehicle', 'CREATE_VEHICLE') : $user->lang['CREATE_VEHICLE'],
+			'S_GARAGE_DISPLAY_MAIN'					=> ($garage_config['enable_index_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_BROWSE'				=> ($garage_config['enable_browse_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_SEARCH'				=> ($garage_config['enable_search_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_INSURANCE_REVIEW'		=> ($garage_config['enable_insurance_review_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_SHOP_REVIEW'			=> ($garage_config['enable_shop_review_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_GARAGE_REVIEW'		=> ($garage_config['enable_garage_review_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_QUARTERMILE_TABLE'	=> ($garage_config['enable_quartermile_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_DYNORUN_TABLE'		=> ($garage_config['enable_dynorun_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_LAP_TABLE'			=> ($garage_config['enable_lap_menu']) ? true : false,
+			'S_GARAGE_DISPLAY_UPDATED_VEHICLES'		=> ($garage_config['enable_latest_vehicle_index']) ? true : false,
+			'S_GARAGE_DISPLAY_CREATE_VEHICLE'		=> ($auth->acl_get('u_garage_add_vehicle')) ? true : false)
 		);
 
 		//If Not Allowed Browse Stop Here..We Want The Error To Have The Menu..But No More
@@ -119,26 +119,26 @@ class garage_template
 			$user_vehicles = $garage_vehicle->get_vehicles_by_user($user->data['user_id']);
 			for ($i = 0; $i < count($user_vehicles); $i++)
 			{
-		       		$template->assign_block_vars('user_vehicles', array(
-       					'U_VIEW_VEHICLE'=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;CID=" . $user_vehicles[$i]['id']),
-       					'VEHICLE' 	=> $user_vehicles[$i]['vehicle'])
-      				);
+				$template->assign_block_vars('user_vehicles', array(
+					'U_VIEW_VEHICLE'=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;CID=" . $user_vehicles[$i]['id']),
+					'VEHICLE'		=> $user_vehicles[$i]['vehicle']
+				));
 			}
 		}
 
 		if ($garage_config['enable_latest_vehicle_index'] == true)
 		{
-			$vehicles = $garage_vehicle->get_latest_updated_vehicles($garage_config['latest_vehicle_index_limit']);	
+			$vehicles = $garage_vehicle->get_latest_updated_vehicles($garage_config['latest_vehicle_index_limit']);
 			for ($i = 0; $i < count($vehicles); $i++)
 			{
-       				$template->assign_block_vars('updated_vehicles', array(
-       					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $vehicles[$i]['id']),
+				$template->assign_block_vars('updated_vehicles', array(
+					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $vehicles[$i]['id']),
 					'U_VIEW_PROFILE'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=".$vehicles[$i]['user_id']),
 					'USERNAME_COLOUR'	=> get_username_string('colour', $vehicles[$i]['user_id'], $vehicles[$i]['username'], $vehicles[$i]['user_colour']),
-       					'VEHICLE' 		=> $vehicles[$i]['vehicle'],
-       					'UPDATED_TIME' 		=> $user->format_date($vehicles[$i]['date_updated']),
-		       			'USERNAME' 		=> $vehicles[$i]['username'])
-      				);
+					'VEHICLE'			=> $vehicles[$i]['vehicle'],
+					'UPDATED_TIME'		=> $user->format_date($vehicles[$i]['date_updated']),
+					'USERNAME'			=> $vehicles[$i]['username']
+				));
 			}
 		}
 
@@ -148,7 +148,7 @@ class garage_template
 	/**
 	* Assign template variables for attaching images
 	*
-	* @param string $type 
+	* @param string $type
 	*
 	*/
 	function attach_image($type)
@@ -161,8 +161,8 @@ class garage_template
 			return;
 		}
 
-		//If Images For Mode Are Enabled Then Show Methods Enabled	
-		if ($garage_config['enable_'.$type.'_images'] && ($garage_config['enable_uploaded_images']||$garage_config['enable_remote_images'])) 
+		//If Images For Mode Are Enabled Then Show Methods Enabled
+		if ($garage_config['enable_'.$type.'_images'] && ($garage_config['enable_uploaded_images']||$garage_config['enable_remote_images']))
 		{
 			//Setup Parent Template Block For Image Attachment
 			$template->assign_vars(array('S_DISPLAY_IMAGE_ATTACH_OPTIONS' => true));
@@ -173,7 +173,7 @@ class garage_template
 				$template->assign_vars(array(
 					'MAXIMUM_IMAGE_FILE_SIZE'	=> $garage_config['max_image_kbytes'],
 					'MAXIMUM_IMAGE_RESOLUTION'	=> $garage_config['max_image_resolution'],
-					'S_DISPLAY_UPLOAD_IMAGE' 	=> true)
+					'S_DISPLAY_UPLOAD_IMAGE'	=> true)
 				);
 			}
 			//Show Remote Image Link If Enabled
@@ -182,7 +182,7 @@ class garage_template
 				$template->assign_vars(array('S_DISPLAY_REMOTE_IMAGE' => true));
 			}
 		}
-	
+
 		return;
 	}
 
@@ -202,8 +202,8 @@ class garage_template
 		for ($i = 0, $count = sizeof($orders);$i < $count; $i++)
 		{
 			$template->assign_block_vars('order', array(
-				'VALUE'		=> $orders[$i],
-				'TEXT'		=> $orders_text[$i],
+				'VALUE'			=> $orders[$i],
+				'TEXT'			=> $orders_text[$i],
 				'S_SELECTED'	=> ($selected == $orders[$i]) ? true: false)
 			);
 		}
@@ -213,7 +213,7 @@ class garage_template
 	* Assign template variables for sort selection
 	*
 	* @param string $type vehicle|modification|premium|quartermile|dynorun|track_time
-	* @param string $selected 
+	* @param string $selected
 	*
 	*/
 	function sort_dropdown($type, $selected = null)
@@ -254,10 +254,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($values);$i < $count; $i++)
 		{
 			$template->assign_block_vars('sort', array(
-				'VALUE'		=> $values[$i],
-				'TEXT'		=> $texts[$i],
-				'S_SELECTED'	=> ($selected == $values[$i]) ? true: false)
-			);
+				'VALUE'			=> $values[$i],
+				'TEXT'			=> $texts[$i],
+				'S_SELECTED'	=> ($selected == $values[$i]) ? true: false
+			));
 		}
 	}
 
@@ -275,8 +275,8 @@ class garage_template
 		for ($i = 0, $count = sizeof($makes);$i < $count; $i++)
 		{
 			$template->assign_block_vars('make', array(
-				'VALUE'		=> $makes[$i]['id'],
-				'TEXT'		=> $makes[$i]['make'],
+				'VALUE'			=> $makes[$i]['id'],
+				'TEXT'			=> $makes[$i]['make'],
 				'S_SELECTED'	=> ($selected_id == $makes[$i]['id']) ? true: false)
 			);
 		}
@@ -296,10 +296,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($tracks);$i < $count; $i++)
 		{
 			$template->assign_block_vars('track', array(
-				'VALUE'		=> $tracks[$i]['id'],
-				'TEXT'		=> $tracks[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $tracks[$i]['id']) ? true: false)
-			);
+				'VALUE'			=> $tracks[$i]['id'],
+				'TEXT'			=> $tracks[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $tracks[$i]['id']) ? true: false
+			));
 		}
 	}
 
@@ -317,10 +317,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($categories);$i < $count; $i++)
 		{
 			$template->assign_block_vars('category', array(
-				'VALUE'		=> $categories[$i]['id'],
-				'TEXT'		=> $categories[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $categories[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $categories[$i]['id'],
+				'TEXT'			=> $categories[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $categories[$i]['id']) ? true : false
+			));
 		}
 
 	}
@@ -339,10 +339,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($manufacturers);$i < $count; $i++)
 		{
 			$template->assign_block_vars('manufacturer', array(
-				'VALUE'		=> $manufacturers[$i]['id'],
-				'TEXT'		=> $manufacturers[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $manufacturers[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $manufacturers[$i]['id'],
+				'TEXT'			=> $manufacturers[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $manufacturers[$i]['id']) ? true : false
+			));
 		}
 
 	}
@@ -361,10 +361,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($shops);$i < $count; $i++)
 		{
 			$template->assign_block_vars('shop', array(
-				'VALUE'		=> $shops[$i]['id'],
-				'TEXT'		=> $shops[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $shops[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $shops[$i]['id'],
+				'TEXT'			=> $shops[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $shops[$i]['id']) ? true : false
+			));
 		}
 	}
 
@@ -382,10 +382,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($garages);$i < $count; $i++)
 		{
 			$template->assign_block_vars('garage', array(
-				'VALUE'		=> $garages[$i]['id'],
-				'TEXT'		=> $garages[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $garages[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $garages[$i]['id'],
+				'TEXT'			=> $garages[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $garages[$i]['id']) ? true : false
+			));
 		}
 	}
 
@@ -403,10 +403,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($dynocentres);$i < $count; $i++)
 		{
 			$template->assign_block_vars('dynocentre', array(
-				'VALUE'		=> $dynocentres[$i]['id'],
-				'TEXT'		=> $dynocentres[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $dynocentres[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $dynocentres[$i]['id'],
+				'TEXT'			=> $dynocentres[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $dynocentres[$i]['id']) ? true : false
+			));
 		}
 	}
 
@@ -424,10 +424,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($insurers);$i < $count; $i++)
 		{
 			$template->assign_block_vars('insurer', array(
-				'VALUE'		=> $insurers[$i]['id'],
-				'TEXT'		=> $insurers[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $insurers[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $insurers[$i]['id'],
+				'TEXT'			=> $insurers[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $insurers[$i]['id']) ? true : false
+			));
 		}
 
 	}
@@ -446,10 +446,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($business);$i < $count; $i++)
 		{
 			$template->assign_block_vars('reassign_business', array(
-				'VALUE'		=> $business[$i]['id'],
-				'TEXT'		=> $business[$i]['title'],
-				'S_SELECTED'	=> ($selected_id == $business[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $business[$i]['id'],
+				'TEXT'			=> $business[$i]['title'],
+				'S_SELECTED'	=> ($selected_id == $business[$i]['id']) ? true : false
+			));
 		}
 
 	}
@@ -468,10 +468,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($years);$i < $count; $i++)
 		{
 			$template->assign_block_vars('year', array(
-				'VALUE'		=> $years[$i],
-				'TEXT'		=> $years[$i],
-				'S_SELECTED'	=> ($selected == $years[$i]) ? true : false)
-			);
+				'VALUE'			=> $years[$i],
+				'TEXT'			=> $years[$i],
+				'S_SELECTED'	=> ($selected == $years[$i]) ? true : false
+			));
 		}
 	}
 
@@ -491,10 +491,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($id);$i < $count; $i++)
 		{
 			$template->assign_block_vars('engine', array(
-				'VALUE'		=> $id[$i],
-				'TEXT'		=> $text[$i],
-				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false)
-			);
+				'VALUE'			=> $id[$i],
+				'TEXT'			=> $text[$i],
+				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false
+			));
 		}
 	}
 
@@ -514,10 +514,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($id);$i < $count; $i++)
 		{
 			$template->assign_block_vars('condition', array(
-				'VALUE'		=> $id[$i],
-				'TEXT'		=> $text[$i],
-				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false)
-			);
+				'VALUE'			=> $id[$i],
+				'TEXT'			=> $text[$i],
+				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false
+			));
 		}
 	}
 
@@ -537,10 +537,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($id);$i < $count; $i++)
 		{
 			$template->assign_block_vars('type', array(
-				'VALUE'		=> $id[$i],
-				'TEXT'		=> $text[$i],
-				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false)
-			);
+				'VALUE'			=> $id[$i],
+				'TEXT'			=> $text[$i],
+				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false
+			));
 		}
 	}
 
@@ -560,17 +560,17 @@ class garage_template
 		for ($i = 0, $count = sizeof($id);$i < $count; $i++)
 		{
 			$template->assign_block_vars('service_type', array(
-				'VALUE'		=> $id[$i],
-				'TEXT'		=> $text[$i],
-				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false)
-			);
+				'VALUE'			=> $id[$i],
+				'TEXT'			=> $text[$i],
+				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false
+			));
 		}
 	}
 
 	/**
 	* Assign template variables for currency selection
 	*
-	* @param string $selected selected option 
+	* @param string $selected selected option
 	*
 	*/
 	function currency_dropdown($selected = null)
@@ -582,10 +582,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($currency_types);$i < $count; $i++)
 		{
 			$template->assign_block_vars('currency', array(
-				'VALUE'		=> $currency_types[$i],
-				'TEXT'		=> $currency_types[$i],
-				'S_SELECTED'	=> ($selected == $currency_types[$i]) ? true : false)
-			);
+				'VALUE'			=> $currency_types[$i],
+				'TEXT'			=> $currency_types[$i],
+				'S_SELECTED'	=> ($selected == $currency_types[$i]) ? true : false
+			));
 		}
 	}
 
@@ -604,10 +604,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($mileage_unit_types);$i < $count; $i++)
 		{
 			$template->assign_block_vars('mileage', array(
-				'VALUE'		=> $mileage_unit_types[$i],
-				'TEXT'		=> $mileage_unit_types[$i],
-				'S_SELECTED'	=> ($selected == $mileage_unit_types[$i]) ? true : false)
-			);
+				'VALUE'			=> $mileage_unit_types[$i],
+				'TEXT'			=> $mileage_unit_types[$i],
+				'S_SELECTED'	=> ($selected == $mileage_unit_types[$i]) ? true : false
+			));
 		}
 	}
 
@@ -620,17 +620,17 @@ class garage_template
 	*/
 	function dynorun_dropdown($dynoruns, $selected_id = null)
 	{
-		global $template; 
+		global $template;
 
 		for ($i = 0, $count = sizeof($dynoruns);$i < $count; $i++)
 		{
 			$template->assign_block_vars('dynorun', array(
-				'VALUE'		=> $dynoruns[$i]['id'],
-				'TEXT'		=> $dynoruns[$i]['bhp'] . " BHP @ " . $dynoruns[$i]['bhp_unit'],
-				'S_SELECTED'	=> ($selected_id == $dynoruns[$i]['id']) ? true : false)
-			);
+				'VALUE'			=> $dynoruns[$i]['id'],
+				'TEXT'			=> $dynoruns[$i]['bhp'] . " BHP @ " . $dynoruns[$i]['bhp_unit'],
+				'S_SELECTED'	=> ($selected_id == $dynoruns[$i]['id']) ? true : false
+			));
 		}
-	
+
 	}
 
 	/**
@@ -642,16 +642,16 @@ class garage_template
 	function boost_dropdown($selected = null)
 	{
 		global $template;
-		
+
 		$boost_types = array('PSI', 'BAR');
 
 		for ($i = 0, $count = sizeof($boost_types);$i < $count; $i++)
 		{
 			$template->assign_block_vars('boost', array(
-				'VALUE'		=> $boost_types[$i],
-				'TEXT'		=> $boost_types[$i],
-				'S_SELECTED'	=> ($selected == $boost_types[$i]) ? true : false)
-			);
+				'VALUE'			=> $boost_types[$i],
+				'TEXT'			=> $boost_types[$i],
+				'S_SELECTED'	=> ($selected == $boost_types[$i]) ? true : false
+			));
 		}
 	}
 
@@ -671,10 +671,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($nitrous_types);$i < $count; $i++)
 		{
 			$template->assign_block_vars('nitrous', array(
-				'VALUE'		=> $nitrous_types[$i],
-				'TEXT'		=> $nitrous_types_text[$i],
-				'S_SELECTED'	=> ($selected == $nitrous_types[$i]) ? true : false)
-			);
+				'VALUE'			=> $nitrous_types[$i],
+				'TEXT'			=> $nitrous_types_text[$i],
+				'S_SELECTED'	=> ($selected == $nitrous_types[$i]) ? true : false
+			));
 		}
 	}
 
@@ -694,10 +694,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($power_types);$i < $count; $i++)
 		{
 			$template->assign_block_vars($name, array(
-				'VALUE'		=> $power_types[$i],
-				'TEXT'		=> $power_types[$i],
-				'S_SELECTED'	=> ($selected == $power_types[$i]) ? true : false)
-			);
+				'VALUE'			=> $power_types[$i],
+				'TEXT'			=> $power_types[$i],
+				'S_SELECTED'	=> ($selected == $power_types[$i]) ? true : false
+			));
 		}
 	}
 
@@ -717,10 +717,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($id);$i < $count; $i++)
 		{
 			$template->assign_block_vars('cover', array(
-				'VALUE'		=> $id[$i],
-				'TEXT'		=> $text[$i],
-				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false)
-			);
+				'VALUE'			=> $id[$i],
+				'TEXT'			=> $text[$i],
+				'S_SELECTED'	=> ($selected == $id[$i]) ? true : false
+			));
 		}
 	}
 
@@ -740,10 +740,10 @@ class garage_template
 		for ($i = 0, $count = sizeof($rating);$i < $count; $i++)
 		{
 			$template->assign_block_vars($name, array(
-				'VALUE'		=> $rating[$i],
-				'TEXT'		=> $rating[$i],
-				'S_SELECTED'	=> ($selected_id == $rating[$i]) ? true : false)
-			);
+				'VALUE'			=> $rating[$i],
+				'TEXT'			=> $rating[$i],
+				'S_SELECTED'	=> ($selected_id == $rating[$i]) ? true : false
+			));
 		}
 	}
 
@@ -772,7 +772,7 @@ class garage_template
 	* Assign template variables for pagination of pages with #'s
 	* Based of phpBB3 standard generate_pagination
 	*
-	* @param string $base_url 
+	* @param string $base_url
 	* @param string $hash_location
 	* @param int $num_items
 	* @param int $per_page
@@ -835,7 +835,7 @@ class garage_template
 
 		if ($add_prevnext_text)
 		{
-			if ($on_page != 1) 
+			if ($on_page != 1)
 			{
 				$page_string = '<a href="' . $base_url . '&amp;start=' . (($on_page - 2) * $per_page) . '#'. $hash_location .'">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
 			}
@@ -847,12 +847,12 @@ class garage_template
 		}
 
 		$template->assign_vars(array(
-			$tpl_prefix . 'BASE_URL'	=> $base_url,
+			$tpl_prefix . 'BASE_URL'		=> $base_url,
 			$tpl_prefix . 'HASH_LOCATION'	=> $hash_location,
-			$tpl_prefix . 'PER_PAGE'	=> $per_page,
+			$tpl_prefix . 'PER_PAGE'		=> $per_page,
 
 			$tpl_prefix . 'PREVIOUS_PAGE'	=> ($on_page == 1) ? '' : $base_url . '&amp;start=' . (($on_page - 2) * $per_page). '#'. $hash_location,
-			$tpl_prefix . 'NEXT_PAGE'	=> ($on_page == $total_pages) ? '' : $base_url . '&amp;start=' . ($on_page * $per_page) .'#'. $hash_location,
+			$tpl_prefix . 'NEXT_PAGE'		=> ($on_page == $total_pages) ? '' : $base_url . '&amp;start=' . ($on_page * $per_page) .'#'. $hash_location,
 		));
 
 		return $page_string;
@@ -872,28 +872,28 @@ class garage_template
 		for ($i = 0, $count = sizeof($data);$i < $count; $i++)
 		{
 			$template->assign_block_vars($block_name, array(
-				'U_IMAGE'		=> ($data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $data[$i]['attach_id']) : '',
-				'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
+				'U_IMAGE'			=> ($data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $data[$i]['attach_id']) : '',
+				'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
 				'U_VIEW_PROFILE'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
-				'U_EDIT'		=> ($auth->acl_get('m_garage') || $user->data['user_id'] == $data[$i]['user_id'] ) ? append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=" . $data[$i]['id']. "&amp;redirect=MCP") : '',
-				'ROW_NUMBER' 		=> $i + ( $start + 1 ),
-				'IMAGE'			=> $user->img('garage_img_attached', 'VEHICLE_IMAGE_ATTACHED'),
-				'ID'			=> $data[$i]['id'],
-				'YEAR' 			=> $data[$i]['made_year'],
-				'MAKE' 			=> $data[$i]['make'],
-				'COLOUR'		=> $data[$i]['colour'],
-				'UPDATED'		=> $user->format_date($data[$i]['date_updated']),
-				'VIEWS'			=> $data[$i]['views'],
-				'MODS'			=> $data[$i]['total_mods'],
-				'MODEL'			=> $data[$i]['model'],
-				'USERNAME'		=> $data[$i]['username'],
+				'U_EDIT'			=> ($auth->acl_get('m_garage') || $user->data['user_id'] == $data[$i]['user_id'] ) ? append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=" . $data[$i]['id']. "&amp;redirect=MCP") : '',
+				'ROW_NUMBER'		=> $i + ( $start + 1 ),
+				'IMAGE'				=> $user->img('garage_img_attached', 'VEHICLE_IMAGE_ATTACHED'),
+				'ID'				=> $data[$i]['id'],
+				'YEAR'				=> $data[$i]['made_year'],
+				'MAKE'				=> $data[$i]['make'],
+				'COLOUR'			=> $data[$i]['colour'],
+				'UPDATED'			=> $user->format_date($data[$i]['date_updated']),
+				'VIEWS'				=> $data[$i]['views'],
+				'MODS'				=> $data[$i]['total_mods'],
+				'MODEL'				=> $data[$i]['model'],
+				'USERNAME'			=> $data[$i]['username'],
 				'ENGINE_TYPE'		=> $data[$i]['engine_type'],
-				'PRICE'			=> $data[$i]['price'],
-				'CURRENCY'		=> $data[$i]['currency'],
-				'MILEAGE'		=> $data[$i]['mileage'],
+				'PRICE'				=> $data[$i]['price'],
+				'CURRENCY'			=> $data[$i]['currency'],
+				'MILEAGE'			=> $data[$i]['mileage'],
 				'MILEAGE_UNIT'		=> $data[$i]['mileage_unit'],
 				'USERNAME_COLOUR'	=> get_username_string('colour', $data[$i]['user_id'], $data[$i]['username'], $data[$i]['user_colour']),
-				'EDIT'			=> ($garage_config['enable_images']) ? $user->img('garage_edit', 'EDIT') : $user->lang['EDIT'],
+				'EDIT'				=> ($garage_config['enable_images']) ? $user->img('garage_edit', 'EDIT') : $user->lang['EDIT'],
 			));
 		}
 	}

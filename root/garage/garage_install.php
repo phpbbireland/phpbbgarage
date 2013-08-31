@@ -13,7 +13,7 @@
 */
 define('UMIL_AUTO', true);
 define('IN_PHPBB', true);
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 $user->session_begin();
@@ -549,11 +549,11 @@ $versions = array(
 
 		// Lets add a new column to the phpbb_test table named test_time
 		'table_column_add' => array(
-			array('phpbb_users', 'user_garage_index_columns', array('BOOL', 2)),
-			array('phpbb_users', 'user_garage_guestbook_email_notify', array('BOOL', 1)),
-			array('phpbb_users', 'user_garage_guestbook_pm_notify', array('BOOL', 1)),
-			array('phpbb_users', 'user_garage_mod_email_optout', array('BOOL', 0)),
-			array('phpbb_users', 'user_garage_mod_pm_optout', array('BOOL', 0)),
+			array('phpbb_users', 'ug_index_columns', array('BOOL', 2)),
+			array('phpbb_users', 'ug_guestbook_email_notify', array('BOOL', 1)),
+			array('phpbb_users', 'ug_guestbook_pm_notify', array('BOOL', 1)),
+			array('phpbb_users', 'ug_mod_email_optout', array('BOOL', 0)),
+			array('phpbb_users', 'ug_mod_pm_optout', array('BOOL', 0)),
 		),
 
 		/*
@@ -586,24 +586,24 @@ function garage_config_entries($action, $version)
 	global $db, $table_prefix, $umil, $phpbb_root_path, $phpEx;
 
 	$config_data = array(
-		'version' 					=> '2.0.B5-DEV',
-		'cars_per_page' 			=> '30',
-		'year_start' 				=> '1980',
-		'year_end' 					=> '1',
-		'enable_user_submit_make' 	=> '1',
-		'enable_user_submit_model' 	=> '1',
-		'dateformat' 				=> 'dMYH:i',
-		'default_make_id' 			=> '',
-		'default_model_id' 			=> '',
-		'integrate_memberlist' 		=> '1',
-		'integrate_viewtopic' 		=> '1',
-		'integrate_profile' 		=> '1',
-		'profile_thumbs' 			=> '1',
-		'enable_pm_pending_notify' 				=> '1',
-		'enable_email_pending_notify' 			=> '1',
-		'enable_pm_pending_notify_optout' 		=> '1',
+		'version' 						=> '2.0.6',
+		'cars_per_page' 				=> '30',
+		'year_start' 					=> '1980',
+		'year_end' 						=> '1',
+		'enable_user_submit_make' 		=> '1',
+		'enable_user_submit_model'		=> '1',
+		'dateformat' 					=> 'dMYH:i',
+		'default_make_id' 				=> '',
+		'default_model_id' 				=> '',
+		'integrate_memberlist' 			=> '1',
+		'integrate_viewtopic' 			=> '1',
+		'integrate_profile' 			=> '1',
+		'profile_thumbs' 				=> '1',
+		'enable_pm_pending_notify' 			=> '1',
+		'enable_email_pending_notify' 		=> '1',
+		'enable_pm_pending_notify_optout' 	=> '1',
 		'enable_email_pending_notify_optout' 	=> '1',
-		'enable_vehicle_approval'				=> '0',
+		'enable_vehicle_approval'			=> '0',
 		'enable_index_menu' 				=> '1',
 		'enable_browse_menu' 				=> '1',
 		'enable_search_menu' 				=> '1',
@@ -691,7 +691,7 @@ function garage_config_entries($action, $version)
 		'enable_guestbooks' 			=> '1',
 		'enable_guestbooks_bbcode' 		=> '1',
 		'enable_guestbooks_comment_approval' 	=> '0',
-		'enable_user_submit_product' 			=> '1',
+		'enable_user_submit_product' 	=> '1',
 		'enable_product_approval' 		=> '0',
 		'enable_product_search' 		=> '1',
 		'enable_service' 				=> '1',

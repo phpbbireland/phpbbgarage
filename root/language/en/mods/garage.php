@@ -153,6 +153,7 @@ $lang = array_merge($lang, array(
 	'RESULTS'				=> 'Results',
 	'RESULTS_DISPLAY'		=> 'Display Results As',
 	'RATING' 				=> 'Rating',
+	'RATINGS' 				=> 'Ratings',
 	'COST' 					=> 'Cost',
 	'TITLE' 				=> 'Title',
 	'EDIT_MOD' 				=> 'Edit Mod',

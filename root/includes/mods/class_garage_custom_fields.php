@@ -872,7 +872,7 @@ class custom_vehicle_fields
 		global $template;
 
 		$template->set_filenames(array(
-			'cp' => 'garage_custom_vehicle_fields.tpl')
+			'cp' => 'garage/garage_custom_vehicle_fields.html')
 		);
 
 		foreach ($this->profile_types as $field_case => $field_type)

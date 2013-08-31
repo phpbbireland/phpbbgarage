@@ -1,11 +1,11 @@
 <?php
-/** 
+/**
 *
 * @package install
 * @version $Id$
-* @copyright (c) 2005 phpBB Group 
+* @copyright (c) 2005 phpBB Group
 * @copyright (c) 2007 Esmond Poynton
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -251,7 +251,7 @@ class install_install extends module
 					'U_UPDATE_ACTION'	=> append_sid($this->p_master->module_url, "mode=$mode&amp;sub=update_files"),
 				));
 
-				if (($all_up_to_date) AND ($sub == 'final')) 
+				if (($all_up_to_date) AND ($sub == 'final'))
 				{
 					// Remove the lock file
 					@unlink($phpbb_root_path . 'cache/install_lock');
@@ -265,7 +265,7 @@ class install_install extends module
 
 				if ($all_up_to_date)
 				{
-					// Refresh any style css data we updated - this may cause some unhappy users, but 
+					// Refresh any style css data we updated - this may cause some unhappy users, but
 					$sql = 'SELECT *
 						FROM ' . STYLES_THEME_TABLE;
 					$result = $db->sql_query($sql);
@@ -287,7 +287,7 @@ class install_install extends module
 							{
 								$last_change = $theme['theme_mtime'];
 								$dir = @opendir("{$phpbb_root_path}styles/{$theme['theme_path']}/theme");
-	
+
 								if ($dir)
 								{
 									while (($entry = readdir($dir)) !== false)
@@ -301,24 +301,24 @@ class install_install extends module
 									closedir($dir);
 								}
 							}
-	
+
 							if ($recache)
 							{
 								include_once($phpbb_root_path . 'includes/acp/acp_styles.' . $phpEx);
-	
+
 								$theme['theme_data'] = acp_styles::db_theme_data($theme);
 								$theme['theme_mtime'] = $update_time;
-	
+
 								// Save CSS contents
 								$sql_ary = array(
 									'theme_mtime'	=> $theme['theme_mtime'],
 									'theme_data'	=> $theme['theme_data']
 								);
-	
+
 								$sql = 'UPDATE ' . STYLES_THEME_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE theme_id = ' . $theme['theme_id'];
 								$db->sql_query($sql);
-	
+
 								$cache->destroy('sql', STYLES_THEME_TABLE);
 							}
 						}
@@ -470,7 +470,7 @@ class install_install extends module
 						$db->sql_freeresult($result2);
 
 						$db->sql_multi_insert(STYLES_IMAGESET_DATA_TABLE, $sql_ary);
-	
+
 						$db->sql_transaction('commit');
 					}
 					$db->sql_freeresult($result);
@@ -532,7 +532,7 @@ class install_install extends module
 						{
 							continue;
 						}
-		
+
 						$methods[] = $type;
 					}
 
@@ -901,7 +901,7 @@ class install_install extends module
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
-				$sql = $db->sql_build_query('SELECT', 
+				$sql = $db->sql_build_query('SELECT',
 					array(
 					'SELECT'	=> 'c.config_name, c.config_value',
 					'FROM'		=> array(
@@ -988,7 +988,7 @@ class install_install extends module
 			'S_LEGEND'		=> false,
 		));
 
-		// Check for url_fopen 
+		// Check for url_fopen
 		if (@ini_get('allow_url_fopen') == '1' || strtolower(@ini_get('allow_url_fopen')) == 'on')
 		{
 			$result = '<strong style="color:green">' . $lang['YES'] . '</strong>';
@@ -1006,9 +1006,9 @@ class install_install extends module
 			'S_EXPLAIN'		=> true,
 			'S_LEGEND'		=> false,
 		));
-		
-		
-		// Check for getimagesize 
+
+
+		// Check for getimagesize
 		if (@function_exists('getimagesize'))
 		{
 			$passed['imagesize'] = true;
@@ -1328,11 +1328,11 @@ class install_install extends module
 		$schema_changes = array(
 			'add_columns'	=> array(
 				USERS_TABLE	=> array(
-					'user_garage_index_columns' 		=> array('BOOL', 2),
-					'user_garage_guestbook_email_notify' 	=> array('BOOL', 1),
-					'user_garage_guestbook_pm_notify' 	=> array('BOOL', 1),
-					'user_garage_mod_email_optout' 		=> array('BOOL', 0),
-					'user_garage_mod_pm_optout' 		=> array('BOOL', 0),
+					'ug_index_columns' 		=> array('BOOL', 2),
+					'ug_guestbook_email_notify' 	=> array('BOOL', 1),
+					'ug_guestbook_pm_notify' 	=> array('BOOL', 1),
+					'ug_mod_email_optout' 		=> array('BOOL', 0),
+					'ug_mod_pm_optout' 		=> array('BOOL', 0),
 				),
 			),
 		);
@@ -1525,16 +1525,16 @@ class install_install extends module
 
 		//Queue Moderator Role
 		update_role_permissions('grant', 'ROLE_MOD_QUEUE', array('m_garage_approve_vehicle', 'm_garage_approve_make', 'm_garage_approve_model', 'm_garage_approve_business', 'm_garage_approve_quartermile', 'm_garage_approve_dynorun', 'm_garage_approve_guestbook', 'm_garage_approve_lap', 'm_garage_approve_track', 'm_garage_approve_product'), ACL_YES);
-			
+
 		//Standard Moderator Role
 		update_role_permissions('grant', 'ROLE_MOD_STANDARD', array('m_garage_edit', 'm_garage_delete', 'm_garage_rating', 'm_garage_approve_vehicle', 'm_garage_approve_make', 'm_garage_approve_model', 'm_garage_approve_business', 'm_garage_approve_quartermile', 'm_garage_approve_dynorun', 'm_garage_approve_guestbook', 'm_garage_approve_lap', 'm_garage_approve_track', 'm_garage_approve_product'), ACL_YES);
-	
+
 		//Full Moderator Role
 		update_role_permissions('grant', 'ROLE_MOD_FULL', array('m_garage_edit', 'm_garage_delete', 'm_garage_rating', 'm_garage_approve_vehicle', 'm_garage_approve_make', 'm_garage_approve_model', 'm_garage_approve_business', 'm_garage_approve_quartermile', 'm_garage_approve_dynorun', 'm_garage_approve_guestbook', 'm_garage_approve_lap', 'm_garage_approve_track', 'm_garage_approve_product'), ACL_YES);
 
 		//Standard Features User Role
 		update_role_permissions('grant', 'ROLE_USER_STANDARD', array('u_garage_browse', 'u_garage_search', 'u_garage_add_vehicle', 'u_garage_delete_vehicle', 'u_garage_add_modification', 'u_garage_delete_modification', 'u_garage_add_quartermile', 'u_garage_delete_quartermile', 'u_garage_add_lap', 'u_garage_delete_lap', 'u_garage_add_track', 'u_garage_delete_track', 'u_garage_add_dynorun', 'u_garage_delete_dynorun', 'u_garage_add_insurance', 'u_garage_delete_insurance', 'u_garage_add_service', 'u_garage_delete_service', 'u_garage_add_blog', 'u_garage_delete_blog', 'u_garage_add_business', 'u_garage_add_make_model', 'u_garage_add_product', 'u_garage_rate', 'u_garage_comment', 'u_garage_upload_image', 'u_garage_remote_image', 'u_garage_delete_image', 'u_garage_deny'), ACL_YES);
-			
+
 		//All Features User Role
 		update_role_permissions('grant', 'ROLE_USER_FULL', array('u_garage_browse', 'u_garage_search', 'u_garage_add_vehicle', 'u_garage_delete_vehicle', 'u_garage_add_modification', 'u_garage_delete_modification', 'u_garage_add_quartermile', 'u_garage_delete_quartermile', 'u_garage_add_lap', 'u_garage_delete_lap', 'u_garage_add_track', 'u_garage_delete_track', 'u_garage_add_dynorun', 'u_garage_delete_dynorun', 'u_garage_add_insurance', 'u_garage_delete_insurance', 'u_garage_add_service', 'u_garage_delete_service', 'u_garage_add_blog', 'u_garage_delete_blog', 'u_garage_add_business', 'u_garage_add_make_model', 'u_garage_add_product', 'u_garage_rate', 'u_garage_comment', 'u_garage_upload_image', 'u_garage_remote_image', 'u_garage_delete_image', 'u_garage_deny'), ACL_YES);
 	}

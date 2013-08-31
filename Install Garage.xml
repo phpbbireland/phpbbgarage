@@ -7,8 +7,7 @@
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
     		<title lang="en-gb">phpBB Garage</title>
     		<description lang="en-gb">This mod allows users of your forum to add details about their vehicles.</description>
-    		<author-notes lang="en-gb"><![CDATA[- Support is given for both prosilver & subSilver2 templates. Please note the DIY instructions at the end of this file should be completed AFTER the COPY actions and not at the end. Currently the XSL does not allow me place the DIY instructions where I need.
-]]></author-notes>
+    		<author-notes lang="en-gb"><![CDATA[- Support is given for both prosilver & subSilver2 templates.]]></author-notes>
 
 		<author-group>
 			<author>
@@ -17,14 +16,20 @@
 				<username>poyntesm</username>
 				<homepage>http://forums.phpbbgarage.com/</homepage>
 			</author>
+			<author>
+				<username>michaelo</username>
+				<realname>Michael O'Toole</realname>
+				<homepage>http://www.phpbbreland.com/</homepage>
+				<email>o2l@eircom.net</email>
+			</author>
 		</author-group>
 
-		<mod-version>2.0.B5-DEV</mod-version>
+		<mod-version>2.0.6</mod-version>
 
 		<installation>
 			<level>advanced</level>
 			<time>1800</time>
-			<target-version>3.0.4</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 
 		<link-group>
@@ -32,6 +37,13 @@
 		</link-group>
 
 		<history>
+			<entry>
+        			<date>2013-08-29</date>
+			        <rev-version>2.0.6</rev-version>
+				<changelog lang="en-gb">
+					<change>Update Mod to phpBB3.0.11</change>
+				</changelog>
+			</entry>
 			<entry>
         			<date>2008-12-16</date>
 			        <rev-version>2.0.B4</rev-version>
@@ -69,32 +81,12 @@
 			<file from="./root/garage/*.*" to="./garage/" />
 			<file from="./root/includes/*.*" to="./includes/" />
 			<file from="./root/language/en/*.*" to="./language/en/" />
-			<file from="./root/styles/prosilver/imageset/*.*" to="./styles/prosilver/imageset/" />
-			<file from="./root/styles/prosilver/imageset/en/*.*" to="./styles/prosilver/imageset/en/" />
-			<file from="./root/styles/prosilver/template/*.*" to="./styles/prosilver/template/" />
-			<file from="./root/styles/prosilver/theme/*.*" to="./styles/prosilver/theme/" />
+			<file from="./root/styles/prosilver/*.*" to="./styles/prosilver/" />
 			<file from="./root/umil/*.*" to="./umil/" />
-			<file from="./root/garage.php" to="./garage.php" />
-			<file from="./root/garage_blog.php" to="./garage_blog.php" />
-			<file from="./root/garage_dynorun.php" to="./garage_dynorun.php" />
-			<file from="./root/garage_guestbook.php" to="./garage_guestbook.php" />
-			<file from="./root/garage_install.php" to="./garage_install.php" />
-			<file from="./root/garage_modification.php" to="./garage_modification.php" />
-			<file from="./root/garage_premium.php" to="./garage_premium.php" />
-			<file from="./root/garage_quartermile.php" to="./garage_quartermile.php" />
-			<file from="./root/garage_service.php" to="./garage_service.php" />
-			<file from="./root/garage_track.php" to="./garage_track.php" />
-			<file from="./root/garage_vehicle.php" to="./garage_vehicle.php" />
 		</copy>
 
-		<diy-instructions lang="en-gb"><![CDATA[Open your web browser and open the address http://www.yourdomain.com/pathtophpbb/garage_install.php]]>
-		</diy-instructions>
-	    
+
 		<open src="common.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
 			<edit>
 				<find><![CDATA[$config = $cache->obtain_config();]]></find>
 				<action type="after-add">
@@ -108,10 +100,6 @@ require($phpbb_root_path . 'includes/mods/class_garage.' . $phpEx);
 		</open>
 
 		<open src="memberlist.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
 			<edit>
 				<find><![CDATA[			'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.username_clean, u.user_colour, u.user_rank, u.user_posts, u.user_allow_pm, g.group_id, g.group_name, g.group_colour, g.group_type, ug.user_id as ug_user_id',]]></find>
 				<inline-edit>
@@ -211,10 +199,6 @@ require($phpbb_root_path . 'includes/mods/class_garage.' . $phpEx);
 		
 		<open src="viewonline.php">
 			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
-			<edit>
 				<find><![CDATA[		case 'report':
 			$location = $user->lang['REPORTING_POST'];
 			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
@@ -275,10 +259,6 @@ require($phpbb_root_path . 'includes/mods/class_garage.' . $phpEx);
 		</open>
 		
 		<open src="viewtopic.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
 			<edit>
 				<find><![CDATA[$topic_data['topic_title'] = censor_text($topic_data['topic_title']);]]></find>
 				<action type="after-add"><![CDATA[
@@ -344,7 +324,7 @@ $template->assign_vars(array(
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
 //-- add
 		'VEHICLE'			=> $user_cache[$poster_id]['vehicle'],
-		'U_VEHICLE'			=> (isset($user_cache[$poster_id]['garage_id'])) ? append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", 'mode=view_vehicle&amp;VID=' . $user_cache[$poster_id]['garage_id']) : '',
+		'U_VEHICLE'			=> (isset($user_cache[$poster_id]['garage_id'])) ? append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", 'mode=view_vehicle&amp;VID=' . $user_cache[$poster_id]['garage_id']) : '',
 		'U_GARAGE'			=> (isset($user_cache[$poster_id]['garage_id'])) ? append_sid("{$phpbb_root_path}garage.$phpEx", 'mode=search_results&amp;username=' . $user_cache[$poster_id]['username']). '&amp;search_username=1' : '',
 		'S_DISPLAY_GARAGE_VIEWTOPIC'	=> ($garage_config['integrate_viewtopic']) ? true : false,
 //-- mod finish : Garage ---------------------------------------------------------------------------------------------------]]></action>
@@ -352,10 +332,6 @@ $template->assign_vars(array(
 		</open>
 		
 		<open src="adm/index.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
 			<edit>
 				<find><![CDATA[		'ICON_SYNC_DISABLED'		=> '<img src="' . $phpbb_admin_path . 'images/icon_sync_disabled.gif" alt="' . $user->lang['RESYNC'] . '" title="' . $user->lang['RESYNC'] . '" />',]]></find>
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
@@ -370,12 +346,8 @@ $template->assign_vars(array(
 		
 		<open src="includes/functions.php">
 			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add">//-- mod : Garage ----------------------------------------------------------------------------------------------------------</action>
-			</edit>
-			<edit>
-				<find>function page_header($page_title = '', $display_online_list = true)
-{</find>
+				<find><![CDATA[function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum')
+{]]></find>
 				<action type="after-add">//-- mod start : Garage ----------------------------------------------------------------------------------------------------
 //-- add
 	global $garage_config;
@@ -399,10 +371,6 @@ $template->assign_vars(array(
 
 		<open src="includes/functions_user.php">
 			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add"><![CDATA[//-- mod : Garage ----------------------------------------------------------------------------------------------------------]]></action>
-			</edit>
-			<edit>
 				<find><![CDATA[		set_config_count('num_users', -1, true);
 	}]]></find>
 				<action type="after-add"><![CDATA[
@@ -420,10 +388,6 @@ $template->assign_vars(array(
 
 		<open src="includes/session.php">
 			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add"><![CDATA[//-- mod : Garage ----------------------------------------------------------------------------------------------------------]]></action>
-			</edit>
-			<edit>
 				<find><![CDATA[		$this->add_lang($lang_set);
 		unset($lang_set);]]></find>
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
@@ -435,10 +399,6 @@ $template->assign_vars(array(
 
 		<open src="includes/acp/acp_logs.php">
 			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add"><![CDATA[//-- mod : Garage ----------------------------------------------------------------------------------------------------------]]></action>
-			</edit>
-			<edit>
 				<find><![CDATA[		$user->add_lang('mcp');]]></find>
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
 //-- add
@@ -448,10 +408,6 @@ $template->assign_vars(array(
 		</open>
 	    
 		<open src="includes/acp/acp_styles.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add"><![CDATA[//-- mod : Garage ----------------------------------------------------------------------------------------------------------]]></action>
-			</edit>
 			<edit>
 				<find><![CDATA[		$user->add_lang('acp/styles');]]></find>
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
@@ -473,10 +429,6 @@ $template->assign_vars(array(
 		</open>
 
 		<open src="includes/mcp/mcp_logs.php">
-			<edit>
-				<find><![CDATA[<?php]]></find>
-				<action type="after-add"><![CDATA[//-- mod : Garage ----------------------------------------------------------------------------------------------------------]]></action>
-			</edit>
 			<edit>
 				<find><![CDATA[		$user->add_lang('acp/common');]]></find>
 				<action type="after-add"><![CDATA[//-- mod start : Garage ----------------------------------------------------------------------------------------------------
@@ -513,10 +465,10 @@ img_garage_add_modification	= garage_new_modification.gif*25*135
 img_garage_add_insurance	= garage_new_premium.gif*25*120
 img_garage_add_dynorun		= garage_new_dynorun.gif*25*120
 img_garage_add_quartermile	= garage_new_quartermile.gif*25*135
-img_garage_add_lap		= garage_new_lap.gif*25*120
+img_garage_add_lap			= garage_new_lap.gif*25*120
 img_garage_add_service		= garage_new_service.gif*25*120
 img_garage_main_vehicle		= garage_main_vehicle.gif*25*120
-img_garage_no_thumb		= garage_no_thumb.gif*25*120
+img_garage_no_thumb			= garage_no_thumb.gif*25*120
 img_garage_icon_garage		= icon_miniprofile_garage.gif*20*20
 //-- mod finish : Garage ---------------------------------------------------------------------------------------------------
 				</action>
@@ -571,6 +523,11 @@ img_garage_icon_garage		= icon_miniprofile_garage.gif*20*20
 				</action>
 			</edit>
 		</open>
+
+		<php-installer><![CDATA[garage_install.php]]></php-installer>
+		<diy-instructions lang="en-gb"><![CDATA[Open your web browser and open the address http://www.yourdomain.com/pathtophpbb/garage_install.php]]>
+		</diy-instructions>
+	    
 
 	</action-group>
 </mod>

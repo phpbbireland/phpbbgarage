@@ -16,7 +16,7 @@ define('IN_PHPBB', true);
 /**
 * Set root path & include standard phpBB files required
 */
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
@@ -56,7 +56,7 @@ $image_id = request_var('image_id', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx"))
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"))
 );
 
 /**
@@ -83,7 +83,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
+			login_box("garage/garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
 		}
 
 		/**
@@ -91,7 +91,7 @@ switch( $mode )
 		*/
 		if (!$garage_config['enable_tracktime'] || !$auth->acl_get('u_garage_add_lap'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 		}
 
 		/**
@@ -118,33 +118,33 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_lap.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_lap.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['ADD_LAP'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=add_lap&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=add_lap&amp;VID=$vid"))
 		);
 		$garage_template->attach_image('lap');
 		$garage_template->track_dropdown($tracks, $data['track_id']);
 		$garage_template->track_condition_dropdown($data['condition_id']);
 		$garage_template->lap_type_dropdown($data['type_id']);
 		$template->assign_vars(array(
-			'L_TITLE'  		=> $user->lang['ADD_LAP'],
+			'L_TITLE'  			=> $user->lang['ADD_LAP'],
 			'L_BUTTON'  		=> $user->lang['ADD_LAP'],
 			'U_ADD_TRACK'		=> 'javascript:add_track()',
-			'VID' 			=> $vid,
-			'MINUTE' 		=> $data['minute'],
-			'SECOND' 		=> $data['second'],
+			'VID' 				=> $vid,
+			'MINUTE' 			=> $data['minute'],
+			'SECOND' 			=> $data['second'],
 			'MILLISECOND' 		=> $data['millisecond'],
-			'URL_IMAGE'		=> $data['url_image'],
+			'URL_IMAGE'			=> $data['url_image'],
 			'S_DISPLAY_ADD_TRACK'	=> $garage_config['enable_user_add_track'],
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=insert_lap"),
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=insert_lap"),
+			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
          	));
 		$garage_template->sidemenu();
 	break;
@@ -158,7 +158,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
+			login_box("garage/garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
 		}
 
 		/**
@@ -166,7 +166,7 @@ switch( $mode )
 		*/
 		if (!$garage_config['enable_tracktime'] || !$auth->acl_get('u_garage_add_lap'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 		}
 
 		/**
@@ -206,7 +206,7 @@ switch( $mode )
 			}
 			else if ($garage_image->above_image_quotas())
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=4"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=4"));
 			}
 		}
 
@@ -221,7 +221,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -233,7 +233,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
+			login_box("garage/garage_track.$phpEx?mode=add_lap&amp;VID=$vid");
 		}
 
 		/**
@@ -241,7 +241,7 @@ switch( $mode )
 		*/
 		if (!$garage_config['enable_tracktime'] || !$auth->acl_get('u_garage_add_track'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 		}
 
 		/**
@@ -278,14 +278,14 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' 	=> 'garage_header.html',
-			'body'   	=> 'garage_user_submit_data.html')
+			'header' 	=> 'garage/garage_header.html',
+			'body'   	=> 'garage/garage_user_submit_data.html')
 		);
 
-		$user_submit_action = append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=add_lap");
+		$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=add_lap");
 		if ($data['tertiary'] == "edit")
 		{
-			$user_submit_action = append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID={$data['VID']}&amp;LID={$data['LID']}");
+			$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID={$data['VID']}&amp;LID={$data['LID']}");
 		}
 
 		$template->assign_vars(array(
@@ -320,7 +320,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_track.$phpEx?mode=edit_lap&amp;LID=$lid&amp;VID=$vid");
+			login_box("garage/garage_track.$phpEx?mode=edit_lap&amp;LID=$lid&amp;VID=$vid");
 		}
 
 		/**
@@ -347,16 +347,16 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_lap.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_lap.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle_data['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['EDIT_LAP'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid"))
 		);
 		$garage_template->track_dropdown($tracks, (!empty($store['track_id'])) ? $store['track_id'] : $data['track_id']);
 		$garage_template->track_condition_dropdown((!empty($store['condition_id'])) ? $store['condition_id'] : $data['condition_id']);
@@ -364,8 +364,8 @@ switch( $mode )
 		$template->assign_vars(array(
 			'L_TITLE'  				=> $user->lang['EDIT_LAP'],
 			'L_BUTTON'  			=> $user->lang['EDIT_LAP'],
-			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid"),
-			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"),
+			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid"),
+			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"),
 			'U_ADD_TRACK'			=> "javascript:add_track('edit')",
 			'MINUTE' 				=> (!empty($store['minute'])) ? $store['minute'] : $data['minute'],
 			'SECOND' 				=> (!empty($store['second'])) ? $store['second'] : $data['second'],
@@ -373,18 +373,18 @@ switch( $mode )
 			'VID' 					=> $vid,
 			'LID' 					=> $lid,
 			'S_DISPLAY_ADD_TRACK'	=> $garage_config['enable_user_add_track'],
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 			'REDIRECT' 				=> $store['redirect'],
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=update_lap"),
-			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=insert_lap_image"),
+			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=update_lap"),
+			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=insert_lap_image"),
 		));
 		$garage_template->attach_image('lap');
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
-				'U_IMAGE'		=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
-				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=remove_lap_image&amp;&amp;VID=$vid&amp;LID=$lid&amp;image_id=" . $gallery_data[$i]['attach_id']),
-				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=set_lap_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;LID=$lid") : '',
+				'U_IMAGE'		=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
+				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=remove_lap_image&amp;&amp;VID=$vid&amp;LID=$lid&amp;image_id=" . $gallery_data[$i]['attach_id']),
+				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=set_lap_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;LID=$lid") : '',
 				'IMAGE' 		=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
 				'IMAGE_TITLE' 	=> $gallery_data[$i]['attach_file'])
 			);
@@ -401,7 +401,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_track.$phpEx?mode=edit_lap&amp;LID=$lid&amp;VID=$vid");
+			login_box("garage/garage_track.$phpEx?mode=edit_lap&amp;LID=$lid&amp;VID=$vid");
 		}
 
 		/**
@@ -447,7 +447,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -459,7 +459,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_delete_lap'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**
@@ -481,7 +481,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -493,7 +493,7 @@ switch( $mode )
 		*/
 		if ((!$auth->acl_get('u_garage_upload_image')) OR (!$auth->acl_get('u_garage_remote_image')))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=16"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=16"));
 		}
 
 		/**
@@ -514,7 +514,7 @@ switch( $mode )
 			}
 			else if ($garage_image->above_image_quotas())
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=4"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=4"));
 			}
 		}
 
@@ -527,7 +527,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
 	break;
 
 	/**
@@ -554,7 +554,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
 	break;
 
 	/**
@@ -580,7 +580,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID=$lid#images"));
 	break;
 
 	/**
@@ -592,7 +592,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		/**
@@ -606,12 +606,12 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
+			'header' => 'garage/garage_header.html',
 			'body'   => 'garage_view_lap.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $data['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid"))
 		);
        		for ( $i = 0; $i < count($gallery_data); $i++ )
         	{
@@ -631,7 +631,7 @@ switch( $mode )
 
 		$template->assign_vars(array(
 			'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data['user_id']),
-			'U_VIEW_TRACK' 		=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=view_track&amp;TID=" . $data['track_id']),
+			'U_VIEW_TRACK' 		=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=view_track&amp;TID=" . $data['track_id']),
 			'TRACK'				=> $data['title'],
 			'CONDITION'			=> $garage_track->get_track_condition($data['condition_id']),
 			'TYPE'				=> $garage_track->get_lap_type($data['type_id']),
@@ -657,7 +657,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		/**
@@ -671,12 +671,12 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
+			'header' => 'garage/garage_header.html',
 			'body'   => 'garage_view_track.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $data['title'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=view_track&amp;TID=$tid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=view_track&amp;TID=$tid"))
 		);
        		for ( $i = 0; $i < count($lap_data); $i++ )
 		{
@@ -695,10 +695,10 @@ switch( $mode )
 				'USERNAME_COLOUR'	=> get_username_string('colour', $lap_data[$i]['user_id'], $lap_data[$i]['username'], $lap_data[$i]['user_colour']),
 				'VEHICLE'			=> $lap_data[$i]['vehicle'],
 				'IMAGE'				=> $user->img('garage_img_attached', 'IMAGE_ATTACHED'),
-				'U_IMAGE'			=> ($lap_data[$i]['attach_id']) ? append_sid("garage.$phpEx", "mode=view_image&amp;image_id=". $lap_data[$i]['attach_id']) : '',
+				'U_IMAGE'			=> ($lap_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=". $lap_data[$i]['attach_id']) : '',
 				'U_VIEWPROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $lap_data[$i]['user_id']),
-				'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $lap_data[$i]['vehicle_id']),
-				'U_LAP'				=> append_sid("garage_track.$phpEx?mode=view_lap&amp;LID=".$lap_data[$i]['lid']."&amp;VID=". $lap_data[$i]['vehicle_id']),
+				'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $lap_data[$i]['vehicle_id']),
+				'U_LAP'				=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx?mode=view_lap&amp;LID=".$lap_data[$i]['lid']."&amp;VID=". $lap_data[$i]['vehicle_id']),
 			));
 
 			if ( (empty($lap_data[$i]['attach_thumb_location']) == false) && ($lap_data[$i]['attach_thumb_location'] != $lap_data[$i]['attach_location']) )

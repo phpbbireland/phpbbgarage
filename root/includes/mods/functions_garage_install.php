@@ -10,7 +10,7 @@
 
 /**
 * Update role-specific ACL options. Function can grant or remove options. If option already granted it will NOT be updated.
-* 
+*
 * @param grant|remove $mode defines whether roles are granted to removed
 * @param strong $role_name role name to update
 * @param mixed $options auth_options to grant (a auth_option has to be specified)
@@ -21,7 +21,7 @@ function update_user_permissions($mode = 'grant', $username, $options = array(),
 {
 	global $db, $auth, $cache;
 
-	//First We Get User ID 
+	//First We Get User ID
 	$sql = "SELECT u.user_id
 		FROM " . USERS_TABLE . " u
 		WHERE username = '$username'";
@@ -64,7 +64,7 @@ function update_user_permissions($mode = 'grant', $username, $options = array(),
 		{
 			return false;
 		}
-		
+
 		//Build SQL Array For Query
 		$sql_ary = array();
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
@@ -78,7 +78,7 @@ function update_user_permissions($mode = 'grant', $username, $options = array(),
 			$sql_ary[] = array(
 				'user_id'		=> (int) $user_id,
 				'auth_option_id'	=> (int) $acl_options_ids[$i]['auth_option_id'],
-				'auth_setting'		=> $auth_setting, 
+				'auth_setting'		=> $auth_setting,
 			);
 		}
 
@@ -95,11 +95,11 @@ function update_user_permissions($mode = 'grant', $username, $options = array(),
 		{
 			return false;
 		}
-		
+
 		//Process Each Option To Remove
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
 		{
-			$sql = "DELETE 
+			$sql = "DELETE
 				FROM " . ACL_USERS_TABLE . "
 				WHERE auth_option_id = " . $acl_options_ids[$i]['auth_option_id'];
 
@@ -115,7 +115,7 @@ function update_user_permissions($mode = 'grant', $username, $options = array(),
 
 /**
 * Update role-specific ACL options. Function can grant or remove options. If option already granted it will NOT be updated.
-* 
+*
 * @param grant|remove $mode defines whether roles are granted to removed
 * @param strong $role_name role name to update
 * @param mixed $options auth_options to grant (a auth_option has to be specified)
@@ -126,7 +126,7 @@ function update_role_permissions($mode = 'grant', $role_name, $options = array()
 {
 	global $db, $auth, $cache;
 
-	//First We Get Role ID 
+	//First We Get Role ID
 	$sql = "SELECT r.role_id
 		FROM " . ACL_ROLES_TABLE . " r
 		WHERE role_name = '$role_name'";
@@ -169,7 +169,7 @@ function update_role_permissions($mode = 'grant', $role_name, $options = array()
 		{
 			return false;
 		}
-		
+
 		//Build SQL Array For Query
 		$sql_ary = array();
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
@@ -181,9 +181,9 @@ function update_role_permissions($mode = 'grant', $role_name, $options = array()
 				continue;
 			}
 			$sql_ary[] = array(
-				'role_id'		=> (int) $role_id,
+				'role_id'			=> (int) $role_id,
 				'auth_option_id'	=> (int) $acl_options_ids[$i]['auth_option_id'],
-				'auth_setting'		=> $auth_setting, 
+				'auth_setting'		=> $auth_setting,
 			);
 		}
 
@@ -200,11 +200,11 @@ function update_role_permissions($mode = 'grant', $role_name, $options = array()
 		{
 			return false;
 		}
-		
+
 		//Process Each Option To Remove
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
 		{
-			$sql = "DELETE 
+			$sql = "DELETE
 				FROM " . ACL_ROLES_DATA_TABLE . "
 				WHERE auth_option_id = " . $acl_options_ids[$i]['auth_option_id'];
 
@@ -220,7 +220,7 @@ function update_role_permissions($mode = 'grant', $role_name, $options = array()
 
 /**
 * Update group-specific ACL options. Function can grant or remove options. If option already granted it will NOT be updated.
-* 
+*
 * @param grant|remove $mode defines whether roles are granted to removed
 * @param string $group_name group name to update
 * @param mixed $options auth_options to grant (a auth_option has to be specified)
@@ -231,7 +231,7 @@ function update_group_permissions($mode = 'grant', $group_name, $options = array
 {
 	global $db, $auth, $cache;
 
-	//First We Get Role ID 
+	//First We Get Role ID
 	$sql = "SELECT g.group_id
 		FROM " . GROUPS_TABLE . " g
 		WHERE group_name = '$group_name'";
@@ -273,7 +273,7 @@ function update_group_permissions($mode = 'grant', $group_name, $options = array
 		{
 			return false;
 		}
-		
+
 		//Build SQL Array For Query
 		$sql_ary = array();
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
@@ -285,9 +285,9 @@ function update_group_permissions($mode = 'grant', $group_name, $options = array
 				continue;
 			}
 			$sql_ary[] = array(
-				'group_id'		=> (int) $group_id,
+				'group_id'			=> (int) $group_id,
 				'auth_option_id'	=> (int) $acl_options_ids[$i]['auth_option_id'],
-				'auth_setting'		=> $auth_setting, 
+				'auth_setting'		=> $auth_setting,
 			);
 		}
 
@@ -304,11 +304,11 @@ function update_group_permissions($mode = 'grant', $group_name, $options = array
 		{
 			return false;
 		}
-		
+
 		//Process Each Option To Remove
 		for ($i = 0, $count = sizeof($acl_options_ids);$i < $count; $i++)
 		{
-			$sql = "DELETE 
+			$sql = "DELETE
 				FROM " . ACL_GROUPS_TABLE . "
 				WHERE auth_option_id = " . $acl_options_ids[$i]['auth_option_id'];
 

@@ -16,7 +16,7 @@ define('IN_PHPBB', true);
 /**
 * Set root path & include standard phpBB files required
 */
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
@@ -54,7 +54,7 @@ $eid = request_var('EID', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx"))
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"))
 );
 
 /**
@@ -81,7 +81,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_add_service') || $garage_config['enable_service'] == '0')
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**
@@ -106,16 +106,16 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_service.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_service.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['ADD_SERVICE'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=add_service&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=add_service&amp;VID=$vid"))
 		);
 		$garage_template->garage_dropdown($garages, $data['garage_id']);
 		$garage_template->rating_dropdown('rating', $data['rating']);
@@ -133,7 +133,7 @@ switch( $mode )
 
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('')",
 			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=insert_service"),
-			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
          	));
 		$garage_template->sidemenu();
 	break;
@@ -147,7 +147,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_add_service') || !$garage_config['enable_service'])
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**
@@ -177,7 +177,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -215,16 +215,16 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_service.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_service.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle['vehicle'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"))
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['EDIT_SERVICE'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid&amp;SVID=$svid"))
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid&amp;SVID=$svid"))
 		);
 		$garage_template->garage_dropdown($garages, (!empty($store['garage_id'])) ? $store['garage_id'] : $data['garage_id']);
 		$garage_template->rating_dropdown('rating', (!empty($store['rating'])) ? $store['rating'] : $data['rating']);
@@ -241,7 +241,7 @@ switch( $mode )
 			'L_BUTTON'			=> $user->lang['EDIT_SERVICE'],
 
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('edit')",
-			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=update_service"))
 		);
 		$garage_template->sidemenu();
@@ -286,7 +286,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 
 	/**
@@ -298,7 +298,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_delete_service'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**
@@ -320,7 +320,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_own_vehicle&amp;VID=$vid"));
 	break;
 }
 $garage_template->version_notice();

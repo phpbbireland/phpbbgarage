@@ -16,7 +16,7 @@ define('IN_PHPBB', true);
 /**
 * Set root path & include standard phpBB files required
 */
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
@@ -69,7 +69,7 @@ $image_id = request_var('image_id', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx"))
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"))
 );
 
 /**
@@ -85,7 +85,7 @@ if ($garage->mcp_access())
 /**
 * Perform a set action based on value for $mode
 */
-switch( $mode )
+switch ($mode)
 {
 	/**
 	* Build page allowing user submit data
@@ -98,8 +98,8 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' 	=> 'garage_header.html',
-			'body'   	=> 'garage_user_submit_data.html'
+			'header' 	=> 'garage/garage_header.html',
+			'body'   	=> 'garage/garage_user_submit_data.html'
 		));
 
 		//Build Navlinks
@@ -114,7 +114,7 @@ switch( $mode )
 		//Check The User Is Logged In...Else Send Them Off To Do So......And Redirect Them Back Just To Main Page Though!!!
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage.$phpEx");
+			login_box("{$phpbb_root_path}garage/garage.$phpEx");
 		}
 
 		if ($data['primary'] == "vehicle")
@@ -129,13 +129,13 @@ switch( $mode )
 				//Check This Feature Is Enabled & User Authorised
 				if (!$garage_config['enable_user_submit_make'] || !$auth->acl_get('u_garage_add_make_model'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 				}
 				$template->assign_vars(array(
 					'L_BUTTON_LABEL'		=> $user->lang['ADD_MAKE'],
 					'S_USER_SUBMIT_MAKE'		=> true,
 					'S_USER_SUBMIT_SUCCESSS'	=> false,
-					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_make"),
+					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_make"),
 				));
 			}
 
@@ -144,7 +144,7 @@ switch( $mode )
 				//Check This Feature Is Enabled & User Authorised
 				if (!$garage_config['enable_user_submit_model'] || !$auth->acl_get('u_garage_add_make_model'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 				}
 				$make = $garage_model->get_make($store['make_id']);
 
@@ -153,7 +153,7 @@ switch( $mode )
 					'MAKE'				=> $make['make'],
 					'S_USER_SUBMIT_MODEL'		=> true,
 					'S_USER_SUBMIT_SUCCESSS'	=> false,
-					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=insert_model"),
+					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_model"),
 				));
 			}
 		}
@@ -168,7 +168,7 @@ switch( $mode )
 				//Let Check The User Is Allowed Perform This Action
 				if (!$auth->acl_get('u_garage_add_business'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 				if ($data['secondary'] == "garage")
 				{
@@ -192,7 +192,7 @@ switch( $mode )
 					'L_BUTTON_LABEL'		=> $user->lang['ADD_NEW_BUSINESS'],
 					'S_USER_SUBMIT_BUSINESS'	=> true,
 					'S_USER_SUBMIT_SUCCESSS'	=> false,
-					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insert_business"),
+					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insert_business"),
 				));
 			}
 			elseif ($data['secondary'] == "product")
@@ -201,7 +201,7 @@ switch( $mode )
 				//Check This Feature Is Enabled & User Authorised
 				if (!$garage_config['enable_user_submit_product'] || !$auth->acl_get('u_garage_add_product'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 				}
 				$category = $garage->get_category($store['category_id']);
 				$manufacturer = $garage_business->get_business($store['manufacturer_id']);
@@ -212,7 +212,7 @@ switch( $mode )
 					'L_BUTTON_LABEL'			=> $user->lang['ADD_PRODUCT'],
 					'S_USER_SUBMIT_PRODUCT'		=> true,
 					'S_USER_SUBMIT_SUCCESSS'	=> false,
-					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=insert_product"),
+					'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=insert_product"),
 				));
 			}
 		}
@@ -225,14 +225,14 @@ switch( $mode )
 			//Let Check The User Is Allowed Perform This Action
 			if (!$auth->acl_get('u_garage_add_business'))
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 			}
 			$template->assign_vars(array(
 				'L_BUTTON_LABEL'			=> $user->lang['ADD_NEW_BUSINESS'],
 				'S_USER_SUBMIT_BUSINESS'	=> true,
 				'S_BUSINESS_INSURANCE'		=> true,
 				'S_USER_SUBMIT_SUCCESSS'	=> false,
-				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insert_business"),
+				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insert_business"),
 			));
 		}
 		elseif ($data['primary'] == "dynorun")
@@ -242,14 +242,14 @@ switch( $mode )
 			//Let Check The User Is Allowed Perform This Action
 			if (!$auth->acl_get('u_garage_add_business'))
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 			}
 			$template->assign_vars(array(
 				'L_BUTTON_LABEL'			=> $user->lang['ADD_NEW_BUSINESS'],
 				'S_USER_SUBMIT_BUSINESS'	=> true,
 				'S_BUSINESS_DYNOCENTRE'		=> true,
 				'S_USER_SUBMIT_SUCCESSS'	=> false,
-				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insert_business"),
+				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insert_business"),
 			));
 		}
 		elseif ($data['primary'] == "lap")
@@ -261,13 +261,13 @@ switch( $mode )
 			*/
 			if (!$garage_config['enable_tracktime'] || !$garage_config['enable_user_add_track'] || !$auth->acl_get('u_garage_add_track'))
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=18"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=18"));
 			}
 			$garage_template->mileage_dropdown();
 			$template->assign_vars(array(
 				'L_BUTTON_LABEL'		=> $user->lang['ADD_TRACK'],
 				'S_USER_SUBMIT_TRACK'		=> true,
-				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=insert_track"),
+				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}{$phpbb_root_path}garage/garage_track.$phpEx", "mode=insert_track"),
 				'S_USER_SUBMIT_SUCCESSS'	=> false,
 			));
 		}
@@ -278,13 +278,13 @@ switch( $mode )
 			//Let Check The User Is Allowed Perform This Action
 			if (!$auth->acl_get('u_garage_add_business'))
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 			}
 			$template->assign_vars(array(
 				'L_BUTTON_LABEL'			=> $user->lang['ADD_NEW_BUSINESS'],
 				'S_USER_SUBMIT_BUSINESS'	=> true,
 				'S_BUSINESS_GARAGE'			=> true,
-				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insert_business"),
+				'S_USER_SUBMIT_ACTION'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insert_business"),
 			));
 		}
 
@@ -313,7 +313,7 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_search'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Build Page Header ;)
@@ -321,21 +321,21 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' 	=> 'garage_header.html',
-			'body'   	=> 'garage_search.html'
+			'header' 	=> 'garage/garage_header.html',
+			'body'   	=> 'garage/garage_search.html'
 		));
 
 		//Build Navlinks
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['SEARCH'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=search")
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=search")
 		));
 
 		//Get Years As Defined By Admin In ACP
-		$years 		= $garage->year_list();
+		$years 	= $garage->year_list();
 		$manufacturers 	= $garage_business->get_business_by_type(BUSINESS_PRODUCT);
 		$makes 		= $garage_model->get_all_makes();
-		$categories 	= $garage->get_categories();
+		$categories = $garage->get_categories();
 
 		//Build All Required Javascript And Arrays
 		$garage_template->category_dropdown($categories);
@@ -347,7 +347,7 @@ switch( $mode )
 			'U_FIND_USERNAME'				=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=searchuser&amp;form=search_garage&amp;field=username&amp;select_single=true'),
 			'UA_FIND_USERNAME'				=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=searchuser&form=search_garage&field=username&select_single=true', false),
 			'S_DISPLAY_SEARCH_INSURANCE'	=> $garage_config['enable_insurance'],
-			'S_MODE_ACTION_SEARCH' 			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=search_results"),
+			'S_MODE_ACTION_SEARCH' 			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=search_results"),
 			'S_SEARCH_TAB_ACTIVE'			=> true,
 		));
 
@@ -374,7 +374,7 @@ switch( $mode )
 			//Build Navlinks
 			$template->assign_block_vars('navlinks', array(
 				'FORUM_NAME'	=> $user->lang['BROWSE'],
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=$mode")
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=$mode")
 			));
 
 			$template->assign_vars(array(
@@ -388,7 +388,7 @@ switch( $mode )
 			//Build Navlinks
 			$template->assign_block_vars('navlinks', array(
 				'FORUM_NAME'	=> $user->lang['QUARTERMILE_TABLE'],
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=$mode")
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=$mode")
 			));
 
 			$template->assign_vars(array(
@@ -402,7 +402,7 @@ switch( $mode )
 			//Build Navlinks
 			$template->assign_block_vars('navlinks', array(
 				'FORUM_NAME'	=> $user->lang['DYNORUN_TABLE'],
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=$mode")
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=$mode")
 			));
 
 			$template->assign_vars(array(
@@ -416,7 +416,7 @@ switch( $mode )
 			//Build Navlinks
 			$template->assign_block_vars('navlinks', array(
 				'FORUM_NAME'	=> $user->lang['LAP_TABLE'],
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=$mode")
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=$mode")
 			));
 
 			$template->assign_vars(array(
@@ -429,7 +429,7 @@ switch( $mode )
 			//Build Navlinks
 			$template->assign_block_vars('navlinks', array(
 				'FORUM_NAME'	=> $user->lang['SEARCH'],
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=search")
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=search")
 			));
 
 			$template->assign_block_vars('navlinks', array(
@@ -450,9 +450,9 @@ switch( $mode )
 			*/
 			if ($user->data['user_id'] == ANONYMOUS)
 			{
-				login_box("garage.$phpEx?mode=$mode");
+				login_box("{$phpbb_root_path}garage/garage.$phpEx?mode=$mode");
 			}
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Get All Data Posted And Make It Safe To Use
@@ -466,8 +466,8 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_search_results.html'
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_search_results.html'
 		));
 
 		//Build Page Header ;)
@@ -505,10 +505,10 @@ switch( $mode )
 			{
 				//Provide Results To Template Engine
 				$template->assign_block_vars('modification', array(
-					'U_IMAGE'				=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
-					'U_VIEW_VEHICLE'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
+					'U_IMAGE'				=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
+					'U_VIEW_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
 					'U_VIEW_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $results_data[$i]['user_id']),
-					'U_VIEW_MODIFICATION'	=> append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $results_data[$i]['vehicle_id'] . "&amp;MID=" . $results_data[$i]['modification_id']),
+					'U_VIEW_MODIFICATION'	=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $results_data[$i]['vehicle_id'] . "&amp;MID=" . $results_data[$i]['modification_id']),
 					'IMAGE'					=> $user->img('garage_img_attached', 'MODIFICATION_IMAGE_ATTACHED'),
 					'VEHICLE'				=> $results_data[$i]['vehicle'],
 					'MODIFICATION'			=> $results_data[$i]['modification_title'],
@@ -538,9 +538,9 @@ switch( $mode )
 			{
 				//Provide Results To Template Engine
 				$template->assign_block_vars('premium', array(
-					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['id']),
+					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['id']),
 					'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $results_data[$i]['user_id']),
-					'U_VIEW_BUSINESS' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_insurance_business&amp;BID=" . $results_data[$i]['business_id']),
+					'U_VIEW_BUSINESS' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_insurance_business&amp;BID=" . $results_data[$i]['business_id']),
 					'VEHICLE' 			=> $results_data[$i]['vehicle'],
 					'USERNAME' 			=> $results_data[$i]['username'],
 					'BUSINESS' 			=> $results_data[$i]['title'],
@@ -563,17 +563,17 @@ switch( $mode )
 				'S_DISPLAY_QUARTERMILE_RESULTS'	=> true,
 				'PAGINATION' 			=> $pagination,
 				'PAGE_NUMBER' 			=> on_page($total_quartermiles, $garage_config['cars_per_page'], $start),
-				'TOTAL_QUARTERMILES'		=> ($total_quartermiles == 1) ? $user->lang['VIEW_QUARTERMILE_PAGE'] : sprintf($user->lang['VIEW_QUARTERMILES_PAGE'], $total_quartermiles),
+				'TOTAL_QUARTERMILES'	=> ($total_quartermiles == 1) ? $user->lang['VIEW_QUARTERMILE_PAGE'] : sprintf($user->lang['VIEW_QUARTERMILES_PAGE'], $total_quartermiles),
 			));
 
 			for ($i = 0, $count = sizeof($results_data); $i < $count; $i++)
 			{
 				//Provide Results To Template Engine
 				$template->assign_block_vars('quartermile', array(
-					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
+					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
 					'U_VIEWPROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $results_data[$i]['user_id']),
-					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['id']),
-					'U_QUART'			=> append_sid("garage_quartermile.$phpEx?mode=view_quartermile&amp;QMID=".$results_data[$i]['qmid']."&amp;VID=".$results_data[$i]['id']),
+					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['id']),
+					'U_QUART'			=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx?mode=view_quartermile&amp;QMID=".$results_data[$i]['qmid']."&amp;VID=".$results_data[$i]['id']),
 					'VEHICLE'			=> $results_data[$i]['vehicle'],
 					'USERNAME'			=> $results_data[$i]['username'],
 					'IMAGE'				=> $user->img('garage_img_attached', 'QUARTEMILE_IMAGE_ATTACHED'),
@@ -605,10 +605,10 @@ switch( $mode )
 			{
 				//Provide Results To Template Engine
 				$template->assign_block_vars('dynorun', array(
-					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
+					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $results_data[$i]['attach_id']) : '',
 					'U_VIEWPROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $results_data[$i]['user_id']),
-					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
-					'U_BHP'				=> append_sid("garage_dynorun.$phpEx?mode=view_dynorun&amp;DID=".$results_data[$i]['did']."&amp;VID=".$results_data[$i]['vehicle_id']),
+					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
+					'U_BHP'				=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx?mode=view_dynorun&amp;DID=".$results_data[$i]['did']."&amp;VID=".$results_data[$i]['vehicle_id']),
 					'IMAGE'				=> $user->img('garage_img_attached', 'QUARTEMILE_IMAGE_ATTACHED'),
 					'USERNAME'			=> $results_data[$i]['username'],
 					'VEHICLE'			=> $results_data[$i]['vehicle'],
@@ -651,10 +651,10 @@ switch( $mode )
 					'USERNAME'			=> $results_data[$i]['username'],
 					'VEHICLE'			=> $results_data[$i]['vehicle'],
 					'U_VIEWPROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $results_data[$i]['user_id']),
-					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
-					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("garage.$phpEx", "mode=view_image&amp;image_id=". $results_data[$i]['attach_id']) : '',
-					'U_TRACK'			=> append_sid("garage_track.$phpEx?mode=view_track&amp;TID=".$results_data[$i]['track_id']."&amp;VID=". $results_data[$i]['vehicle_id']),
-					'U_LAP'				=> append_sid("garage_track.$phpEx?mode=view_lap&amp;LID=".$results_data[$i]['lid']."&amp;VID=". $results_data[$i]['vehicle_id']),
+					'U_VIEWVEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $results_data[$i]['vehicle_id']),
+					'U_IMAGE'			=> ($results_data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=". $results_data[$i]['attach_id']) : '',
+					'U_TRACK'			=> append_sid("{$phpbb_root_path}{$phpbb_root_path}garage/garage_track.$phpEx?mode=view_track&amp;TID=".$results_data[$i]['track_id']."&amp;VID=". $results_data[$i]['vehicle_id']),
+					'U_LAP'				=> append_sid("{$phpbb_root_path}{$phpbb_root_path}garage/garage_track.$phpEx?mode=view_lap&amp;LID=".$results_data[$i]['lid']."&amp;VID=". $results_data[$i]['vehicle_id']),
 					'USERNAME_COLOUR'	=> get_username_string('colour', $results_data[$i]['user_id'], $results_data[$i]['username'], $results_data[$i]['user_colour']),
 				));
 			}
@@ -676,7 +676,7 @@ switch( $mode )
 			'MANUFACTURER_ID'		=> $data['manufacturer_id'],
 			'PRODUCT_ID'			=> $data['product_id'],
 			'USERNAME'				=> $data['username'],
-			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=$mode"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=$mode"),
 		));
 
 		//Display Page...In Order Header->Menu->Body->Footer (Foot Gets Parsed At The Bottom)
@@ -692,7 +692,7 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Increment View Counter For This Image
@@ -742,17 +742,18 @@ switch( $mode )
 					switch ($data['attach_ext'])
 					{
 						case '.png':
-								$source = imagecreatefrompng($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
+							$source = imagecreatefrompng($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
 						break;
 						case '.gif':
-								$source = imagecreatefromgif($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
+							$source = imagecreatefromgif($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
 						break;
 						case '.jpg':
 						case '.jpeg':
-								$source = imagecreatefromjpeg($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
+							$source = imagecreatefromjpeg($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
 						break;
 						default:
 							$img_src = false;
+						break;
 					}
 					if ($source)
 					{
@@ -765,11 +766,11 @@ switch( $mode )
 			//Lets Display The Watermarked Image
 			if ($watermark_ok)
 			{
-				switch ( $data['attach_ext'] )
+				switch ($data['attach_ext'])
 				{
-				    case '.gif':
-				    case '.png':
-					    header('Content-type: image/png');
+					case '.gif':
+					case '.png':
+						header('Content-type: image/png');
 						imagepng($source);
 						imagedestroy($source);
 						imagedestroy($watermark);
@@ -777,8 +778,8 @@ switch( $mode )
 
 					case '.jpg':
 					case '.jpeg':
-					    header('Content-type: image/jpeg');
-					    imagejpeg($source);
+						header('Content-type: image/jpeg');
+						imagejpeg($source);
 						imagedestroy($source);
 						imagedestroy($watermark);
 					break;
@@ -793,16 +794,16 @@ switch( $mode )
 			{
 				switch ($data['attach_ext'])
 				{
-				    case '.png':
-						    header('Content-type: image/png');
-						    break;
-				    case '.gif':
-						    header('Content-type: image/gif');
-						    break;
-				    case '.jpg':
-						    header('Content-type: image/jpeg');
-						    break;
-				    default:
+					case '.png':
+							header('Content-type: image/png');
+					break;
+					case '.gif':
+							header('Content-type: image/gif');
+					break;
+					case '.jpg':
+							header('Content-type: image/jpeg');
+					break;
+					default:
 						trigger_error('UNSUPPORTED_FILE_TYPE');
 				}
 				readfile($phpbb_root_path . GARAGE_UPLOAD_PATH . $data['attach_location']);
@@ -818,7 +819,7 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Set Required Values To Defaults If They Are Empty
@@ -829,14 +830,14 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_view_images.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_view_images.html')
 		);
 
 		//Build Navlinks
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $user->lang['IMAGES'],
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_all_images")
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_all_images")
 		));
 
 		//Pull Required Image Data From DB
@@ -850,8 +851,8 @@ switch( $mode )
 			{
 				$template->assign_block_vars('pic_row', array(
 					'U_VIEW_PROFILE'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" .$data[$i]['user_id']),
-					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" .$data[$i]['garage_id']),
-					'U_IMAGE'			=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_image&amp;image_id=" . $data[$i]['attach_id']),
+					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" .$data[$i]['garage_id']),
+					'U_IMAGE'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $data[$i]['attach_id']),
 					'IMAGE_TITLE'		=> $data[$i]['attach_file'],
 					'IMAGE'				=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $data[$i]['attach_thumb_location'],
 					'VEHICLE' 			=> $data[$i]['vehicle'],
@@ -865,7 +866,7 @@ switch( $mode )
 		}
 
 		$template->assign_vars(array(
-			'S_MODE_ACTION' => append_sid("garage.$phpEx?mode=view_all_images")
+			'S_MODE_ACTION' => append_sid("{$phpbb_root_path}garage/garage.$phpEx?mode=view_all_images")
 		));
 
 		//Display Page...In Order Header->Menu->Body->Footer (Foot Gets Parsed At The Bottom)
@@ -881,13 +882,13 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_view_insurance_business.html'
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_view_insurance_business.html'
 		));
 
 		//Get All Data Posted And Make It Safe To Use
@@ -903,7 +904,7 @@ switch( $mode )
 
 		//Display Correct Breadcrumb Links..
 		$template->assign_block_vars('navlinks', array(
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insurance_review"),
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insurance_review"),
 			'FORUM_NAME' 	=> $user->lang['INSURANCE_SUMMARY']
 		));
 
@@ -911,7 +912,7 @@ switch( $mode )
 		if (!empty($bid))
 		{
 			$template->assign_block_vars('navlinks', array(
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insurance_review&amp;BID=" . $business[0]['id']),
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insurance_review&amp;BID=" . $business[0]['id']),
 				'FORUM_NAME' 	=> $business[0]['title']
 			));
 		}
@@ -919,8 +920,8 @@ switch( $mode )
 	  		//Loop Processing All Insurance Business's Returned From First Select
 		for ($i = 0, $count = sizeof($business);$i < $count; $i++)
 	  	{
-		 	$template->assign_block_vars('business_row', array(
-				'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=insurance_review&amp;BID=" . $business[$i]['id']),
+			$template->assign_block_vars('business_row', array(
+				'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=insurance_review&amp;BID=" . $business[$i]['id']),
 				'TITLE' 			=> $business[$i]['title'],
 				'ADDRESS' 			=> $business[$i]['address'],
 				'TELEPHONE' 		=> $business[$i]['telephone'],
@@ -932,7 +933,7 @@ switch( $mode )
 
 			//Setup Template Block For Detail Being Displayed...
 			$detail = (empty($bid)) ? 'business_row.more_detail' : 'business_row.insurance_detail';
-			 	$template->assign_block_vars($detail, array());
+			$template->assign_block_vars($detail, array());
 
 			//Now Loop Through All Insurance Cover Types...
 			$cover_types_id = array(TP, TPFT, COMP, CLAS, COMP_RED);
@@ -941,10 +942,10 @@ switch( $mode )
 				//Pull MIN/MAX/AVG Of Specific Cover Type By Business ID
 				$premium_data = $garage_insurance->get_premiums_stats_by_business_and_covertype($business[$i]['id'], $cover_types_id[$j]);
 				$template->assign_block_vars('business_row.cover_row', array(
-			   		'COVER_TYPE'	=> $garage_insurance->get_cover_type($cover_types_id[$j]),
-			   		'MINIMUM' 	=> $premium_data['min'],
-			   		'AVERAGE' 	=> $premium_data['avg'],
-			   		'MAXIMUM' 	=> $premium_data['max']
+					'COVER_TYPE'	=> $garage_insurance->get_cover_type($cover_types_id[$j]),
+					'MINIMUM' 	=> $premium_data['min'],
+					'AVERAGE' 	=> $premium_data['avg'],
+					'MAXIMUM' 	=> $premium_data['max']
 				));
 			}
 
@@ -957,7 +958,7 @@ switch( $mode )
 				{
 					$template->assign_block_vars('business_row.insurance_detail.premiums', array(
 						'U_VIEW_PROFILE'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $insurance_data[$k]['user_id']),
-						'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $insurance_data[$k]['vehicle_id']),
+						'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $insurance_data[$k]['vehicle_id']),
 						'USERNAME'			=> $insurance_data[$k]['username'],
 						'USERNAME_COLOUR'	=> get_username_string('colour', $insurance_data[$i]['user_id'], $insurance_data[$i]['username'], $insurance_data[$i]['user_colour']),
 						'VEHICLE' 			=> $insurance_data[$k]['vehicle'],
@@ -966,7 +967,7 @@ switch( $mode )
 					));
 				}
 			}
-  		}
+ 		}
 
 		if  (empty($bid))
 		{
@@ -994,13 +995,13 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header'=> 'garage_header.html',
-			'body' 	=> 'garage_view_garage_business.html'
+			'header'=> 'garage/garage_header.html',
+			'body' 	=> 'garage/garage_view_garage_business.html'
 		));
 
 		//Get All Data Posted And Make It Safe To Use
@@ -1016,7 +1017,7 @@ switch( $mode )
 
 		//Display Correct Breadcrumb Links..
 		$template->assign_block_vars('navlinks', array(
-			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=garage_review"),
+			'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=garage_review"),
 			'FORUM_NAME' 	=> $user->lang['GARAGE_REVIEW']
 		));
 
@@ -1024,7 +1025,7 @@ switch( $mode )
 		if (!empty($bid))
 		{
 			$template->assign_block_vars('navlinks', array(
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=garage_review&amp;BID=" . $business[0]['id']),
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=garage_review&amp;BID=" . $business[0]['id']),
 				'FORUM_NAME' 	=> $business[0]['title']
 			));
 		}
@@ -1033,7 +1034,7 @@ switch( $mode )
 		for ($i = 0, $count = sizeof($business);$i < $count; $i++)
 		{
 			$template->assign_block_vars('business_row', array(
-				'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=garage_review&amp;BID=" . $business[$i]['id']),
+				'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=garage_review&amp;BID=" . $business[$i]['id']),
 				'RATING' 			=> (empty($business[$i]['rating'])) ? 0 : $business[$i]['rating'],
 				'TITLE' 			=> $business[$i]['title'],
 				'ADDRESS' 			=> $business[$i]['address'],
@@ -1042,7 +1043,7 @@ switch( $mode )
 				'WEBSITE' 			=> $business[$i]['website'],
 				'EMAIL' 			=> $business[$i]['email'],
 				'MAX_RATING' 		=> $business[$i]['total_rating'],
-				'OPENING_HOURS'	=> $business[$i]['opening_hours']
+				'OPENING_HOURS'		=> $business[$i]['opening_hours']
 			));
 
 			$template->assign_block_vars('business_row.customers', array());
@@ -1061,8 +1062,8 @@ switch( $mode )
 			{
 				$template->assign_block_vars('business_row.mod_row', array(
 					'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $bus_mod_data[$j]['user_id']),
-					'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_mod_data[$j]['vehicle_id']),
-					'U_VIEW_ITEM'		=> append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $bus_mod_data[$j]['vehicle_id'] . "&amp;MID=" . $bus_mod_data[$j]['id']),
+					'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_mod_data[$j]['vehicle_id']),
+					'U_VIEW_ITEM'		=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $bus_mod_data[$j]['vehicle_id'] . "&amp;MID=" . $bus_mod_data[$j]['id']),
 					'USERNAME' 			=> $bus_mod_data[$j]['username'],
 					'USERNAME_COLOUR'	=> get_username_string('colour', $bus_mod_data[$j]['user_id'], $bus_mod_data[$j]['username'], $bus_mod_data[$j]['user_colour']),
 					'VEHICLE' 			=> $bus_mod_data[$j]['vehicle'],
@@ -1088,7 +1089,7 @@ switch( $mode )
 			{
 				$template->assign_block_vars('business_row.mod_row', array(
 					'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $bus_srv_data[$j]['user_id']),
-					'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_srv_data[$j]['vehicle_id']),
+					'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_srv_data[$j]['vehicle_id']),
 					'USERNAME' 			=> $bus_srv_data[$j]['username'],
 					'USERNAME_COLOUR'	=> get_username_string('colour', $bus_srv_data[$j]['user_id'], $bus_srv_data[$j]['username'], $bus_srv_data[$j]['user_colour']),
 					'VEHICLE' 			=> $bus_srv_data[$j]['vehicle'],
@@ -1128,13 +1129,13 @@ switch( $mode )
 			//Let Check The User Is Allowed Perform This Action
 			if (!$auth->acl_get('u_garage_browse'))
 			{
-				redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 			}
 
 			//Set Template Files In Use For This Mode
 			$template->set_filenames(array(
-				'header'=> 'garage_header.html',
-				'body' 	=> 'garage_view_shop_business.html'
+				'header'=> 'garage/garage_header.html',
+				'body' 	=> 'garage/garage_view_shop_business.html'
 			));
 
 			//Get All Data Posted And Make It Safe To Use
@@ -1150,15 +1151,15 @@ switch( $mode )
 
 			//Display Correct Breadcrumb Links..
 			$template->assign_block_vars('navlinks', array(
-				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=shop_review"),
-				'FORUM_NAME' 	=> $user->lang['SHOP_REVIEW']
+				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review"),
+				'FORUM_NAME'	=> $user->lang['SHOP_REVIEW']
 			));
 
 			//Display Correct Breadcrumb Links..
 			if (!empty($bid))
 			{
 				$template->assign_block_vars('navlinks', array(
-					'U_VIEW_FORUM' 	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=shop_review&amp;BID=" . $business[0]['id']),
+					'U_VIEW_FORUM' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review&amp;BID=" . $business[0]['id']),
 					'FORUM_NAME'	=> $business[0]['title']
 				));
 			}
@@ -1167,7 +1168,7 @@ switch( $mode )
 			for ($i = 0, $count = sizeof($business);$i < $count; $i++)
 			{
 				$template->assign_block_vars('business_row', array(
-					'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=shop_review&amp;BID=" . $business[$i]['id']),
+					'U_VIEW_BUSINESS'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review&amp;BID=" . $business[$i]['id']),
 					'RATING' 			=> (empty($business[$i]['rating'])) ? 0 : $business[$i]['rating'],
 					'TITLE' 			=> $business[$i]['title'],
 					'ADDRESS' 			=> $business[$i]['address'],
@@ -1194,8 +1195,8 @@ switch( $mode )
 				{
 					$template->assign_block_vars('business_row.mod_row', array(
 						'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $bus_mod_data[$j]['user_id']),
-						'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_mod_data[$j]['vehicle_id']),
-						'U_VIEW_MODIFICATION'	=> append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $bus_mod_data[$j]['vehicle_id'] . "&amp;MID=" . $bus_mod_data[$j]['id']),
+						'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=" . $bus_mod_data[$j]['vehicle_id']),
+						'U_VIEW_MODIFICATION'	=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=view_modification&amp;VID=" . $bus_mod_data[$j]['vehicle_id'] . "&amp;MID=" . $bus_mod_data[$j]['id']),
 						'USERNAME' 		=> $bus_mod_data[$j]['username'],
 						'USERNAME_COLOUR'	=> get_username_string('colour', $bus_mod_data[$j]['user_id'], $bus_mod_data[$j]['username'], $bus_mod_data[$j]['user_colour']),
 						'VEHICLE' 		=> $bus_mod_data[$j]['vehicle'],
@@ -1207,7 +1208,7 @@ switch( $mode )
 
 					if (!empty($bus_mod_data[$j]['comments']))
 					{
-						if ( $comments != 'SET')
+						if ($comments != 'SET')
 						{
 							$template->assign_block_vars('business_row.comments', array());
 						}
@@ -1249,7 +1250,7 @@ switch( $mode )
 		//Let Check The User Is Allowed Perform This Action
 		if (!$auth->acl_get('u_garage_add_business'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		//Get All Data Posted And Make It Safe To Use
@@ -1283,8 +1284,8 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' 	=> 'garage_header.html',
-			'body'   	=> 'garage_user_submit_data.html')
+			'header' 	=> 'garage/garage_header.html',
+			'body'   	=> 'garage/garage_user_submit_data.html')
 		);
 
 		if ($data['primary'] == "modification")
@@ -1305,10 +1306,10 @@ switch( $mode )
 			{
 				$store['installer_id'] = $business_id;
 			}
-			$user_submit_action = append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=add_modification");
+			$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=add_modification");
 			if ($data['tertiary'] == "edit")
 			{
-				$user_submit_action = append_sid("{$phpbb_root_path}garage_modification.$phpEx", "mode=edit_modification&amp;VID={$store['VID']}&amp;MID={$store['MID']}");
+				$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=edit_modification&amp;VID={$store['VID']}&amp;MID={$store['MID']}");
 			}
 		}
 		elseif ($data['primary'] == "premium")
@@ -1318,11 +1319,11 @@ switch( $mode )
 			$params = array('comments' => '');
 			$store 	+= $garage->process_mb_vars($params);
 			$store['business_id'] = $business_id;
-			$user_submit_action = append_sid("{$phpbb_root_path}garage_premium.$phpEx", "mode=add_premium");
+			$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=add_premium");
 
 			if ($data['tertiary'] == "edit")
 			{
-				$user_submit_action = append_sid("{$phpbb_root_path}garage_premium.$phpEx", "mode=edit_premium&amp;VID={$store['VID']}&amp;INS_ID={$store['INS_ID']}");
+				$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=edit_premium&amp;VID={$store['VID']}&amp;INS_ID={$store['INS_ID']}");
 			}
 		}
 		elseif ($data['primary'] == "dynorun")
@@ -1330,11 +1331,11 @@ switch( $mode )
 			$params = array('VID' => '', 'DID' => '', 'bhp' => '', 'bhp_decimal' => '', 'bhp_unit' => '', 'torque' => 0, 'torque_decimal' => 0, 'torque_unit' => '', 'boost' => 0, 'boost_decimal' => 0, 'boost_unit' => 'PSI', 'nitrous' => 0, 'peakpoint' => 0, 'peakpoint_decimal' => 0, 'primary' => '', 'secondary' => '', 'tertiary' => '', 'redirect' => '');
 			$store 	= $garage->process_vars($params);
 			$store['dynocentre_id'] = $business_id;
-			$user_submit_action = append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=add_dynorun");
+			$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=add_dynorun");
 
 			if ($data['tertiary'] == "edit")
 			{
-				$user_submit_action = append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID={$store['VID']}&amp;DID={$store['DID']}");
+				$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID={$store['VID']}&amp;DID={$store['DID']}");
 			}
 		}
 		elseif ($data['primary'] == "service")
@@ -1342,11 +1343,11 @@ switch( $mode )
 			$params	= array('VID' => '', 'SVID' => '', 'type_id' => '', 'price' => 0, 'price_decimal' => 0, 'rating' => 0, 'mileage' => '', 'primary' => '', 'secondary' => '', 'tertiary' => '', 'redirect' => '');
 			$store 	= $garage->process_vars($params);
 			$store['garage_id'] = $business_id;
-			$user_submit_action = append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=add_service");
+			$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_service.$phpEx", "mode=add_service");
 
 			if ($data['tertiary'] == "edit")
 			{
-				$user_submit_action = append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=edit_service&amp;VID={$store['VID']}&amp;SVID={$store['SVID']}");
+				$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_service.$phpEx", "mode=edit_service&amp;VID={$store['VID']}&amp;SVID={$store['SVID']}");
 			}
 		}
 
@@ -1383,8 +1384,8 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_error.html'
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_error.html'
 		));
 
 		//Build Navlinks
@@ -1478,8 +1479,8 @@ switch( $mode )
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_users_garage.html')
+			'header' => 'garage/garage_header.html',
+			'body'   => 'garage/garage_users_garage.html')
 		);
 
 		//Build Navlinks
@@ -1495,7 +1496,7 @@ switch( $mode )
 		for ($i = 0; $i < count($user_vehicles); $i++)
 		{
 			  	$template->assign_block_vars('user_vehicles', array(
-	   				'U_VIEW_VEHICLE'=> append_sid("garage_vehicle.$phpEx?mode=view_own_vehicle&amp;VID=" . $user_vehicles[$i]['id']),
+	   				'U_VIEW_VEHICLE'=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx?mode=view_own_vehicle&amp;VID=" . $user_vehicles[$i]['id']),
 	   				'VEHICLE' 	=> $user_vehicles[$i]['vehicle'],
 			));
 		}*/
@@ -1516,11 +1517,11 @@ switch( $mode )
 			/**
 			* If Not Logged In Send Them To Login & Back, Maybe They Have Permission As A User
 			*/
-			if ( $user->data['user_id'] == ANONYMOUS )
+			if ($user->data['user_id'] == ANONYMOUS)
 			{
-				login_box("garage.$phpEx");
+				login_box("{$phpbb_root_path}garage/garage.$phpEx");
 			}
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		//Build Page Header ;)
@@ -1551,19 +1552,19 @@ switch( $mode )
 		$garage_vehicle->show_month_toprated_vehicle();
 
 		$template->assign_vars(array(
-			'S_INDEX_COLUMNS' 	=> ($garage_config['enable_user_index_columns'] && ($user->data['user_garage_index_columns'] != $garage_config['index_columns'])) ? $user->data['user_garage_index_columns'] : $garage_config['index_columns'],
-			'S_MAIN_TAB_ACTIVE'	=> true,
-			'TOTAL_VEHICLES' 	=> $garage_vehicle->count_total_vehicles(),
-			'TOTAL_VIEWS' 		=> $garage->count_total_views(),
+			'S_INDEX_COLUMNS' 		=> ($garage_config['enable_user_index_columns'] && ($user->data['ug_index_columns'] != $garage_config['index_columns'])) ? $user->data['ug_index_columns'] : $garage_config['index_columns'],
+			'S_MAIN_TAB_ACTIVE'		=> true,
+			'TOTAL_VEHICLES' 		=> $garage_vehicle->count_total_vehicles(),
+			'TOTAL_VIEWS' 			=> $garage->count_total_views(),
 			'TOTAL_MODIFICATIONS' 	=> $garage_modification->count_total_modifications(),
-			'TOTAL_COMMENTS'  	=> $garage_guestbook->count_total_comments(),
+			'TOTAL_COMMENTS'  		=> $garage_guestbook->count_total_comments(),
 		));
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header'	=> 'garage_header.html',
-			'menu' 		=> 'garage_menu.html',
-			'body' 		=> 'garage.html',
+			'header'	=> 'garage/garage_header.html',
+			'menu' 		=> 'garage/garage_menu.html',
+			'body' 		=> 'garage/garage.html',
 		));
 	break;
 }
@@ -1571,7 +1572,7 @@ switch( $mode )
 $garage_template->version_notice();
 
 $template->set_filenames(array(
-	'garage_footer' => 'garage_footer.html')
+	'garage_footer' => 'garage/garage_footer.html')
 );
 
 page_footer();

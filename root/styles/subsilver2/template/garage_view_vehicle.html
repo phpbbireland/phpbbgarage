@@ -8,9 +8,9 @@
 	<br clear="all" /><br />
 <!-- ENDIF -->
 
-<!-- INCLUDE garage_header.html -->
+<!-- INCLUDE garage/garage_header.html -->
 
-<!-- INCLUDE garage_menu.html -->
+<!-- INCLUDE garage/garage_menu.html -->
 
 <script type="text/javascript">
 <!--
@@ -121,10 +121,10 @@ function jumpto_garage()
 							<!-- ENDIF -->
 			                                <tr>
 				                        	<td class="row1"><span class="gen"><b>{L_DESCRIPTION}</b></span></td>
-                                   			</tr> 
+                                   			</tr>
 			                                <tr>
 				                        	<td align="center"><span class="gen">{DESCRIPTION}</span></td>
-							</tr> 
+							</tr>
 							<!-- ENDIF -->
 							<!-- IF U_MODERATE_VEHICLE -->
 							<tr>
@@ -316,7 +316,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END category -->
-				
+
 				<!-- BEGIN quartermile -->
 				<table width="100%" cellspacing="1" class="tablebg">
 				<tr>
@@ -351,7 +351,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END quartermile -->
-			
+
 				<!-- BEGIN dynorun -->
 				<table width="100%" cellspacing="1" class="tablebg">
 				<tr>
@@ -389,7 +389,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END dynorun -->
-				
+
 				<!-- BEGIN tracktime -->
 				<table width="100%" cellspacing="1" class="tablebg">
 				<tr>
@@ -417,7 +417,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END tracktime -->
-				
+
 				<!-- BEGIN insurance -->
 				<table width="100%" cellspacing="1" class="tablebg">
 				<tr>
@@ -440,7 +440,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END insurance -->
-				
+
 				<!-- BEGIN service_history -->
 				<table width="100%" cellspacing="1" class="tablebg">
 				<tr>
@@ -467,7 +467,7 @@ function jumpto_garage()
 				</table>
 				<br />
 				<!-- END service_history -->
-				
+
 				<!-- BEGIN blog -->
 				<form method="post" name="guestbook" action="{S_MODE_BLOG_ACTION}">
 				<table width="100%" cellspacing="1" cellpadding="3" border="0" class="tablebg">
@@ -545,7 +545,7 @@ function jumpto_garage()
 							</table>
 						</td>
 					</tr>
-		
+
 					<!-- IF guestbook.comments.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 
 						<td valign="top">
@@ -603,8 +603,8 @@ function jumpto_garage()
 									<tr valign="middle">
 										<td class="gensmall" align="right">
 										<!-- IF not S_IS_BOT -->
-											<!-- IF guestbook.comments.U_INFO --><a href="{guestbook.comments.U_INFO}">{INFO_IMG}</a> <!-- ENDIF --> 
-											<!-- IF guestbook.comments.U_WARN --><a href="{guestbook.comments.U_WARN}">{WARN_IMG}</a> <!-- ENDIF --> 
+											<!-- IF guestbook.comments.U_INFO --><a href="{guestbook.comments.U_INFO}">{INFO_IMG}</a> <!-- ENDIF -->
+											<!-- IF guestbook.comments.U_WARN --><a href="{guestbook.comments.U_WARN}">{WARN_IMG}</a> <!-- ENDIF -->
 											<!-- IF guestbook.comments.U_DELETE --><a href="{guestbook.comments.U_DELETE}">{DELETE_IMG}</a> <!-- ENDIF -->
 										<!-- ENDIF -->
 										</td>
@@ -623,7 +623,7 @@ function jumpto_garage()
 					</tr>
 
 				<!-- ENDIF -->
-	
+
 				<tr>
 					<td class="spacer" colspan="2" height="1"><img src="images/spacer.gif" alt="" width="1" height="1" /></td>
 				</tr>
@@ -660,7 +660,7 @@ function jumpto_garage()
 	{S_FORM_TOKEN}
 			</form>
 			<!-- END guestbook -->
-		
-<!-- INCLUDE garage_footer.html -->
+
+<!-- INCLUDE garage/garage_footer.html -->
 
 <!-- INCLUDE overall_footer.html -->

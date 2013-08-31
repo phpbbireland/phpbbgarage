@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -26,7 +26,7 @@ include_once($phpbb_root_path . 'includes/mods/constants_garage.'. $phpEx);
 * display as normal since this is called from common.php
 */
 $db->sql_return_on_error(true);
-$sql = $db->sql_build_query('SELECT', 
+$sql = $db->sql_build_query('SELECT',
 	array(
 	'SELECT'	=> 'c.config_name, c.config_value',
 	'FROM'		=> array(
@@ -35,7 +35,7 @@ $sql = $db->sql_build_query('SELECT',
 ));
 
 $result = $db->sql_query($sql);
-while( $row = $db->sql_fetchrow($result) )
+while ($row = $db->sql_fetchrow($result))
 {
 	$garage_config[$row['config_name']] = $row['config_value'];
 }
@@ -46,7 +46,7 @@ $db->sql_return_on_error(false);
 * phpBB Garage Class
 * @package garage
 */
-class garage 
+class garage
 {
 	var $classname = "garage";
 
@@ -59,11 +59,10 @@ class garage
 	*/
 	function process_vars($params = array())
 	{
-		while(list($var, $param) = @each($params) )
+		while (list($var, $param) = @each($params))
 		{
-			$data[$var] = request_var($var, $param );
+			$data[$var] = request_var($var, $param);
 		}
-
 		return $data;
 	}
 
@@ -76,16 +75,15 @@ class garage
 	*/
 	function process_mb_vars($params = array())
 	{
-		while(list($var, $param) = @each($params) )
+		while (list($var, $param) = @each($params))
 		{
 			$data[$var] = request_var($var, $param, true);
 		}
-
 		return $data;
 	}
 
 	/**
-	* Checks all required data is present. If any required data is missing 
+	* Checks all required data is present. If any required data is missing
 	* the user is redirected to an informational error page
 	*
 	* @param array $params multi-dimensional array holding the required variables.
@@ -93,21 +91,20 @@ class garage
 	*/
 	function check_required_vars($params = array())
 	{
-		global $phpEx, $data;
+		global $phpEx, $data, $phpbb_root_path;
 
-		while( list($var, $param) = @each($params) )
+		while (list($var, $param) = @each($params))
 		{
 			if (empty($data[$param]))
 			{
-				redirect(append_sid("garage.$phpEx", "mode=error&amp;EID=3"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=3"));
 			}
 		}
-
-		return ;
+		return;
 	}
 
 	/**
-	* Checks all required data is present. If any required data is missing 
+	* Checks all required data is present. If any required data is missing
 	* the user is redirected to an informational error page
 	*
 	* @param array $params multi-dimensional array holding the required variables.
@@ -145,7 +142,7 @@ class garage
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'SUM(g.views) as total',
 			'FROM'		=> array(
@@ -154,7 +151,7 @@ class garage
 		));
 
 		$result = $db->sql_query($sql);
-	        $data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -185,7 +182,7 @@ class garage
 			WHERE $where_field = '$where_value'";
 
 		$db->sql_query($sql);
-	
+
 		return;
 	}
 
@@ -202,10 +199,9 @@ class garage
 	{
 		global $db;
 
-		$sql = "UPDATE $table 
-			SET $set_field = $set_field + 1 
+		$sql = "UPDATE $table
+			SET $set_field = $set_field + 1
 			WHERE $where_field = $where_value";
-
 		$db->sql_query($sql);
 
 		return;
@@ -223,10 +219,9 @@ class garage
 	{
 		global $db;
 
-		$sql = "DELETE 
-			FROM $table 
+		$sql = "DELETE
+			FROM $table
 			WHERE $where_field = '$where_value'";
-
 		$db->sql_query($sql);
 
 		return;
@@ -243,7 +238,7 @@ class garage
 
 		$data = array();
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'c.id, c.title, c.field_order',
 			'FROM'		=> array(
@@ -252,13 +247,13 @@ class garage
 			'ORDER_BY'	=> 'c.field_order'
 		));
 
-      		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result) )
+		$result = $db->sql_query($sql);
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
 		}
 		$db->sql_freeresult($result);
-	
+
 		return $data;
 	}
 
@@ -275,7 +270,7 @@ class garage
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'c.id, c.title, c.field_order',
 			'FROM'		=> array(
@@ -285,7 +280,7 @@ class garage
 			'ORDER_BY'	=> 'c.field_order'
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
@@ -314,15 +309,15 @@ class garage
 
 		$my_array = localtime(time(), 1) ;
 		$current_date = $my_array["tm_year"] +1900 ;
-	
-	        $end_year = $current_date + $garage_config['year_end'];
-	
-		if ( $garage_config['year_start'] > $end_year ) 
+
+		$end_year = $current_date + $garage_config['year_end'];
+
+		if ($garage_config['year_start'] > $end_year)
 		{
 			return;
-		}	
-	
-		for ( $year = $end_year; $year >= $garage_config['year_start']; $year-- ) 
+		}
+
+		for ($year = $end_year; $year >= $garage_config['year_start']; $year--)
 		{
 			$years[] = $year;
 		}
@@ -390,6 +385,10 @@ class garage
 						'ON'	=> 'v.id = m.vehicle_id'
 					)
 					,array(
+						'FROM'	=> array(GARAGE_PRODUCTS_TABLE => 'p'),
+						'ON'	=> 'p.id = m.product_id'
+					)
+					,array(
 						'FROM'	=> array(GARAGE_VEHICLE_GALLERY_TABLE => 'vg'),
 						'ON'	=> 'v.id = vg.vehicle_id AND vg.hilite = 1'
 					)
@@ -398,10 +397,10 @@ class garage
 						'ON'	=> 'vg.image_id = i.attach_id'
 					)
 				),
-				'WHERE'		=> "v.pending = 0 
-							AND (v.make_id = mk.id and mk.pending = 0) 
-							AND (v.model_id = md.id and md.pending = 0) 
-							AND v.user_id = u.user_id",
+				'WHERE'	=> "v.pending = 0
+					AND (v.make_id = mk.id and mk.pending = 0)
+					AND (v.model_id = md.id and md.pending = 0)
+					AND v.user_id = u.user_id",
 				'GROUP_BY'	=> "v.id",
 				'ORDER_BY'	=> "$sort $order"
 			);
@@ -442,11 +441,11 @@ class garage
 				),
 				'LEFT_JOIN'	=> array(
 					array(
-						'FROM'	=> array(GARAGE_CATEGORIES_TABLE => 'c'),	
+						'FROM'	=> array(GARAGE_CATEGORIES_TABLE => 'c'),
 						'ON'	=> 'm.category_id = c.id'
 					)
 					,array(
-						'FROM'	=> array(GARAGE_PRODUCTS_TABLE => 'p'),	
+						'FROM'	=> array(GARAGE_PRODUCTS_TABLE => 'p'),
 						'ON'	=> 'm.product_id = p.id'
 					)
 					,array(
@@ -462,21 +461,19 @@ class garage
 						'ON'	=> 'p.business_id = b1.id'
 					)
 				),
-				'WHERE'		=> "m.id IS NOT NULL 
-							AND m.vehicle_id = v.id 
-							AND (v.make_id = mk.id and mk.pending = 0) 
-							AND (v.model_id = md.id and md.pending = 0) 
-							AND v.user_id = u.user_id",
+				'WHERE'	=> "m.id IS NOT NULL
+					AND m.vehicle_id = v.id
+					AND (v.make_id = mk.id and mk.pending = 0)
+					AND (v.model_id = md.id and md.pending = 0)
+					AND v.user_id = u.user_id",
 				'GROUP_BY'	=> "m.id",
 				'ORDER_BY'	=> "$sort $order"
 			);
-
-		
 		}
 		else if ($search_options['display_as'] == 'premiums')
 		{
 			$pagination_url .= "&amp;display_as=premiums";
-			
+
 			if (empty($sort))
 			{
 				$sort = 'premium';
@@ -503,13 +500,13 @@ class garage
 				'FROM'		=> array(
 					GARAGE_PREMIUMS_TABLE	=> 'p',
 					GARAGE_VEHICLES_TABLE	=> 'v',
-					GARAGE_MAKES_TABLE	=> 'mk',
-					GARAGE_MODELS_TABLE	=> 'md',
-					USERS_TABLE		=> 'u',
+					GARAGE_MAKES_TABLE		=> 'mk',
+					GARAGE_MODELS_TABLE		=> 'md',
+					USERS_TABLE				=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
-						'FROM'	=> array(GARAGE_MODIFICATIONS_TABLE => 'm'),	
+						'FROM'	=> array(GARAGE_MODIFICATIONS_TABLE => 'm'),
 						'ON'	=> 'v.id = m.vehicle_id'
 					)
 					,array(
@@ -556,13 +553,13 @@ class garage
 				'FROM'		=> array(
 					GARAGE_QUARTERMILES_TABLE	=> 'q',
 					GARAGE_VEHICLES_TABLE		=> 'v',
-					GARAGE_MAKES_TABLE		=> 'mk',
-					GARAGE_MODELS_TABLE		=> 'md',
-					USERS_TABLE			=> 'u',
+					GARAGE_MAKES_TABLE			=> 'mk',
+					GARAGE_MODELS_TABLE			=> 'md',
+					USERS_TABLE					=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
-						'FROM'	=> array(GARAGE_DYNORUNS_TABLE => 'd'),	
+						'FROM'	=> array(GARAGE_DYNORUNS_TABLE => 'd'),
 						'ON'	=> 'q.dynorun_id = d.id'
 					)
 					,array(
@@ -613,9 +610,9 @@ class garage
 				'FROM'		=> array(
 					GARAGE_DYNORUNS_TABLE	=> 'd',
 					GARAGE_VEHICLES_TABLE	=> 'v',
-					GARAGE_MAKES_TABLE	=> 'mk',
-					GARAGE_MODELS_TABLE	=> 'md',
-					USERS_TABLE		=> 'u',
+					GARAGE_MAKES_TABLE		=> 'mk',
+					GARAGE_MODELS_TABLE		=> 'md',
+					USERS_TABLE				=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
@@ -668,11 +665,11 @@ class garage
 				'SELECT'	=> "v.id, v.made_year, v.user_id, mk.make, md.model, l.*, i.*, l.id as lid, v.made_year, mk.make, md.model, u.username, t.title, v.id as vehicle_id, u.user_colour",
 				'SELECT_COUNT'	=> "COUNT(l.id) AS total",
 				'FROM'		=> array(
-					GARAGE_LAPS_TABLE	=> 'l',
+					GARAGE_LAPS_TABLE		=> 'l',
 					GARAGE_VEHICLES_TABLE	=> 'v',
-					GARAGE_MAKES_TABLE	=> 'mk',
-					GARAGE_MODELS_TABLE	=> 'md',
-					USERS_TABLE		=> 'u',
+					GARAGE_MAKES_TABLE		=> 'mk',
+					GARAGE_MODELS_TABLE		=> 'md',
+					USERS_TABLE				=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
@@ -697,7 +694,7 @@ class garage
 
 		/**
 		* Add Modifications Tabe To Query So We Can Do Where Statement On It Only If Needed..Else It Produces Too Many Rows Since Its A Left Join
-		*/	
+		*/
 		if (($search_options['search_category'] OR $search_options['search_manufacturer'] OR $search_options['search_product']) AND !($search_options['display_as'] == 'vehicles' OR $search_options['display_as'] == 'premiums' OR $search_options['display_as'] == 'modifications'))
 		{
 			array_push($sql_array['LEFT_JOIN'], array('FROM' => array(GARAGE_MODIFICATIONS_TABLE => 'm'), 'ON' => 'v.id = m.vehicle_id'));
@@ -755,7 +752,7 @@ class garage
 		));
 
 		$result = $db->sql_query_limit($sql, $garage_config['cars_per_page'], $start);
-		while ($row = $db->sql_fetchrow($result) )
+		while ($row = $db->sql_fetchrow($result))
 		{
 			if (!empty($row))
 			{
@@ -789,7 +786,7 @@ class garage
 	/**
 	* Return true|false if user has moderator acp allow MCP actions
 	*
-	* @return true|false 
+	* @return true|false
 	*/
 	function mcp_access()
 	{
@@ -799,7 +796,6 @@ class garage
 		{
 			return true;
 		}
-
 		return false;
 	}
 
@@ -818,25 +814,24 @@ class garage
 
 		$user_ids = array_unique(array_merge($authd[0]['u_garage_add_vehicle'], $authd[0]['u_garage_upload_image'], $authd[0]['u_garage_remote_image']));
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'g.group_id, g.group_name',
-			'FROM'		=> array(
-				USERS_TABLE		=> 'u',
-				GROUPS_TABLE		=> 'g',
-				USER_GROUP_TABLE	=> 'ug',
-			),
-			'WHERE'		=> $db->sql_in_set('u.user_id', $user_ids) . " AND u.user_id = ug.user_id AND g.group_id = ug.group_id",
-			'GROUP_BY'	=> 'g.group_id'
+				'FROM'		=> array(
+					USERS_TABLE		=> 'u',
+					GROUPS_TABLE		=> 'g',
+					USER_GROUP_TABLE	=> 'ug',
+				),
+				'WHERE'	=> $db->sql_in_set('u.user_id', $user_ids) . " AND u.user_id = ug.user_id AND g.group_id = ug.group_id",
+					'GROUP_BY'	=> 'g.group_id'
 		));
 
 		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result) )
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
 		}
 		$db->sql_freeresult($result);
-
 		return $data;
 	}
 
@@ -853,22 +848,21 @@ class garage
 
 		$data = array();
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'u.user_id, u.username, u.user_email, u.user_lang, u.user_jabber, u.user_notify_type',
 			'FROM'		=> array(
 				USERS_TABLE	=> 'u',
 			),
-			'WHERE'		=> $db->sql_in_set('u.user_id', $moderators) . ' AND u.user_garage_mod_email_optout = 0'
+			'WHERE'	=> $db->sql_in_set('u.user_id', $moderators) . ' AND u.ug_mod_email_optout = 0'
 		));
 
 		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result) )
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
 		}
 		$db->sql_freeresult($result);
-
 		return $data;
 	}
 
@@ -885,22 +879,21 @@ class garage
 
 		$data = array();
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'u.user_id',
 			'FROM'		=> array(
 				USERS_TABLE	=> 'u',
 			),
-			'WHERE'  	=> $db->sql_in_set('u.user_id', $moderators) . ' AND u.user_garage_mod_pm_optout = 0'
+			'WHERE'	=> $db->sql_in_set('u.user_id', $moderators) . ' AND u.ug_mod_pm_optout = 0'
 		));
 
 		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result) )
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
 		}
 		$db->sql_freeresult($result);
-
 		return $data;
 	}
 
@@ -915,7 +908,7 @@ class garage
 		global $user, $phpEx, $auth, $garage_config, $config, $garage, $phpbb_root_path;
 
 		//Get All Users With The Rights To Approve Items If We Need To
-		if ( $garage_config['enable_email_pending_notify'] OR $garage_config['enable_pm_pending_notify'] )
+		if ($garage_config['enable_email_pending_notify'] || $garage_config['enable_pm_pending_notify'])
 		{
 			$garage_moderators = $auth->acl_get_list(false, array('m_garage_approve_vehicle', 'm_garage_approve_make', 'm_garage_approve_model', 'm_garage_approve_business', 'm_garage_approve_quartermile', 'm_garage_approve_dynorun', 'm_garage_approve_guestbook', 'm_garage_approve_lap', 'm_garage_approve_track', 'm_garage_approve_product'), false);
 			//Merge All Moderators With Permissions & Unique Them.
@@ -926,7 +919,7 @@ class garage
 		if ($garage_config['enable_email_pending_notify'])
 		{
 			//Get All Garage Moderators To Notify Via Email
-			$moderators_to_email = $garage->moderators_requiring_email($moderators, $garage_config['enable_email_pending_notify_optout'] );
+			$moderators_to_email = $garage->moderators_requiring_email($moderators, $garage_config['enable_email_pending_notify_optout']);
 
 			//Process All Moderator Returned And Send Them Notification Via There Perferred Methods (Email/Jabber)
 			for ($i = 0, $count = sizeof($moderators_to_email);$i < $count; $i++)
@@ -940,8 +933,8 @@ class garage
 				$messenger->im($moderators_to_email[$i]['user_jabber'], $moderators_to_email[$i]['username']);
 
 				$messenger->assign_vars(array(
-					'U_MCP'		=> generate_board_url() . "/mcp.$phpEx?i=garage&mode=$mcp_mode_to_approve")
-				);
+					'U_MCP'	=> generate_board_url() . "/mcp.$phpEx?i=garage&mode=$mcp_mode_to_approve"
+				));
 
 				//Send Them The Actual Notification
 				$messenger->send($moderators_to_email[$i]['user_notify_type']);
@@ -972,10 +965,10 @@ class garage
 					'enable_bbcode'			=> true,
 					'enable_smilies'		=> true,
 					'enable_urls'			=> false,
-					'icon_id'			=> 0,
+					'icon_id'				=> 0,
 					'bbcode_bitfield'		=> $message_parser->bbcode_bitfield,
 					'bbcode_uid'			=> $message_parser->bbcode_uid,
-					'message'			=> $message_parser->message,
+					'message'				=> $message_parser->message,
 					'address_list'			=> array('u' => array($moderators_to_pm[$i]['user_id'] => 'to')),
 				);
 
@@ -996,29 +989,29 @@ class garage
 	* @param int $level number of tabs before text
 	*
 	*/
-	function write_logfile ($log_file, $log_type, $message, $level=0)
+	function write_logfile($log_file, $log_type, $message, $level=0)
 	{
-        	// Open that log up!
-	        $log_handle = @fopen( $log_file, $log_type );
+		// Open that log up!
+		$log_handle = @fopen($log_file, $log_type);
 
 		//Make Sure We Have A File Handle
-		if ( empty($log_handle) == false )
+		if (empty($log_handle) == false)
 		{
 			// Make sure we end with a new line
-			if ( !preg_match('/^.+?\n$/', $message) )
+			if (!preg_match('/^.+?\n$/', $message))
 			{
 				$message .= "\n";
 			}
 
 			// Prepend number of tabs equal to level
-			while ( $level > 0 )
+			while ($level > 0)
 			{
 				$message = "\t".$message;
 				$level--;
 			}
-	
+
 			// Write the message to the log
-			@fwrite( $log_handle, $message );
+			@fwrite($log_handle, $message);
 		}
 
 		//Finished Writting Required Message So Close Our File Handle

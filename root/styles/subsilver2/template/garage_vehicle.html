@@ -25,7 +25,7 @@ function build_model_list()
 {
 	var obj = document.getElementById('model_id');
 	eval(ajax.response);
-} 
+}
 </script>
 
 <!-- IF U_MCP -->
@@ -37,9 +37,9 @@ function build_model_list()
 
 <!-- ENDIF -->
 
-<!-- INCLUDE garage_header.html -->
+<!-- INCLUDE garage/garage_header.html -->
 
-<!-- INCLUDE garage_menu.html -->
+<!-- INCLUDE garage/garage_menu.html -->
 
 		<td width="72%" valign="top" >
 
@@ -90,7 +90,7 @@ function build_model_list()
 					</tr>
 
 					<!-- IF ! VID -->
-						<!-- INCLUDE garage_image_attach.html -->
+						<!-- INCLUDE garage/garage_image_attach.html -->
 					<!-- ENDIF -->
 
 					<tr>
@@ -108,9 +108,9 @@ function build_model_list()
 
 			<!-- IF U_MANAGE_GALLERY -->
 			<br />
-				<!-- INCLUDE garage_manage_gallery.html -->
+				<!-- INCLUDE garage/garage_manage_gallery.html -->
 			<!-- ENDIF -->
-			
+
 </td>
 
 <script language="JavaScript1.1" type="text/javascript">
@@ -162,6 +162,6 @@ function add_make ( tertiary )
 -->
 </script>
 
-<!-- INCLUDE garage_footer.html -->
+<!-- INCLUDE garage/garage_footer.html -->
 
 <!-- INCLUDE overall_footer.html -->

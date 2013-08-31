@@ -16,7 +16,7 @@ define('IN_PHPBB', true);
 /**
 * Set root path & include standard phpBB files required
 */
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
@@ -53,7 +53,7 @@ $comment_id = request_var('CMT_ID', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx"))
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx"))
 );
 
 /**
@@ -69,7 +69,8 @@ if ($garage->mcp_access())
 /**
 * Perform a set action based on value for $mode
 */
-switch( $mode )
+
+switch ($mode)
 {
 	case 'view_guestbook':
 		/**
@@ -77,7 +78,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_browse'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=15"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=15"));
 		}
 
 		/**
@@ -91,8 +92,8 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_view_guestbook.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_view_guestbook.html')
 		);
 		for ($i = 0, $count = sizeof($comment_data);$i < $count; $i++)
 		{
@@ -141,12 +142,12 @@ switch( $mode )
 			$delpost_img = '';
 			$delpost = '';
 
-		 	if ( $auth->acl_get('m_garage_edit') )
+		 	if ($auth->acl_get('m_garage_edit'))
 			{
 				$edit_img = $user->img('icon_post_edit', 'EDIT_POST');
-				$edit = '<a href="'. append_sid("{$phpbb_root_path}garage.$phpEx", "mode=edit_comment&amp;VID=$vid&amp;comment_id=" . $comment_data[$i]['comment_id'] . "&amp;sid=" . $user->data['session_id']) . '">' . $user->lang['EDIT_POST'] . '</a>';
+				$edit = '<a href="'. append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=edit_comment&amp;VID=$vid&amp;comment_id=" . $comment_data[$i]['comment_id'] . "&amp;sid=" . $user->data['session_id']) . '">' . $user->lang['EDIT_POST'] . '</a>';
 				$delpost_img = $user->img('icon_post_delete', 'DELETE_POST');
-				$delpost = '<a href="'. append_sid("{$phpbb_root_path}garage.$phpEx", "mode=delete_comment&amp;VID=$vid&amp;comment_id=" . $comment_data[$i]['comment_id'] . "&amp;sid=" . $user->data['session_id']) . '">' . $user->lang['DELETE_POST'] . '</a>';
+				$delpost = '<a href="'. append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=delete_comment&amp;VID=$vid&amp;comment_id=" . $comment_data[$i]['comment_id'] . "&amp;sid=" . $user->data['session_id']) . '">' . $user->lang['DELETE_POST'] . '</a>';
 
 			}
 
@@ -159,7 +160,7 @@ switch( $mode )
 				'POSTER_CAR_MARK' 		=> $poster_car_mark,
 				'POSTER_CAR_MODEL' 		=> $poster_car_model,
 				'POSTER_CAR_YEAR' 		=> $poster_car_year,
-				'VIEW_POSTER_CARPROFILE'	=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=$garage_id"),
+				'VIEW_POSTER_CARPROFILE'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=$garage_id"),
 				'POSTER_AVATAR'				=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
 				'PROFILE_IMG' 	=> $user->img('icon_user_profile', 'READ_PROFILE'),
 				'PROFILE' 		=> $profile,
@@ -179,10 +180,10 @@ switch( $mode )
 			);
 		}
 		$template->assign_vars(array(
-			'L_GUESTBOOK_TITLE' 	=> $vehicle_data['username'] . " - " . $vehicle_data['vehicle'] . " " . $user->lang['GUESTBOOK'],
-			'VID' 			=> $vid,
-			'S_DISPLAY_LEAVE_COMMENT'=> $auth->acl_get('u_garage_comment'),
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage_guestbook.$phpEx", "mode=insert_comment&VID=$vid"))
+			'L_GUESTBOOK_TITLE'			=> $vehicle_data['username'] . " - " . $vehicle_data['vehicle'] . " " . $user->lang['GUESTBOOK'],
+			'VID' 						=> $vid,
+			'S_DISPLAY_LEAVE_COMMENT'	=> $auth->acl_get('u_garage_comment'),
+			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=insert_comment&VID=$vid"))
 		);
 		$garage_template->sidemenu();
 	break;
@@ -193,7 +194,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_comment'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=17"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=17"));
 		}
 
 		/**
@@ -203,10 +204,10 @@ switch( $mode )
 		$uid = $bitfield = $options = '';
 		generate_text_for_storage($text, $uid, $bitfield, $options, $garage_config['enable_guestbooks_bbcode'], $garage_config['enable_guestbooks_url'], $garage_config['enable_guestbooks_smilies']);
 		$data = array(
-		    'post'              => $text,
-		    'bbcode_uid'        => $uid,
-		    'bbcode_bitfield'   => $bitfield,
-		    'bbcode_options'    => $options,
+			'post'				=> $text,
+			'bbcode_uid'		=> $uid,
+			'bbcode_bitfield'	=> $bitfield,
+			'bbcode_options'	=> $options,
 		);
 
 		/**
@@ -223,30 +224,30 @@ switch( $mode )
 		/**
 		* Perform user PM notification if required
 		*/
-		if ($notify_data['user_garage_guestbook_pm_notify'])
+		if ($notify_data['ug_guestbook_pm_notify'])
 		{
 			include_once($phpbb_root_path . 'includes/functions_privmsgs.' . $phpEx);
 			include_once($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 
-			$data['vehicle_link'] 	= '<a href="garage_vehicle.'.$phpEx.'?mode=view_vehicle&VID='.$vid.'#guestbook">' . $user->lang['HERE'] . '</a>';
+			$data['vehicle_link'] 	= '<a href="{$phpbb_root_path}garage/garage_vehicle.'.$phpEx.'?mode=view_vehicle&VID='.$vid.'#guestbook">' . $user->lang['HERE'] . '</a>';
 
 			$message_parser = new parse_message();
 			$message_parser->message = sprintf($user->lang['GUESTBOOK_NOTIFY_TEXT'], $data['vehicle_link']);
 			$message_parser->parse(true, true, true, false, false, true, true);
 
 			$pm_data = array(
-				'from_user_id'			=> $user->data['user_id'],
-				'from_user_ip'			=> $user->data['user_ip'],
-				'from_username'			=> $user->data['username'],
-				'enable_sig'			=> false,
-				'enable_bbcode'			=> true,
-				'enable_smilies'		=> true,
-				'enable_urls'			=> false,
-				'icon_id'				=> 0,
-				'bbcode_bitfield'		=> $message_parser->bbcode_bitfield,
-				'bbcode_uid'			=> $message_parser->bbcode_uid,
-				'message'				=> $message_parser->message,
-				'address_list'			=> array('u' => array($data['user_id'] => 'to')),
+				'from_user_id'		=> $user->data['user_id'],
+				'from_user_ip'		=> $user->data['user_ip'],
+				'from_username'		=> $user->data['username'],
+				'enable_sig'		=> false,
+				'enable_bbcode'		=> true,
+				'enable_smilies'	=> true,
+				'enable_urls'		=> false,
+				'icon_id'			=> 0,
+				'bbcode_bitfield'	=> $message_parser->bbcode_bitfield,
+				'bbcode_uid'		=> $message_parser->bbcode_uid,
+				'message'			=> $message_parser->message,
+				'address_list'		=> array('u' => array($data['user_id'] => 'to')),
 			);
 			submit_pm('post', $user->lang['GUESTBOOK_NOTIFY_SUBJECT'], $pm_data, false, false);
 		}
@@ -254,7 +255,7 @@ switch( $mode )
 		/**
 		* Perform user email/jabber notification if required
 		*/
-		if ($notify_data['user_garage_guestbook_email_notify'])
+		if ($notify_data['ug_guestbook_email_notify'])
 		{
 			//Guess we need some code here at some point soon ;)
 		}
@@ -270,7 +271,7 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid#guestbook"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid#guestbook"));
 	break;
 
 	case 'edit_comment':
@@ -279,7 +280,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('m_garage_edit'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=13"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=13"));
 		}
 
 		/**
@@ -292,13 +293,13 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->assign_vars(array(
-			'VID' 		 => $vid,
-			'COMMENT_ID' 	 => $data['comment_id'],
-			'COMMENTS' 	 => $data['post'])
+			'VID' 			=> $vid,
+			'COMMENT_ID'	=> $data['comment_id'],
+			'COMMENTS'		=> $data['post'])
 		);
 		$template->set_filenames(array(
-			'header' => 'garage_header.html',
-			'body'   => 'garage_edit_comment.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_edit_comment.html')
 		);
 		$garage_template->sidemenu();
 	break;
@@ -309,7 +310,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('m_garage_edit'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=13"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=13"));
 		}
 
 		/**
@@ -320,10 +321,10 @@ switch( $mode )
 		$allow_bbcode = $allow_urls = $allow_smilies = true;
 		generate_text_for_storage($text, $uid, $bitfield, $flags, $allow_bbcode, $allow_urls, $allow_smilies);
 		$data = array(
-		    'post'              => $text,
-		    'bbcode_uid'        => $uid,
-		    'bbcode_bitfield'   => $bitfield,
-		    'bbcode_flags'      => $flags,
+			'post'				=> $text,
+			'bbcode_uid'		=> $uid,
+			'bbcode_bitfield'	=> $bitfield,
+			'bbcode_flags'		=> $flags,
 		);
 
 		/**
@@ -334,7 +335,7 @@ switch( $mode )
 		/**
 		* Perform notification if required
 		*/
-		if ( $garage_config['enable_guestbooks_comment_approval'] )
+		if ($garage_config['enable_guestbooks_comment_approval'])
 		{
 			$garage->pending_notification('unapproved_guestbook_comments');
 		}
@@ -342,33 +343,35 @@ switch( $mode )
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_guestbook.$phpEx", "mode=view_guestbook&amp;VID=$vid"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=view_guestbook&amp;VID=$vid"));
 	break;
 
 	case 'delete_comment':
+
 		/**
 		* Check authorisation to perform action, redirecting to error screen if not
 		*/
 		if (!$auth->acl_get('m_garage_delete'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=13"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=13"));
 		}
 
 		/**
 		* Get all required/optional data and check required data is present
 		*/
-		$params = array('comment_id' => '');
+
+		$params = array('CMT_ID' => '');
 		$data = $garage->process_vars($params);
 
 		/**
 		* Perform required DB work to delete comment
 		*/
-		$garage->delete_rows(GARAGE_GUESTBOOKS_TABLE, 'id', $data['comment_id']);
+		$garage->delete_rows(GARAGE_GUESTBOOKS_TABLE, 'id', $data['CMT_ID']);
 
 		/**
 		* All work complete for mode, so redirect to correct page
 		*/
-		redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid#guestbook"));
+		redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=$vid#guestbook"));
 	break;
 }
 $garage_template->version_notice();

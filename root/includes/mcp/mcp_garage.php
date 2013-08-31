@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package mcp
 * @version $Id$
 * @copyright (c) 2007 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -35,7 +35,7 @@ class mcp_garage
 	function main($id, $mode)
 	{
 		/**
-		* Setup global variables such as $db 
+		* Setup global variables such as $db
 		*/
 		global $auth, $db, $user, $template;
 		global $config, $phpbb_root_path, $phpEx, $action;
@@ -66,7 +66,7 @@ class mcp_garage
 		include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
 
 		/**
-		* Little cheat to swap certain actions to modes 
+		* Little cheat to swap certain actions to modes
 		*/
 		if (in_array($action, array('disapprove_make_confirm', 'disapprove_model_confirm', 'disapprove_business_confirm', 'disapprove_track_confirm', 'disapprove_product_confirm')))
 		{
@@ -94,7 +94,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -109,7 +109,7 @@ class mcp_garage
 					trigger_error('TOO_MANY_SELECTED');
 				}
 
-				redirect(append_sid("{$phpbb_root_path}garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID={$id_list[0]}&amp;redirect=MCP"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID={$id_list[0]}&amp;redirect=MCP"));
 
 			break;
 
@@ -123,7 +123,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -165,7 +165,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -187,7 +187,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_EDIT_MODEL'		=> true,
 					'S_MCP_ACTION'		=> $this->u_action . "&amp;action=update_model",
@@ -210,12 +210,12 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
 				* Check we have one and only one business to work on
-				*/	
+				*/
 				if (!sizeof($id_list))
 				{
 					trigger_error('NO_BUSINESS_SELECTED');
@@ -232,7 +232,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_DISPLAY_PENDING' 	=> $garage_config['enable_business_approval'],
 					'S_BUSINESS_INSURANCE' 	=> ($data['insurance']) ? true : false,
@@ -265,7 +265,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -285,7 +285,7 @@ class mcp_garage
 				*/
 				$vid = $garage_dynorun->get_vehicle_id_for_dynorun($id_list[0]);
 
-				redirect(append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID={$id_list[0]}&amp;redirect=MCP"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID={$id_list[0]}&amp;redirect=MCP"));
 
 			break;
 
@@ -299,7 +299,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -319,7 +319,7 @@ class mcp_garage
 				*/
 				$vid = $garage_quartermile->get_vehicle_id_for_quartermile($id_list[0]);
 
-				redirect(append_sid("{$phpbb_root_path}garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID={$id_list[0]}&amp;redirect=MCP"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=edit_quartermile&amp;VID=$vid&amp;QMID={$id_list[0]}&amp;redirect=MCP"));
 
 			break;
 
@@ -333,7 +333,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -353,7 +353,7 @@ class mcp_garage
 				*/
 				$vid = $garage_track->get_vehicle_id_for_lap($id_list[0]);
 
-				redirect(append_sid("{$phpbb_root_path}garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID={$id_list[0]}&amp;redirect=MCP"));
+				redirect(append_sid("{$phpbb_root_path}garage/garage_track.$phpEx", "mode=edit_lap&amp;VID=$vid&amp;LID={$id_list[0]}&amp;redirect=MCP"));
 
 				break;
 
@@ -367,7 +367,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -389,7 +389,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$garage_template->mileage_dropdown($data['mileage_unit']);
 				$template->assign_vars(array(
 					'S_EDIT_TRACK'		=> true,
@@ -398,7 +398,7 @@ class mcp_garage
 					'TITLE'			=> $data['title'],
 					'LENGTH'		=> $data['length'],
 				));
-				$mode = ""; 
+				$mode = "";
 
 			break;
 
@@ -412,7 +412,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -436,7 +436,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$garage_template->category_dropdown($categories, $data['category_id']);
 				$garage_template->manufacturer_dropdown($manufacturers, $data['business_id']);
 				$template->assign_vars(array(
@@ -445,7 +445,7 @@ class mcp_garage
 					'PRODUCT_ID'		=> $id_list[0],
 					'TITLE'			=> $data['title'],
 				));
-				$mode = ""; 
+				$mode = "";
 
 			break;
 
@@ -459,11 +459,11 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
-				* Get all required/optional data 
+				* Get all required/optional data
 				*/
 				$params = array('id' => '');
 				$data 	= $garage->process_vars($params);
@@ -495,7 +495,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -531,7 +531,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -567,7 +567,7 @@ class mcp_garage
 
 			/**
 			* Update moderated track and redirect to unapproved list
-			*/		
+			*/
 			case 'update_track':
 
 				/**
@@ -575,7 +575,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -603,7 +603,7 @@ class mcp_garage
 
 			/**
 			* Update moderated product and redirect to unapproved list
-			*/				
+			*/
 			case 'update_product':
 
 				/**
@@ -611,7 +611,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_edit'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -646,7 +646,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_vehicle'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -656,7 +656,7 @@ class mcp_garage
 				{
 					trigger_error('NO_VEHICLE_SELECTED');
 				}
-				
+
 				/**
 				* For each ID in array update the pending column in the DB
 				*/
@@ -664,7 +664,7 @@ class mcp_garage
 				{
 					$garage->update_single_field(GARAGE_VEHICLES_TABLE, 'pending', 0, 'id', $id_list[$i]);
 				}
-	
+
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_vehicles"));
 			break;
 
@@ -678,7 +678,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_make'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -699,7 +699,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_makes"));
 			break;
-			
+
 			/**
 			* Approve all models contained with an array recieved from page
 			*/
@@ -710,7 +710,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_model'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -742,7 +742,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_business'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -755,7 +755,7 @@ class mcp_garage
 
 				/**
 				* For each ID in array update the pending column in the DB
-				*/				
+				*/
 				for($i = 0; $i < count($id_list); $i++)
 				{
 					$garage->update_single_field(GARAGE_BUSINESS_TABLE, 'pending', 0, 'id', $id_list[$i]);
@@ -764,7 +764,7 @@ class mcp_garage
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_business"));
 
 			break;
-			
+
 			/**
 			* Approve all quartermile times contained with an array recieved from page
 			*/
@@ -775,7 +775,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_quartermile'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -796,7 +796,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_quartermiles"));
 			break;
-			
+
 			/**
 			* Approve all dynoruns contained with an array recieved from page
 			*/
@@ -807,7 +807,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_dynorun'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -820,7 +820,7 @@ class mcp_garage
 
 				/**
 				* For each ID in array update the pending column in the DB
-				*/				
+				*/
 				for($i = 0; $i < count($id_list); $i++)
 				{
 					$garage->update_single_field(GARAGE_DYNORUNS_TABLE, 'pending', 0, 'id', $id_list[$i]);
@@ -828,7 +828,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_dynoruns"));
 			break;
-			
+
 			/**
 			* Approve all guestbook comments contained with an array recieved from page
 			*/
@@ -839,7 +839,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_guestbook'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -860,7 +860,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_comments"));
 			break;
-			
+
 			/**
 			* Approve all lap times contained with an array recieved from page
 			*/
@@ -871,7 +871,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_lap'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -892,7 +892,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_laps"));
 			break;
-			
+
 			/**
 			* Approve all tracks contained with an array recieved from page
 			*/
@@ -903,7 +903,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_track'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -935,7 +935,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_approve_product'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -956,7 +956,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_products"));
 			break;
-			
+
 			/**
 			* Disappove all vehicles contained with an array recieved from page
 			* Dispproving a vehicle deletes it and all its items
@@ -968,7 +968,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -989,7 +989,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_vehicles"));;
 			break;
-			
+
 			/**
 			* Disappove a single make contained with an array recieved from page
 			* Moderators will have chosen to delete or move linked items
@@ -1001,7 +1001,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1017,7 +1017,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_makes"));
 			break;
-			
+
 			/**
 			* Disappove a single model contained with an array recieved from page
 			* Moderators will have chosen to delete or move linked items
@@ -1029,7 +1029,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1045,7 +1045,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_models"));
 			break;
-			
+
 			/**
 			* Disappove a single business contained with an array recieved from page
 			* Moderators will have chosen to delete or move linked items
@@ -1057,7 +1057,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1073,7 +1073,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_business"));
 			break;
-			
+
 			/**
 			* Disappove all quartermile times contained with an array recieved from page
 			* Dispproving a quartermile time deletes it and all its images
@@ -1085,7 +1085,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1107,7 +1107,7 @@ class mcp_garage
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_quartermiles"));
 
 			break;
-			
+
 			/**
 			* Disappove all dynoruns contained with an array recieved from page
 			* Dispproving a dynorun deletes it and all its images
@@ -1119,7 +1119,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1140,7 +1140,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_dynoruns"));
 			break;
-			
+
 			/**
 			* Disappove all guestbook comments contained with an array recieved from page
 			* Dispproving a comment deletes it
@@ -1152,7 +1152,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1173,7 +1173,7 @@ class mcp_garage
 
 				redirect(append_sid("{$phpbb_root_path}mcp.$phpEx", "i=garage&amp;mode=unapproved_comments"));
 			break;
-			
+
 			/**
 			* Disappove all laps contained with an array recieved from page
 			* Dispproving a lap deletes it and all its images
@@ -1185,7 +1185,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1218,7 +1218,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1246,7 +1246,7 @@ class mcp_garage
 				*/
 				if (!$auth->acl_get('m_garage_delete'))
 				{
-					redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+					redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 				}
 
 				/**
@@ -1274,7 +1274,7 @@ class mcp_garage
 			* Produce page to show moderator all unapproved vehicles
 			*/
 			case 'unapproved_vehicles':
-				
+
 				/**
 				* Get pending vehicles from DB
 				*/
@@ -1285,7 +1285,7 @@ class mcp_garage
 				*/
 				for ($i = 0, $count = sizeof($data);$i < $count; $i++)
 				{
-					
+
 					$template->assign_block_vars('vehicle_row', array(
 						'U_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
 						'USERNAME'		=> $data[$i]['username'],
@@ -1352,7 +1352,7 @@ class mcp_garage
 
 				/**
 				* Get pending models from DB
-				*/				
+				*/
 				$data = $garage_model->get_pending_models();
 
 				/**
@@ -1369,7 +1369,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'		=> build_url(),
 					'S_GARAGE_EDIT'		=> $auth->acl_get('m_garage_edit') ? true : false,
@@ -1415,7 +1415,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'		=> build_url(),
 					'S_GARAGE_EDIT'		=> $auth->acl_get('m_garage_edit') ? true : false,
@@ -1441,7 +1441,7 @@ class mcp_garage
 				{
 					$template->assign_block_vars('quartermile_row', array(
 						'U_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
-						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['vehicle_id']),
+						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['vehicle_id']),
 						'ID'			=> $data[$i]['qmid'],
 						'USERNAME'		=> $data[$i]['username'],
 						'USERNAME_COLOUR'	=> get_username_string('colour', $data[$i]['user_id'], $data[$i]['username'], $data[$i]['user_colour']),
@@ -1459,7 +1459,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'			=> build_url(),
 					'S_GARAGE_EDIT'			=> $auth->acl_get('m_garage_edit') ? true : false,
@@ -1485,7 +1485,7 @@ class mcp_garage
 				{
 					$template->assign_block_vars('dynorun_row', array(
 						'U_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
-						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
+						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
 						'ID'			=> $data[$i]['did'],
 						'USERNAME'		=> $data[$i]['username'],
 						'USERNAME_COLOUR'	=> get_username_string('colour', $data[$i]['user_id'], $data[$i]['username'], $data[$i]['user_colour']),
@@ -1541,10 +1541,10 @@ class mcp_garage
 						'VEHICLE'		=> $data[$i]['vehicle'],
 						'IMAGE'			=> $user->img('garage_img_attached', 'IMAGE_ATTACHED'),
 						'U_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
-						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
-						'U_IMAGE'		=> ($data[$i]['attach_id']) ? append_sid("garage.$phpEx", "mode=view_image&amp;image_id=". $data[$i]['attach_id']) : '',
-						'U_TRACK'		=> append_sid("garage_track.$phpEx?mode=view_track&amp;TID=".$data[$i]['track_id']."&amp;VID=". $data[$i]['vehicle_id']),
-						'U_LAP'			=> append_sid("garage_track.$phpEx?mode=view_lap&amp;LID=".$data[$i]['lid']."&amp;VID=". $data[$i]['vehicle_id']),
+						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['id']),
+						'U_IMAGE'		=> ($data[$i]['attach_id']) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=". $data[$i]['attach_id']) : '',
+						'U_TRACK'		=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx?mode=view_track&amp;TID=".$data[$i]['track_id']."&amp;VID=". $data[$i]['vehicle_id']),
+						'U_LAP'			=> append_sid("{$phpbb_root_path}garage/garage_track.$phpEx?mode=view_lap&amp;LID=".$data[$i]['lid']."&amp;VID=". $data[$i]['vehicle_id']),
 					));
 				}
 
@@ -1566,7 +1566,7 @@ class mcp_garage
 
 				/**
 				* Get pending tracks from DB
-				*/				
+				*/
 				$data = $garage_track->get_pending_tracks();
 
 				/**
@@ -1584,7 +1584,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'		=> build_url(),
 					'S_GARAGE_EDIT'		=> $auth->acl_get('m_garage_edit') ? true : false,
@@ -1611,7 +1611,7 @@ class mcp_garage
 					$message = generate_text_for_display($data[$i]['post'], $data[$i]['bbcode_uid'], $data[$i]['bbcode_bitfield'], $data[$i]['bbcode_options']);
 					$template->assign_block_vars('comment_row', array(
 						'U_PROFILE'		=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data[$i]['user_id']),
-						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['vehicle_id']),
+						'U_VEHICLE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=" . $data[$i]['vehicle_id']),
 						'AUTHOR'		=> $data[$i]['username'],
 						'USERNAME_COLOUR'	=> get_username_string('colour', $data[$i]['user_id'], $data[$i]['username'], $data[$i]['user_colour']),
 						'VEHICLE'		=> $data[$i]['vehicle'],
@@ -1641,7 +1641,7 @@ class mcp_garage
 				* Get pending products from DB
 				*/
 				$data = $garage_modification->get_pending_products();
-				
+
 				/**
 				* Loop through all pending items and handle template assignments
 				*/
@@ -1657,7 +1657,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'		=> build_url(),
 					'S_GARAGE_EDIT'		=> $auth->acl_get('m_garage_edit') ? true : false,
@@ -1668,7 +1668,7 @@ class mcp_garage
 
 			/**
 			* Produce page to allow moderator decide on how linked items are handled
-			* Linked items are models & vehicles. 
+			* Linked items are models & vehicles.
 			* Models & vehicles can be moved to another make or deleted
 			*/
 			case 'disapprove_make_confirm':
@@ -1704,7 +1704,7 @@ class mcp_garage
 
 			/**
 			* Produce page to allow moderator decide on how linked items are handled
-			* Linked are vehicles. 
+			* Linked are vehicles.
 			* Vehicles can be moved to another model of the same make or deleted
 			*/
 			case 'disapprove_model_confirm':
@@ -1729,7 +1729,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MCP_ACTION'		=> $this->u_action . "&amp;action=disapprove_model&amp;model_id=".$id_list[0]."&amp;make_id=" . $model_data['make_id'],
 					'S_DELETE_MODEL'	=> true,
@@ -1740,7 +1740,7 @@ class mcp_garage
 
 			/**
 			* Produce page to allow moderator decide on how linked items are handled
-			* Linked are modifications (installed, purchased & product), premiums, dynoruns. 
+			* Linked are modifications (installed, purchased & product), premiums, dynoruns.
 			* Modifications can be moved to another business (garage, shop & manufacturer) or deleted
 			* Premiums can be moved to another insurer or deleted
 			* Dynoruns can be moved to another dynocentre or deleted
@@ -1814,7 +1814,7 @@ class mcp_garage
 
 			/**
 			* Produce page to allow moderator decide on how linked items are handled
-			* Linked are laps. 
+			* Linked are laps.
 			* Laps can be moved to another track or deleted
 			*/
 			case 'disapprove_track_confirm':
@@ -1839,7 +1839,7 @@ class mcp_garage
 
 				/**
 				* Handle template declarations & assignments
-				*/				
+				*/
 				$template->assign_vars(array(
 					'S_MOVE_OPTIONS'	=> $garage_template->build_move_to($tracks_data, $id_list[0], 'title'),
 					'S_DELETE_TRACK'	=> true,
@@ -1850,7 +1850,7 @@ class mcp_garage
 
 			/**
 			* Produce page to allow moderator decide on how linked items are handled
-			* Linked are modifications. 
+			* Linked are modifications.
 			* Modifications can be moved to another product in the same category by the same manufacturer or deleted
 			*/
 			case 'disapprove_product_confirm':
