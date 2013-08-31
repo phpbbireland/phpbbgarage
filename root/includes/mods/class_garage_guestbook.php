@@ -247,9 +247,9 @@ class garage_guestbook
 			'FROM'		=> array(
 				GARAGE_GUESTBOOKS_TABLE	=> 'gb',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=>	"gb.pending = 1
 				AND gb.author_id = u.user_id
@@ -292,7 +292,7 @@ class garage_guestbook
 			'SELECT'	=> 'SUBSTRING(REPLACE(gb.post,\'<br />\',\' \'),1,75) AS post, gb.author_id, u.username',
 			'FROM'		=> array(
 				GARAGE_GUESTBOOKS_TABLE	=> 'gb',
-				USERS_TABLE		=> 'u',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=>  "gb.vehicle_id = $vid
 				AND gb.author_id = u.user_id",
@@ -327,9 +327,9 @@ class garage_guestbook
 			'FROM'		=> array(
 				GARAGE_GUESTBOOKS_TABLE	=> 'gb',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=>  "gb.author_id = u.user_id
 				AND v.user_id = gb.author_id AND v.main_vehicle = 1
@@ -370,9 +370,9 @@ class garage_guestbook
 			'FROM'		=> array(
 				GARAGE_GUESTBOOKS_TABLE	=> 'gb',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=>  "gb.id = $comment_id
 				AND v.user_id = gb.author_id AND v.main_vehicle = 1
@@ -629,8 +629,8 @@ class garage_guestbook
 			// Handle anon users posting with usernames
 			//if ( $comment_data[$i]['user_id'] == ANONYMOUS && $comment_data[$i]['post_username'] != '' )
 			//{
-		//		$poster = $comment_data[$i]['post_username'];
-		//	}
+			//		$poster = $comment_data[$i]['post_username'];
+			//	}
 
 			$profile = '<a href="' . $temp_url . '">' . $user->lang['READ_PROFILE'] . '</a>';
 
@@ -687,15 +687,15 @@ class garage_guestbook
 			$comment_data[$i]['post_username'] = '';
 
 			$template->assign_block_vars('guestbook.comments', array(
-				'POST_AUTHOR'		=> $poster,
-				'POSTER_JOINED'		=> $poster_joined,
-				'POSTER_POSTS'		=> $poster_posts,
-				'POSTER_FROM'		=> $poster_from,
-				'POSTER_CAR_MARK'	=> $poster_car_mark,
-				'POSTER_CAR_MODEL'	=> $poster_car_model,
-				'POSTER_CAR_YEAR'	=> $poster_car_year,
-				'U_VEHICLE'			=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=$vehicle_id"),
-				'POSTER_AVATAR'		=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
+				'POST_AUTHOR'			=> $poster,
+				'POSTER_JOINED'			=> $poster_joined,
+				'POSTER_POSTS'			=> $poster_posts,
+				'POSTER_FROM'			=> $poster_from,
+				'POSTER_CAR_MARK'		=> $poster_car_mark,
+				'POSTER_CAR_MODEL'		=> $poster_car_model,
+				'POSTER_CAR_YEAR'		=> $poster_car_year,
+				'U_VEHICLE'				=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_vehicle&amp;VID=$vehicle_id"),
+				'POSTER_AVATAR'			=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
 				'POST_AUTHOR_COLOUR'	=> get_username_string('colour', $comment_data[$i]['user_id'], $comment_data[$i]['username'], $comment_data[$i]['user_colour']),
 
 
@@ -703,50 +703,50 @@ class garage_guestbook
 				'S_ONLINE'		=> ($poster_id == ANONYMOUS || !$config['load_onlinetrack']) ? false : (($user_cache[$poster_id]['online']) ? true : false),
 
 
-				'U_PM'			=> ($poster_id != ANONYMOUS && $config['allow_privmsg'] && $auth->acl_get('u_sendpm') && ($user_cache[$poster_id]['allow_pm'] || $auth->acl_gets('a_', 'm_') || $auth->acl_getf_global('m_'))) ? append_sid("{$phpbb_root_path}ucp.$phpEx", "i=pm&amp;mode=compose&amp;u={$poster_id}") : '',
-				'U_EMAIL'		=> $user_cache[$poster_id]['email'],
-				'U_WWW'			=> $user_cache[$poster_id]['www'],
-				'U_MSN'			=> $user_cache[$poster_id]['msn'],
-				'U_ICQ'			=> $user_cache[$poster_id]['icq'],
-				'U_YIM'			=> $user_cache[$poster_id]['yim'],
-				'U_AIM'			=> $user_cache[$poster_id]['aim'],
-				'U_JABBER'		=> $user_cache[$poster_id]['jabber'],
-				'U_DELETE'		=> ($auth->acl_get('m_garage_delete')) ? append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=delete_comment&amp;VID=$vid&amp;CMT_ID={$comment_data[$i]['comment_id']}") : '',
-				'U_EDIT'		=> ($auth->acl_get('m_garage_edit')) ? append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=edit_comment&amp;CMT_ID={$comment_data[$i]['comment_id']}") : '',
+				'U_PM'				=> ($poster_id != ANONYMOUS && $config['allow_privmsg'] && $auth->acl_get('u_sendpm') && ($user_cache[$poster_id]['allow_pm'] || $auth->acl_gets('a_', 'm_') || $auth->acl_getf_global('m_'))) ? append_sid("{$phpbb_root_path}ucp.$phpEx", "i=pm&amp;mode=compose&amp;u={$poster_id}") : '',
+				'U_EMAIL'			=> $user_cache[$poster_id]['email'],
+				'U_WWW'				=> $user_cache[$poster_id]['www'],
+				'U_MSN'				=> $user_cache[$poster_id]['msn'],
+				'U_ICQ'				=> $user_cache[$poster_id]['icq'],
+				'U_YIM'				=> $user_cache[$poster_id]['yim'],
+				'U_AIM'				=> $user_cache[$poster_id]['aim'],
+				'U_JABBER'			=> $user_cache[$poster_id]['jabber'],
+				'U_DELETE'			=> ($auth->acl_get('m_garage_delete')) ? append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=delete_comment&amp;VID=$vid&amp;CMT_ID={$comment_data[$i]['comment_id']}") : '',
+				'U_EDIT'			=> ($auth->acl_get('m_garage_edit')) ? append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=edit_comment&amp;CMT_ID={$comment_data[$i]['comment_id']}") : '',
 				'U_POST_AUTHOR'		=> get_username_string('profile', $poster_id, $comment_data[$i]['username'], $comment_data[$i]['user_colour'], $comment_data[$i]['post_username']),
 				'POST_ID'			=> $comment_data[$i]['comment_id'],
 				'POST_AUTHOR_FULL'	=> get_username_string('full', $poster_id, $comment_data[$i]['username'], $comment_data[$i]['user_colour'], $comment_data[$i]['post_username']),
-				'POST_DATE'		=> $user->format_date($comment_data[$i]['post_date']),
-				'MESSAGE'		=> $post,
-				'SIGNATURE'		=> ($row['enable_sig']) ? $user_cache[$poster_id]['sig'] : '',
-				'POSTER_AVATAR'	=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
-				'RANK_TITLE'	=> $user_cache[$poster_id]['rank_title'],
-				'RANK_IMG'		=> $user_cache[$poster_id]['rank_image'],
-				'POSTER_POSTS'	=> $user_cache[$poster_id]['posts'],
-				'POSTER_JOINED'	=> $user->format_date($comment_data[$i]['user_regdate']),
-				'POSTER_FROM'	=> (!empty($row['user_from'])) ? $comment_data[$i]['user_from'] : '',
-				'PROFILE_IMG'	=> $user->img('icon_user_profile', 'READ_PROFILE'),
-				'PROFILE'		=> $profile,
-				'PM_IMG'		=> $user->img('icon_contact_pm', 'SEND_PRIVATE_MESSAGE'),
-				'PM'			=> $pm,
-				'EMAIL_IMG'		=> $user->img('icon_contact_email', 'SEND_EMAIL'),
-				'EMAIL'			=> $email,
-				'WWW_IMG'		=> $www_img,
-				'WWW'			=> $www,
-				'EDIT_IMG'		=> $edit_img,
-				'EDIT'			=> $edit,
-				'DELETE_IMG'	=> $delpost_img,
-				'DELETE'		=> $delpost,
-				'POSTER'		=> $poster,
+				'POST_DATE'			=> $user->format_date($comment_data[$i]['post_date']),
+				'MESSAGE'			=> $post,
+				'SIGNATURE'			=> ($row['enable_sig']) ? $user_cache[$poster_id]['sig'] : '',
+				'POSTER_AVATAR'		=> ($user->optionget('viewavatars')) ? get_user_avatar($comment_data[$i]['user_avatar'], $comment_data[$i]['user_avatar_type'], $comment_data[$i]['user_avatar_width'], $comment_data[$i]['user_avatar_height']) : '',
+				'RANK_TITLE'		=> $user_cache[$poster_id]['rank_title'],
+				'RANK_IMG'			=> $user_cache[$poster_id]['rank_image'],
+				'POSTER_POSTS'		=> $user_cache[$poster_id]['posts'],
+				'POSTER_JOINED'		=> $user->format_date($comment_data[$i]['user_regdate']),
+				'POSTER_FROM'		=> (!empty($row['user_from'])) ? $comment_data[$i]['user_from'] : '',
+				'PROFILE_IMG'		=> $user->img('icon_user_profile', 'READ_PROFILE'),
+				'PROFILE'			=> $profile,
+				'PM_IMG'			=> $user->img('icon_contact_pm', 'SEND_PRIVATE_MESSAGE'),
+				'PM'				=> $pm,
+				'EMAIL_IMG'			=> $user->img('icon_contact_email', 'SEND_EMAIL'),
+				'EMAIL'				=> $email,
+				'WWW_IMG'			=> $www_img,
+				'WWW'				=> $www,
+				'EDIT_IMG'			=> $edit_img,
+				'EDIT'				=> $edit,
+				'DELETE_IMG'		=> $delpost_img,
+				'DELETE'			=> $delpost,
+				'POSTER'			=> $poster,
 			));
 		}
 
 		$count = $this->count_vehicle_comments($vid);
 		$pagination = $garage_template->generate_pagination(append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode={$mode}&amp;VID=$vid"), 'guestbook', $count, $garage_config['cars_per_page'], $start);
 		$template->assign_vars(array(
-			'PAGINATION' 		=> $pagination,
-			'PAGE_NUMBER'		=> on_page($count, $garage_config['cars_per_page'], $start),
-			'TOTAL_COMMENTS'	=> ($count == 1) ? $user->lang['VIEW_COMMENT_PAGE'] : sprintf($user->lang['VIEW_COMMENTS_PAGE'], $count),
+			'PAGINATION' 				=> $pagination,
+			'PAGE_NUMBER'				=> on_page($count, $garage_config['cars_per_page'], $start),
+			'TOTAL_COMMENTS'			=> ($count == 1) ? $user->lang['VIEW_COMMENT_PAGE'] : sprintf($user->lang['VIEW_COMMENTS_PAGE'], $count),
 			'S_DISPLAY_LEAVE_COMMENT'	=> $auth->acl_get('u_garage_comment'),
 			'S_MODE_GUESTBOOK_ACTION'	=> append_sid("{$phpbb_root_path}garage/garage_guestbook.$phpEx", "mode=insert_comment&amp;VID=$vid")
 		));

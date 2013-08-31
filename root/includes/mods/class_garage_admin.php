@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -34,7 +34,7 @@ class garage_admin
 		global $db;
 
 		$sql = 'INSERT INTO ' . GARAGE_CATEGORIES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
-			'title'		=> $data['title'],
+			'title'			=> $data['title'],
 			'field_order'	=> $data['field_order'])
 		);
 
@@ -45,7 +45,7 @@ class garage_admin
 
 	/**
 	* Count existing modification categories
-	* 
+	*
 	* @return int
 	*/
 	function count_categories()
@@ -54,7 +54,7 @@ class garage_admin
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'COUNT(c.id) as total',
 			'FROM'		=> array(
@@ -156,7 +156,7 @@ class garage_admin
 
 	/**
 	* Update/Create configuration setting
-	* Taken from phpBB3 standard code and table changed 
+	* Taken from phpBB3 standard code and table changed
 	*
 	* @param string $config_name config option to create or update
 	* @param string $config_value value to use for creation or update
@@ -169,7 +169,7 @@ class garage_admin
 
 		if (empty($garage_config))
 		{
-			$sql = $db->sql_build_query('SELECT', 
+			$sql = $db->sql_build_query('SELECT',
 				array(
 				'SELECT'	=> 'c.config_name, c.config_value',
 				'FROM'		=> array(
@@ -202,14 +202,14 @@ class garage_admin
 
 	/**
 	* Re-reading garage configuration option
-	* 
+	*
 	* @return array
 	*/
 	function sync_config()
 	{
 		global $db;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'c.config_name, c.config_value',
 			'FROM'		=> array(

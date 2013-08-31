@@ -147,7 +147,7 @@ class garage_modification
 	function update_product($data)
 	{
 		global $db, $garage_config;
-//print_r($data);
+
 		$pending = (isset($data['pending']) && $data['pending'] == 0) ? 0 : $garage_config['enable_product_approval'];
 
 		$update_sql = array(
@@ -206,7 +206,7 @@ class garage_modification
 		));
 
 		$result = $db->sql_query($sql);
-	        $data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -231,7 +231,7 @@ class garage_modification
 		));
 
 		$result = $db->sql_query($sql);
-        	$data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -521,7 +521,7 @@ class garage_modification
 				AND v.user_id = u.user_id"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		$data = $db->sql_fetchrow($result);
 		if (!empty($data))
 		{
@@ -574,7 +574,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -619,7 +619,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -664,7 +664,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -709,7 +709,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -756,7 +756,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -801,7 +801,7 @@ class garage_modification
 			'ORDER_BY'	=> "p.title ASC"
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -851,7 +851,7 @@ class garage_modification
 			'ORDER_BY'	=> "m.id, m.date_created DESC"
 		));
 
-      		$result = $db->sql_query_limit($sql, $limit, $start);
+		$result = $db->sql_query_limit($sql, $limit, $start);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			if (!empty($row))
@@ -904,7 +904,7 @@ class garage_modification
 			'ORDER_BY'	=> "m.id, m.date_created DESC"
 		));
 
-      		$result = $db->sql_query_limit($sql, $limit, $start);
+		$result = $db->sql_query_limit($sql, $limit, $start);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			if (!empty($row))
@@ -1064,7 +1064,7 @@ class garage_modification
 			'COLUMN_3_TITLE'=> $user->lang['CREATED'])
 		);
 
-	        $limit = $garage_config['newest_modification_limit'] ? $garage_config['newest_modification_limit'] : 10;
+		$limit = $garage_config['newest_modification_limit'] ? $garage_config['newest_modification_limit'] : 10;
 
 		$rows = $this->get_newest_modifications($limit);
 		for($i = 0; $i < count($rows); $i++)
@@ -1109,7 +1109,7 @@ class garage_modification
 			'ORDER_BY'	=> 'c.field_order DESC'
 		));
 
-	      	$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;

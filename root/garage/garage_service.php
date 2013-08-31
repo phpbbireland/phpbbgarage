@@ -120,21 +120,22 @@ switch( $mode )
 		$garage_template->garage_dropdown($garages, $data['garage_id']);
 		$garage_template->rating_dropdown('rating', $data['rating']);
 		$garage_template->service_type_dropdown($data['type_id']);
-		$template->assign_vars(array(
 
-			'VID' 			=> $vid,
+		$template->assign_vars(array(
+			'VID'			=> $vid,
 			'PRICE'			=> $data['price'],
 			'PRICE_DECIMAL'	=> $data['price_decimal'],
 			'MILEAGE'		=> $data['mileage'],
 			'CURRENCY'		=> $vehicle['currency'],
 
-			'L_TITLE'  		=> $user->lang['ADD_SERVICE'],
-			'L_BUTTON'  	=> $user->lang['ADD_SERVICE'],
+			'L_TITLE'		=> $user->lang['ADD_SERVICE'],
+			'L_BUTTON'		=> $user->lang['ADD_SERVICE'],
 
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('')",
-			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=insert_service"),
-			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-         	));
+			'S_MODE_ACTION'				=> append_sid("{$phpbb_root_path}garage/garage_service.$phpEx", "mode=insert_service"),
+			'S_MODE_USER_SUBMIT'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			));
+
 		$garage_template->sidemenu();
 	break;
 
@@ -189,7 +190,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_service.$phpEx?mode=edit_service&amp;SVID=$svid&amp;VID=$vid");
+			login_box("{$phpbb_root_path}garage/garage_service.$phpEx?mode=edit_service&amp;SVID=$svid&amp;VID=$vid");
 		}
 
 		/**
@@ -242,7 +243,7 @@ switch( $mode )
 
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('edit')",
 			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage_service.$phpEx", "mode=update_service"))
+			'S_MODE_ACTION' 			=> append_sid("{$phpbb_root_path}garage/garage_service.$phpEx", "mode=update_service"))
 		);
 		$garage_template->sidemenu();
 	break;
@@ -256,7 +257,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_service.$phpEx?mode=edit_service&amp;SVID=$svid&amp;VID=$vid");
+			login_box("{$phpbb_root_path}garage/garage_service.$phpEx?mode=edit_service&amp;SVID=$svid&amp;VID=$vid");
 		}
 
 		/**
@@ -326,7 +327,7 @@ switch( $mode )
 $garage_template->version_notice();
 
 $template->set_filenames(array(
-	'garage_footer' => 'garage_footer.html')
+	'garage_footer' => 'garage/garage_footer.html')
 );
 
 page_footer();

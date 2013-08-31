@@ -1,11 +1,11 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
 * Based totally on @version Id: functions_profile_fields.php,v 1.48 2006/12/03 18:03:33 naderman Exp -(c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -50,11 +50,11 @@ class custom_vehicle_fields
 		}
 
 		$sql = 'SELECT l.*, f.*
-			FROM ' . PROFILE_LANG_TABLE . ' l, ' . PROFILE_FIELDS_TABLE . " f 
+			FROM ' . PROFILE_LANG_TABLE . ' l, ' . PROFILE_FIELDS_TABLE . " f
 			WHERE f.field_active = 1
 				$sql_where
 				AND l.lang_id = $lang_id
-				AND l.field_id = f.field_id 
+				AND l.field_id = f.field_id
 			ORDER BY f.field_order";
 		$result = $db->sql_query($sql);
 
@@ -95,7 +95,7 @@ class custom_vehicle_fields
 		{
 			case FIELD_DATE:
 				$field_validate = explode('-', $field_value);
-				
+
 				$day = (isset($field_validate[0])) ? (int) $field_validate[0] : 0;
 				$month = (isset($field_validate[1])) ? (int) $field_validate[1] : 0;
 				$year = (isset($field_validate[2])) ? (int) $field_validate[2] : 0;
@@ -138,19 +138,19 @@ class custom_vehicle_fields
 				{
 					return 'FIELD_TOO_SMALL';
 				}
-				else if ($field_value > $field_data['field_maxlen']) 
+				else if ($field_value > $field_data['field_maxlen'])
 				{
 					return 'FIELD_TOO_LARGE';
 				}
 			break;
-		
+
 			case FIELD_DROPDOWN:
 				if ($field_value == $field_data['field_novalue'] && $field_data['field_required'])
 				{
 					return 'FIELD_REQUIRED';
 				}
 			break;
-			
+
 			case FIELD_STRING:
 			case FIELD_TEXT:
 				if (empty($field_value) && !$field_data['field_required'])
@@ -193,14 +193,13 @@ class custom_vehicle_fields
 		global $db, $user, $auth;
 
 		$this->profile_cache = array();
-		
+
 		// Display hidden/no_view fields for admin/moderator
 		$sql = 'SELECT l.*, f.*
-			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . ' f 
+			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . ' f
 			WHERE l.lang_id = 1
-				AND f.field_active = 1 ' .
-				((!$auth->acl_gets('a_', 'm_')) ? '	AND f.field_hide = 0 AND f.field_no_view = 0 ' : '') . '
-				AND l.field_id = f.field_id 
+				AND f.field_active = 1 ' . ((!$auth->acl_gets('a_', 'm_')) ? '	AND f.field_hide = 0 AND f.field_no_view = 0 ' : '') . '
+				AND l.field_id = f.field_id
 			GROUP BY f.field_id
 			ORDER BY f.field_order';
 		$result = $db->sql_query($sql);
@@ -222,7 +221,7 @@ class custom_vehicle_fields
 		if ($preview)
 		{
 			$lang_options = (!is_array($this->vars['lang_options'])) ? explode("\n", $this->vars['lang_options']) : $this->vars['lang_options'];
-			
+
 			foreach ($lang_options as $num => $var)
 			{
 				$this->options_lang[$field_id][$lang_id][($num+1)] = $var;
@@ -254,20 +253,18 @@ class custom_vehicle_fields
 		global $auth, $db, $user;
 
 		$sql = 'SELECT l.*, f.*
-			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . " f 
+			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . " f
 			WHERE l.lang_id = 1
-				AND f.field_active = 1
-				" . (($mode == 'register') ? ' AND f.field_show_on_reg = 1' : '') .
-				(($auth->acl_gets('a_', 'm_') && $mode == 'profile') ? '' : ' AND f.field_hide = 0') . '
-				AND l.field_id = f.field_id 
+				AND f.field_active = 1 " . (($mode == 'register') ? ' AND f.field_show_on_reg = 1' : '') . (($auth->acl_gets('a_', 'm_') && $mode == 'profile') ? '' : ' AND f.field_hide = 0') . '
+				AND l.field_id = f.field_id
 			GROUP BY f.field_id
 			ORDER BY f.field_order';
 		$result = $db->sql_query($sql);
-					
+
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$cp_data[$row['field_ident']] = $this->get_profile_field($row);
-			
+
 			// get_profile_field returns an array with values for TEXT fields.
 			if (is_array($cp_data[$row['field_ident']]))
 			{
@@ -325,7 +322,7 @@ class custom_vehicle_fields
 		}
 		$db->sql_freeresult($result);
 	}
-	
+
 	/**
 	* Assign fields to template, mode can be profile (for profile change) or register (for registration)
 	*/
@@ -334,12 +331,10 @@ class custom_vehicle_fields
 		global $db, $template, $auth, $lang;
 
 		$sql = 'SELECT l.*, f.*
-			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . " f 
+			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . " f
 			WHERE l.lang_id = 1
-				AND f.field_active = 1
-				" . (($mode == 'register') ? ' AND f.field_show_on_reg = 1' : '') .
-				(($auth->acl_gets('a_', 'm_') && $mode == 'profile') ? '' : ' AND f.field_hide = 0') . '
-				AND l.field_id = f.field_id 
+				AND f.field_active = 1 " . (($mode == 'register') ? ' AND f.field_show_on_reg = 1' : '') . (($auth->acl_gets('a_', 'm_') && $mode == 'profile') ? '' : ' AND f.field_hide = 0') . '
+				AND l.field_id = f.field_id
 			GROUP BY f.field_id
 			ORDER BY f.field_order';
 		$result = $db->sql_query($sql);
@@ -347,11 +342,10 @@ class custom_vehicle_fields
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('profile_fields', array(
-				'LANG_NAME' => $row['lang_name'],
-				'LANG_EXPLAIN' => $row['lang_explain'],
-				'FIELD' => $this->process_field_row('change', $row))
-//				'ERROR' => $error)
-			);
+				'LANG_NAME'		=> $row['lang_name'],
+				'LANG_EXPLAIN'	=> $row['lang_explain'],
+				'FIELD'			=> $this->process_field_row('change', $row)
+			));
 		}
 		$db->sql_freeresult($result);
 	}
@@ -370,7 +364,7 @@ class custom_vehicle_fields
 			{
 				$user_id = array($user_id);
 			}
-			
+
 			if (!sizeof($this->profile_cache))
 			{
 				$this->build_cache();
@@ -410,7 +404,7 @@ class custom_vehicle_fields
 						$user_fields[$row['user_id']][$field]['data'][$subfield] = $value;
 					}
 				}
-			} 
+			}
 			while ($row = $db->sql_fetchrow($result));
 			$db->sql_freeresult($result);
 
@@ -429,7 +423,7 @@ class custom_vehicle_fields
 					'PROFILE_' . strtoupper($ident) . '_NAME'	=> $ident_ary['data']['lang_name'],
 					'PROFILE_' . strtoupper($ident) . '_EXPLAIN'=> $ident_ary['data']['lang_explain'],
 
-					'S_PROFILE_' . strtoupper($ident)			=> true
+					'S_PROFILE_' . strtoupper($ident)	=> true
 				);
 
 				$tpl_fields['blockrow'][] = array(
@@ -438,10 +432,10 @@ class custom_vehicle_fields
 					'PROFILE_FIELD_NAME'	=> $ident_ary['data']['lang_name'],
 					'PROFILE_FIELD_EXPLAIN'	=> $ident_ary['data']['lang_explain'],
 
-					'S_PROFILE_' . strtoupper($ident)		=> true
+					'S_PROFILE_' . strtoupper($ident)	=> true
 				);
 			}
-		
+
 			return $tpl_fields;
 		}
 	}
@@ -465,7 +459,7 @@ class custom_vehicle_fields
 		{
 			case FIELD_DATE:
 				$field_validate = explode('-', $field_value);
-				
+
 				$day = (int) $field_validate[0];
 				$month = (int) $field_validate[1];
 				$year = (int) $field_validate[2];
@@ -496,19 +490,19 @@ class custom_vehicle_fields
 				{
 					return 'FIELD_TOO_SMALL';
 				}
-				else if ($field_value > $field_data['field_maxlen']) 
+				else if ($field_value > $field_data['field_maxlen'])
 				{
 					return 'FIELD_TOO_LARGE';
 				}
 				break;
-		
+
 			case FIELD_DROPDOWN:
 				if ($field_value == $field_data['field_novalue'] && $field_data['field_required'])
 				{
 					return 'FIELD_REQUIRED';
 				}
 				break;
-			
+
 			case FIELD_STRING:
 			case FIELD_TEXT:
 				if (empty($field_value) && !$field_data['field_required'])
@@ -573,6 +567,7 @@ class custom_vehicle_fields
 			case 'dropdown':
 				$field_id = $ident_ary['data']['field_id'];
 				$lang_id = $ident_ary['data']['lang_id'];
+
 				if (!isset($this->options_lang[$field_id][$lang_id]))
 				{
 					$this->get_option_lang($field_id, $lang_id, FIELD_DROPDOWN, false);
@@ -583,7 +578,7 @@ class custom_vehicle_fields
 			case 'bool':
 				break;
 			default:
-				trigger_error('Unknown profile type');
+				trigger_error('Unknown profile type'); /* change to lan var */
 				break;
 		}
 	}
@@ -614,7 +609,7 @@ class custom_vehicle_fields
 
 		return $value;
 	}
-	
+
 	// GENERATE_* Functions - return templated, storable profile fields
 	function generate_int($profile_row, $preview = false)
 	{
@@ -674,7 +669,7 @@ class custom_vehicle_fields
 			$profile_row['s_year_options'] .= '<option value="' . $i . '"' . (($i == $year) ? ' selected="selected"' : '') . ">$i</option>";
 		}
 		unset($now);
-		
+
 		$this->set_tpl_vars($profile_row, 0);
 		return $this->get_cp_html();
 	}
@@ -697,9 +692,9 @@ class custom_vehicle_fields
 			foreach ($this->options_lang[$profile_row['field_id']][$profile_row['lang_id']] as $option_id => $option_value)
 			{
 				$template->assign_block_vars('bool.options', array(
-					'OPTION_ID' => $option_id,
-					'CHECKED' => ($value == $option_id) ? ' checked="checked"' : '',
-					'VALUE' => $option_value)
+					'OPTION_ID'	=> $option_id,
+					'CHECKED'	=> ($value == $option_id) ? ' checked="checked"' : '',
+					'VALUE'		=> $option_value)
 				);
 			}
 		}
@@ -724,7 +719,7 @@ class custom_vehicle_fields
 		global $user;
 
 		$value = $this->get_var('', $profile_row, $profile_row['lang_default_value'], $preview);
-		
+
 		if ($preview == false)
 		{
 			$message_parser = new parse_message();
@@ -754,13 +749,13 @@ class custom_vehicle_fields
 		}
 
 		$this->set_tpl_vars($profile_row, $value);
-		
+
 		foreach ($this->options_lang[$profile_row['field_id']][$profile_row['lang_id']] as $option_id => $option_value)
 		{
 			$template->assign_block_vars('dropdown.options', array(
-				'OPTION_ID' => $option_id,
-				'SELECTED' => ($value == $option_id) ? ' selected="selected"' : '',
-				'VALUE' => $option_value)
+				'OPTION_ID'	=> $option_id,
+				'SELECTED'	=> ($value == $option_id) ? ' selected="selected"' : '',
+				'VALUE'		=> $option_value)
 			);
 		}
 
@@ -793,12 +788,11 @@ class custom_vehicle_fields
 		global $db, $user, $auth;
 
 		$sql = 'SELECT f.field_type, f.field_ident, f.field_default_value, l.lang_default_value
-			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . ' f 
-			WHERE l.lang_id = 1 
+			FROM ' . GARAGE_VEHICLE_LANG_TABLE . ' l, ' . GARAGE_VEHICLE_FIELDS_TABLE . ' f
+			WHERE l.lang_id = 1
 				AND f.field_active = 1
-				AND f.field_show_on_reg = 0
-				' . (($auth->acl_gets('a_', 'm_')) ? '' : ' AND f.field_hide = 0') . '
-				AND l.field_id = f.field_id 
+				AND f.field_show_on_reg = 0 ' . (($auth->acl_gets('a_', 'm_')) ? '' : ' AND f.field_hide = 0') . '
+				AND l.field_id = f.field_id
 			GROUP BY f.field_id';
 		$result = $db->sql_query($sql);
 
@@ -812,7 +806,7 @@ class custom_vehicle_fields
 			$cp_data[$row['field_ident']] = (in_array($row['field_type'], array(FIELD_TEXT, FIELD_STRING))) ? $row['lang_default_value'] : $row['field_default_value'];
 		}
 		$db->sql_freeresult($result);
-		
+
 		return $cp_data;
 	}
 
@@ -820,9 +814,9 @@ class custom_vehicle_fields
 	{
 		global $phpbb_root_path, $phpEx;
 		global $config;
-		
+
 		$var_name = 'pf_' . $profile_row['field_ident'];
-		
+
 		switch ($profile_row['field_type'])
 		{
 			case FIELD_DATE:
@@ -841,17 +835,18 @@ class custom_vehicle_fields
 					$month = request_var($var_name . '_month', 0);
 					$year = request_var($var_name . '_year', 0);
 				}
-				
+
 				$var = sprintf('%2d-%2d-%4d', $day, $month, $year);
 				break;
 			case FIELD_TEXT:
 					include_once($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 
 					$message_parser = new parse_message(request_var($var_name, ''));
-					
+
 					// Get the allowed settings from the global settings. Magic URLs are always set to true.
 					// TODO: It might be nice to make this a per field setting.
 					$message_parser->parse($config['allow_html'], $config['allow_bbcode'], true, $config['allow_smilies']);
+
 					$var = array(
 						$profile_row['field_ident'] => $message_parser->message,
 						$profile_row['field_ident'] . '_bbcode_uid' => $message_parser->bbcode_uid,
@@ -913,7 +908,7 @@ class custom_vehicle_fields
 class custom_vehicle_fields_admin extends custom_vehicle_fields
 {
 	var $vars = array();
-	
+
 
 	function validate_options()
 	{
@@ -930,7 +925,7 @@ class custom_vehicle_fields_admin extends custom_vehicle_fields
 
 		return $validate_options;
 	}
-	
+
 	// GET_* get admin options for second step
 	function get_string_options()
 	{
@@ -981,11 +976,11 @@ class custom_vehicle_fields_admin extends custom_vehicle_fields
 		$default_lang_id = 1;
 
 		$profile_row = array(
-			'var_name'		=> 'field_default_value',
-			'field_id'		=> 1,
-			'lang_name'		=> $this->vars['lang_name'],
+			'var_name'			=> 'field_default_value',
+			'field_id'			=> 1,
+			'lang_name'			=> $this->vars['lang_name'],
 			'lang_explain'		=> $this->vars['lang_explain'],
-			'lang_id'		=> $default_lang_id,
+			'lang_id'			=> $default_lang_id,
 			'field_default_value'	=> $this->vars['field_default_value'],
 			'field_ident'		=> 'field_default_value',
 			'field_type'		=> FIELD_BOOL,
@@ -1008,11 +1003,11 @@ class custom_vehicle_fields_admin extends custom_vehicle_fields
 		$default_lang_id = 1;
 
 		$profile_row[0] = array(
-			'var_name'		=> 'field_default_value',
-			'field_id'		=> 1,
-			'lang_name'		=> $this->vars['lang_name'],
+			'var_name'			=> 'field_default_value',
+			'field_id'			=> 1,
+			'lang_name'			=> $this->vars['lang_name'],
 			'lang_explain'		=> $this->vars['lang_explain'],
-			'lang_id'		=> $default_lang_id,
+			'lang_id'			=> $default_lang_id,
 			'field_default_value'	=> $this->vars['field_default_value'],
 			'field_ident'		=> 'field_default_value',
 			'field_type'		=> FIELD_DROPDOWN,
@@ -1039,10 +1034,10 @@ class custom_vehicle_fields_admin extends custom_vehicle_fields
 		$default_lang_id = 1;
 
 		$profile_row = array(
-			'var_name'		=> 'field_default_value',
-			'lang_name'		=> $this->vars['lang_name'],
+			'var_name'			=> 'field_default_value',
+			'lang_name'			=> $this->vars['lang_name'],
 			'lang_explain'		=> $this->vars['lang_explain'],
-			'lang_id'		=> $default_lang_id,
+			'lang_id'			=> $default_lang_id,
 			'field_default_value'	=> $this->vars['field_default_value'],
 			'field_ident'		=> 'field_default_value',
 			'field_type'		=> FIELD_DATE,

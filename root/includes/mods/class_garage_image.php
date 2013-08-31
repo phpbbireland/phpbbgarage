@@ -287,7 +287,7 @@ class garage_image
 		$sql = 'INSERT INTO ' . GARAGE_LAP_GALLERY_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 			'vehicle_id'	=> $vid,
 			'lap_id'		=> $lid,
-			'image_id'	  => $image_id,
+			'image_id'		=> $image_id,
 			'hilite'		=> $hilite)
 		);
 
@@ -522,8 +522,8 @@ class garage_image
 			else
 			{
 				$data['thumb_location']	= $phpbb_root_path . $images['garage_no_thumb'];
-				$data['thumb_width']	 = '145';
-				$data['thumb_height']	 = '35';
+				$data['thumb_width']	= '145';
+				$data['thumb_height']	= '35';
 			}
 
 			//Filesize is 0 as we have not used local storage for the many image.. only thumbnai
@@ -541,7 +541,7 @@ class garage_image
 		else if ($this->image_is_local())
 		{
 			$data['filesize']	= $_FILES['FILE_UPLOAD']['size'];
-			$data['tmp_name']   = $_FILES['FILE_UPLOAD']['tmp_name'];
+			$data['tmp_name']	= $_FILES['FILE_UPLOAD']['tmp_name'];
 			$data['file']		= trim(str_replace("\'", "''", trim(htmlspecialchars($_FILES['FILE_UPLOAD']['name']))));
 			$data['date']		= time();
 			$imagesize			= getimagesize($_FILES['FILE_UPLOAD']['tmp_name']);
@@ -735,12 +735,12 @@ class garage_image
 			if ($width > $height)
 			{
 				$thumb_width	= $garage_config['thumbnail_resolution'];
-				$thumb_height	 = $garage_config['thumbnail_resolution'] * ($height/$width);
+				$thumb_height	= $garage_config['thumbnail_resolution'] * ($height/$width);
 			}
 			else
 			{
-				$thumb_height	 = $garage_config['thumbnail_resolution'];
-				$thumb_width	 = $garage_config['thumbnail_resolution'] * ($width/$height);
+				$thumb_height	= $garage_config['thumbnail_resolution'];
+				$thumb_width	= $garage_config['thumbnail_resolution'] * ($width/$height);
 			}
 
 			$thumb = ($garage_config['gd_version'] == 1) ? @imagecreate($thumb_width, $thumb_height) : @imagecreatetruecolor($thumb_width, $thumb_height);
@@ -1084,12 +1084,13 @@ class garage_image
 			$host = $parse['host'];
 
 			@fputs($fp, 'HEAD '.$url." HTTP/1.1\r\n");
-	        @fputs($fp, 'HOST: '.$host."\r\n");
-	        @fputs($fp, "Connection: close\r\n\r\n");
-	        $headers = '';
-	        while (!@feof ($fp))
-	        {
-				$headers .= @fgets ($fp, 128);
+			@fputs($fp, 'HOST: '.$host."\r\n");
+			@fputs($fp, "Connection: close\r\n\r\n");
+			$headers = '';
+
+			while (!@feof ($fp))
+			{
+					$headers .= @fgets ($fp, 128);
 			}
 		}
 		@fclose ($fp);
@@ -1108,7 +1109,7 @@ class garage_image
 			if((strpos ($arr_headers[0], '301') !== false) || (strpos ($arr_headers[0], '302') !== false))
 			{
 				preg_match("/Location:\s*(.+)\r/i", $headers, $matches);
-	            if (!isset($matches[1]))
+				if (!isset($matches[1]))
 				{
 					return false;
 				}
@@ -1226,11 +1227,11 @@ class garage_image
 			array(
 			'SELECT'	=> "i.*, u.*, v.made_year, mk.make, md.model",
 			'FROM'		=> array(
-				GARAGE_IMAGES_TABLE	=> 'i',
+				GARAGE_IMAGES_TABLE		=> 'i',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=> "i.vehicle_id = v.id
 				AND v.user_id = u.user_id
@@ -1304,7 +1305,7 @@ class garage_image
 			'SELECT'	=> 'mg.*, i.*',
 			'FROM'		=> array(
 				GARAGE_MODIFICATION_GALLERY_TABLE	=> 'mg',
-				GARAGE_IMAGES_TABLE			=> 'i',
+				GARAGE_IMAGES_TABLE					=> 'i',
 			),
 			'WHERE'	=>  "mg.modification_id = $mid
 				AND i.attach_id = mg.image_id",
@@ -1338,7 +1339,7 @@ class garage_image
 			'SELECT'	=> 'qg.*, i.*',
 			'FROM'		=> array(
 				GARAGE_QUARTERMILE_GALLERY_TABLE	=> 'qg',
-				GARAGE_IMAGES_TABLE			=> 'i',
+				GARAGE_IMAGES_TABLE					=> 'i',
 			),
 			'WHERE'	=>  "qg.quartermile_id = $qmid
 				AND i.attach_id = qg.image_id",
@@ -1372,7 +1373,7 @@ class garage_image
 			'SELECT'	=> 'dg.*, i.*',
 			'FROM'		=> array(
 				GARAGE_DYNORUN_GALLERY_TABLE	=> 'dg',
-				GARAGE_IMAGES_TABLE		=> 'i',
+				GARAGE_IMAGES_TABLE				=> 'i',
 			),
 			'WHERE'	=>  "dg.dynorun_id = $did
 				AND i.attach_id = dg.image_id",
@@ -1406,7 +1407,7 @@ class garage_image
 			'SELECT'	=> 'lg.*, i.*',
 			'FROM'		=> array(
 				GARAGE_LAP_GALLERY_TABLE	=> 'lg',
-				GARAGE_IMAGES_TABLE		=> 'i',
+				GARAGE_IMAGES_TABLE			=> 'i',
 			),
 			'WHERE'	=>  "lg.lap_id = $lid
 				AND i.attach_id = lg.image_id",
@@ -1440,7 +1441,7 @@ class garage_image
 			'SELECT'	=> 'i.*',
 				'FROM'		=> array(
 					GARAGE_VEHICLES_TABLE	=> 'v',
-					GARAGE_IMAGES_TABLE	=> 'i',
+					GARAGE_IMAGES_TABLE		=> 'i',
 				),
 				'WHERE'	=>  "v.user_id = $user_id
 					AND v.id = i.vehicle_id
@@ -1474,7 +1475,7 @@ class garage_image
 			'SELECT'	=> 'i.*',
 			'FROM'		=> array(
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_IMAGES_TABLE	=> 'i',
+				GARAGE_IMAGES_TABLE		=> 'i',
 			),
 			'WHERE'	=>  "v.user_id = $user_id
 				AND v.id = i.vehicle_id
@@ -1789,7 +1790,7 @@ class garage_image
 				if (empty($images[$i]['attach_thumb_location']))
 				{
 					// We are going to use the attach_id to create our _thumb
-					//   file name since this image did not have a thumb before.
+					// file name since this image did not have a thumb before.
 					$thumb_file_name = preg_replace( "/^(.+?)\..+?$/", "\\1", $images[$i]['attach_location'] );
 					$thumb_file_name .= '_thumb' . $images[$i]['attach_ext'];
 				}

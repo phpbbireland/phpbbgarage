@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -76,7 +76,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'COUNT(mk.id) as total',
 			'FROM'		=> array(
@@ -106,7 +106,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'COUNT(md.id) as total',
 			'FROM'		=> array(
@@ -179,7 +179,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'mk.id, mk.make',
 			'FROM'		=> array(
@@ -207,7 +207,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'mk.id, mk.make',
 			'FROM'		=> array(
@@ -232,7 +232,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'mk.id, mk.make, mk.pending',
 			'FROM'		=> array(
@@ -263,7 +263,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'md.id, md.model, md.make_id, md.pending',
 			'FROM'		=> array(
@@ -294,7 +294,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'md.id, md.model, md.make_id, mk.make',
 			'FROM'		=> array(
@@ -324,7 +324,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'md.id, md.model, md.make_id',
 			'FROM'		=> array(
@@ -349,7 +349,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'mk.*',
 			'FROM'		=> array(
@@ -377,7 +377,7 @@ class garage_model
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'md.*, mk.make',
 			'FROM'		=> array(
@@ -385,7 +385,7 @@ class garage_model
 				GARAGE_MAKES_TABLE		=> 'mk',
 			),
 			'WHERE'	=> 'md.pending = 1
-					AND md.make_id = mk.id'
+				AND md.make_id = mk.id'
 		));
 
 		$result = $db->sql_query($sql);

@@ -191,7 +191,7 @@ class garage_track
 		));
 
 		$result = $db->sql_query($sql);
-	        $data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -480,12 +480,12 @@ class garage_track
 			array(
 			'SELECT'	=> 'l.*, l.id as lid, t.title, t.id as tid, v.*, u.username, u.user_id, v.made_year, mk.make, md.model, v.id as vid, u.user_colour',
 			'FROM'		=> array(
-				GARAGE_LAPS_TABLE	=> 'l',
-				GARAGE_TRACKS_TABLE	=> 't',
+				GARAGE_LAPS_TABLE		=> 'l',
+				GARAGE_TRACKS_TABLE		=> 't',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'	=> "l.pending = 0
 				AND l.track_id = t.id

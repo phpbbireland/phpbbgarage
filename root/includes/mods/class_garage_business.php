@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -34,19 +34,19 @@ class garage_business
 		global $db, $garage_config;
 
 		$sql = 'INSERT INTO ' . GARAGE_BUSINESS_TABLE . ' ' . $db->sql_build_array('INSERT', array(
-			'title'		=> $data['title'],
-			'address'	=> $data['address'],
-			'telephone'	=> $data['telephone'],
-			'fax'		=> $data['fax'],
-			'website'	=> $data['website'],
-			'email'		=> $data['email'],
+			'title'			=> $data['title'],
+			'address'		=> $data['address'],
+			'telephone'		=> $data['telephone'],
+			'fax'			=> $data['fax'],
+			'website'		=> $data['website'],
+			'email'			=> $data['email'],
 			'opening_hours'	=> $data['opening_hours'],
-			'insurance'	=> $data['insurance'],
-			'garage'	=> $data['garage'],
-			'retail'	=> $data['retail'],
-			'product'	=> $data['product'],
+			'insurance'		=> $data['insurance'],
+			'garage'		=> $data['garage'],
+			'retail'		=> $data['retail'],
+			'product'		=> $data['product'],
 			'dynocentre'	=> $data['dynocentre'],
-			'pending'	=> ($garage_config['enable_business_approval']) ? 1 : 0,
+			'pending'		=> ($garage_config['enable_business_approval']) ? 1 : 0,
 		));
 
 		$db->sql_query($sql);
@@ -65,19 +65,19 @@ class garage_business
 		global $db, $garage_config;
 
 		$update_sql = array(
-			'title'		=> $data['title'],
-			'address'	=> $data['address'],
-			'telephone'	=> $data['telephone'],
-			'fax'		=> $data['fax'],
-			'website'	=> $data['website'],
-			'email'		=> $data['email'],
+			'title'			=> $data['title'],
+			'address'		=> $data['address'],
+			'telephone'		=> $data['telephone'],
+			'fax'			=> $data['fax'],
+			'website'		=> $data['website'],
+			'email'			=> $data['email'],
 			'opening_hours'	=> $data['opening_hours'],
-			'insurance'	=> $data['insurance'],
-			'garage'	=> $data['garage'],
-			'retail'	=> $data['retail'],
-			'product'	=> $data['product'],
+			'insurance'		=> $data['insurance'],
+			'garage'		=> $data['garage'],
+			'retail'		=> $data['retail'],
+			'product'		=> $data['product'],
 			'dynocentre'	=> $data['dynocentre'],
-			'pending'	=> $garage_config['enable_business_approval'],
+			'pending'		=> $garage_config['enable_business_approval'],
 		);
 
 		$sql = 'UPDATE ' . GARAGE_BUSINESS_TABLE . '
@@ -101,7 +101,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*',
 			'FROM'		=> array(
@@ -126,7 +126,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*',
 			'FROM'		=> array(
@@ -156,7 +156,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*',
 			'FROM'		=> array(
@@ -211,7 +211,7 @@ class garage_business
 			$field = 'dynocentre';
 		}
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*',
 			'FROM'		=> array(
@@ -241,7 +241,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*',
 			'FROM'		=> array(
@@ -274,7 +274,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*, SUM(install_rating) AS rating, COUNT(*) *10 AS total_rating',
 			'FROM'		=> array(
@@ -284,7 +284,7 @@ class garage_business
 				array(
 					'FROM'	=> array(GARAGE_MODIFICATIONS_TABLE => 'm'),
 					'ON'	=> 'b.id = m.installer_id'
-				)		
+				)
 			),
 			'WHERE'		=>  "b.garage = 1 AND b.pending = 0 $where",
 			'GROUP_BY'	=>  "b.id",
@@ -315,7 +315,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*, SUM(purchase_rating) AS rating, COUNT(*) *10 AS total_rating',
 			'FROM'		=> array(
@@ -325,7 +325,7 @@ class garage_business
 				array(
 					'FROM'	=> array(GARAGE_MODIFICATIONS_TABLE => 'm'),
 					'ON'	=> 'b.id = m.shop_id'
-				)		
+				)
 			),
 			'WHERE'		=>  "b.retail = 1  AND b.pending =0 $where",
 			'GROUP_BY'	=>  "b.id",
@@ -356,7 +356,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'b.*, COUNT(DISTINCT b.id) as total',
 			'FROM'		=> array(
@@ -388,7 +388,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'count(DISTINCT b.title) as total',
 			'FROM'		=> array(
@@ -417,7 +417,7 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'count(DISTINCT b.title) as total',
 			'FROM'		=> array(
@@ -446,11 +446,11 @@ class garage_business
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'COUNT(DISTINCT b.title) as total',
 			'FROM'		=> array(
-				GARAGE_BUSINESS_TABLE	=> 'b',
+				GARAGE_BUSINESS_TABLE		=> 'b',
 				GARAGE_MODIFICATIONS_TABLE	=> 'm',
 			),
 			'WHERE'		=>  "m.shop_id = b.id AND b.retail = 1 AND b.pending =0 $additional_where"
@@ -573,7 +573,7 @@ class garage_business
 				}
 			}
 		}
-		
+
 		if ($action_retail == 'delete')
 		{
 			$this->delete_retail_business_content($business_id);
@@ -617,7 +617,7 @@ class garage_business
 			else
 			{
 				$row = $garage_business->get_business($product_to_id);
-				
+
 				if (!$row)
 				{
 					$errors[] = $user->lang['NO_BUSINESS'];
@@ -653,6 +653,7 @@ class garage_business
 
 		include_once($phpbb_root_path . 'includes/mods/class_garage_modification.' . $phpEx);
 		$modifications = $garage_modification->get_modifications_by_installer_id($business_id);
+
 		for ($i = 0, $count = sizeof($modifications);$i < $count; $i++)
 		{
 			$garage_modification->delete_modification($modifications[$i]['id']);
@@ -673,6 +674,7 @@ class garage_business
 
 		include_once($phpbb_root_path . 'includes/mods/class_garage_insurance.' . $phpEx);
 		$premiums = $garage_insurance->get_premiums_by_business($business_id);
+
 		for ($i = 0, $count = sizeof($premiums);$i < $count; $i++)
 		{
 			$garage_insurance->delete_premium($premiums[$i]['id']);
@@ -693,6 +695,7 @@ class garage_business
 
 		include_once($phpbb_root_path . 'includes/mods/class_garage_dynorun.' . $phpEx);
 		$dynoruns = $garage_dynorun->get_dynoruns_by_dynocentre_id($business_id);
+
 		for ($i = 0, $count = sizeof($dynoruns);$i < $count; $i++)
 		{
 			$garage_dynorun->delete_dynorun($dynoruns[$i]['id']);
@@ -713,6 +716,7 @@ class garage_business
 
 		include_once($phpbb_root_path . 'includes/mods/class_garage_modification.' . $phpEx);
 		$modifications = $garage_modification->get_modifications_by_retail_id($business_id);
+
 		for ($i = 0, $count = sizeof($modifications);$i < $count; $i++)
 		{
 			$garage_modification->delete_modification($modifications[$i]['id']);
@@ -733,6 +737,7 @@ class garage_business
 
 		include_once($phpbb_root_path . 'includes/mods/class_garage_modification.' . $phpEx);
 		$modifications = $garage_modification->get_modifications_by_manufacturer_id($business_id);
+
 		for ($i = 0, $count = sizeof($modifications);$i < $count; $i++)
 		{
 			$garage_modification->delete_modification($modifications[$i]['id']);

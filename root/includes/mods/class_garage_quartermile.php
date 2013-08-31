@@ -33,18 +33,18 @@ class garage_quartermile
 
 		$sql = 'INSERT INTO ' . GARAGE_QUARTERMILES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 			'vehicle_id'	=> $vid,
-			'rt'		=> $data['rt'] .'.'. $data['rt_decimal'],
-			'sixty'		=> $data['sixty'] .'.'. $data['sixty_decimal'],
-			'three'		=> $data['three'] .'.'. $data['three_decimal'],
-			'eighth'	=> $data['eighth'] .'.'. $data['eighth_decimal'],
-			'eighthmph'	=> $data['eighthmph'] .'.'. $data['eighthmph_decimal'],
-			'thou'		=> $data['thou'] .'.'. $data['thou_decimal'],
-			'quart'		=> $data['quart'] .'.'. $data['quart_decimal'],
-			'quartmph'	=> $data['quartmph'] .'.'. $data['quartmph_decimal'],
+			'rt'			=> $data['rt'] .'.'. $data['rt_decimal'],
+			'sixty'			=> $data['sixty'] .'.'. $data['sixty_decimal'],
+			'three'			=> $data['three'] .'.'. $data['three_decimal'],
+			'eighth'		=> $data['eighth'] .'.'. $data['eighth_decimal'],
+			'eighthmph'		=> $data['eighthmph'] .'.'. $data['eighthmph_decimal'],
+			'thou'			=> $data['thou'] .'.'. $data['thou_decimal'],
+			'quart'			=> $data['quart'] .'.'. $data['quart_decimal'],
+			'quartmph'		=> $data['quartmph'] .'.'. $data['quartmph_decimal'],
 			'date_created'	=> time(),
 			'date_updated'	=> time(),
 			'dynorun_id'	=> $data['dynorun_id'],
-			'pending'	=> ($garage_config['enable_quartermile_approval'] == '1') ? 1 : 0)
+			'pending'		=> ($garage_config['enable_quartermile_approval'] == '1') ? 1 : 0)
 		);
 
 		$db->sql_query($sql);
@@ -64,17 +64,17 @@ class garage_quartermile
 
 		$update_sql = array(
 			'vehicle_id'	=> $vid,
-			'rt'		=> $data['rt'] .'.'. $data['rt_decimal'],
-			'sixty'		=> $data['sixty'] .'.'. $data['sixty_decimal'],
-			'three'		=> $data['three'] .'.'. $data['three_decimal'],
-			'eighth'	=> $data['eighth'] .'.'. $data['eighth_decimal'],
-			'eighthmph'	=> $data['eighthmph'] .'.'. $data['eighthmph_decimal'],
-			'thou'		=> $data['thou'] .'.'. $data['thou_decimal'],
-			'quart'		=> $data['quart'] .'.'. $data['quart_decimal'],
-			'quartmph'	=> $data['quartmph'] .'.'. $data['quartmph_decimal'],
+			'rt'			=> $data['rt'] .'.'. $data['rt_decimal'],
+			'sixty'			=> $data['sixty'] .'.'. $data['sixty_decimal'],
+			'three'			=> $data['three'] .'.'. $data['three_decimal'],
+			'eighth'		=> $data['eighth'] .'.'. $data['eighth_decimal'],
+			'eighthmph'		=> $data['eighthmph'] .'.'. $data['eighthmph_decimal'],
+			'thou'			=> $data['thou'] .'.'. $data['thou_decimal'],
+			'quart'			=> $data['quart'] .'.'. $data['quart_decimal'],
+			'quartmph'		=> $data['quartmph'] .'.'. $data['quartmph_decimal'],
 			'date_updated'	=> time(),
 			'dynorun_id'	=> $data['dynorun_id'],
-			'pending'	=> ($garage_config['enable_quartermile_approval'] == '1') ? 1 : 0
+			'pending'		=> ($garage_config['enable_quartermile_approval'] == '1') ? 1 : 0
 		);
 
 		$sql = 'UPDATE ' . GARAGE_QUARTERMILES_TABLE . '
@@ -148,7 +148,7 @@ class garage_quartermile
 		));
 
 		$result = $db->sql_query($sql);
-	        $data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -177,10 +177,10 @@ class garage_quartermile
 				GARAGE_MODELS_TABLE		=> 'md',
 			),
 			'WHERE'		=>  "q.pending = 0
-						AND (q.sixty IS NOT NULL OR q.three IS NOT NULL OR q.eighth IS NOT NULL OR q.eighthmph IS NOT NULL OR q.thou IS NOT NULL OR q.rt IS NOT NULL OR q.quartmph IS NOT NULL)
-						AND q.vehicle_id = v.id
-						AND (v.make_id = mk.id AND mk.pending = 0)
-						AND (v.model_id =md.id AND md.pending = 0)",
+				AND (q.sixty IS NOT NULL OR q.three IS NOT NULL OR q.eighth IS NOT NULL OR q.eighthmph IS NOT NULL OR q.thou IS NOT NULL OR q.rt IS NOT NULL OR q.quartmph IS NOT NULL)
+				AND q.vehicle_id = v.id
+				AND (v.make_id = mk.id AND mk.pending = 0)
+				AND (v.model_id =md.id AND md.pending = 0)",
 			'GROUP_BY'	=> 'q.vehicle_id, q.quart',
 			'ORDER_BY'	=> "q.quart ASC"
 		));
@@ -215,9 +215,9 @@ class garage_quartermile
 			'FROM'		=> array(
 				GARAGE_QUARTERMILES_TABLE	=> 'q',
 				GARAGE_VEHICLES_TABLE		=> 'v',
-				GARAGE_MAKES_TABLE		=> 'mk',
-				GARAGE_MODELS_TABLE		=> 'md',
-				USERS_TABLE			=> 'u',
+				GARAGE_MAKES_TABLE			=> 'mk',
+				GARAGE_MODELS_TABLE			=> 'md',
+				USERS_TABLE					=> 'u',
 			),
 			'LEFT_JOIN'	=> array(
 				array(
@@ -234,11 +234,11 @@ class garage_quartermile
 				)
 			),
 			'WHERE'		=>  "q.quart = $quart
-						AND q.vehicle_id = $vehicle_id
-						AND q.vehicle_id = v.id
-						AND v.user_id = u.user_id
-						AND (v.make_id = mk.id AND mk.pending = 0)
-						AND (v.model_id =md.id AND md.pending = 0)",
+				AND q.vehicle_id = $vehicle_id
+				AND q.vehicle_id = v.id
+				AND v.user_id = u.user_id
+				AND (v.make_id = mk.id AND mk.pending = 0)
+				AND (v.model_id =md.id AND md.pending = 0)",
 		));
 
 		$result = $db->sql_query($sql);
@@ -267,9 +267,9 @@ class garage_quartermile
 			'FROM'		=> array(
 				GARAGE_QUARTERMILES_TABLE	=> 'q',
 				GARAGE_VEHICLES_TABLE		=> 'v',
-				GARAGE_MAKES_TABLE		=> 'mk',
-				GARAGE_MODELS_TABLE		=> 'md',
-				USERS_TABLE			=> 'u',
+				GARAGE_MAKES_TABLE			=> 'mk',
+				GARAGE_MODELS_TABLE			=> 'md',
+				USERS_TABLE					=> 'u',
 			),
 			'LEFT_JOIN'	=> array(
 				array(
@@ -282,10 +282,10 @@ class garage_quartermile
 				)
 			),
 			'WHERE'		=>  "q.pending = 1
-						AND q.vehicle_id = v.id
-						AND v.user_id = u.user_id
-						AND (v.make_id = mk.id AND mk.pending = 0)
-						AND (v.model_id =md.id AND md.pending = 0)",
+				AND q.vehicle_id = v.id
+				AND v.user_id = u.user_id
+				AND (v.make_id = mk.id AND mk.pending = 0)
+				AND (v.model_id =md.id AND md.pending = 0)",
 		));
 
 		$result = $db->sql_query($sql);
@@ -323,7 +323,7 @@ class garage_quartermile
 				GARAGE_QUARTERMILES_TABLE	=> 'qm',
 			),
 			'WHERE'		=>  "qm.id = $qmid
-						AND v.id = qm.vehicle_id"
+				AND v.id = qm.vehicle_id"
 		));
 
 		$result = $db->sql_query($sql);
@@ -370,13 +370,13 @@ class garage_quartermile
 				)
 			),
 			'WHERE'		=>  "q.id = $qmid
-						AND q.vehicle_id = v.id
-						AND v.user_id = u.user_id
-						AND (v.make_id = mk.id AND mk.pending = 0)
-						AND (v.model_id =md.id AND md.pending = 0)",
+				AND q.vehicle_id = v.id
+				AND v.user_id = u.user_id
+				AND (v.make_id = mk.id AND mk.pending = 0)
+				AND (v.model_id =md.id AND md.pending = 0)",
 		));
 
-      		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		$data = $db->sql_fetchrow($result);
 		if (!empty($data))
 		{
@@ -450,7 +450,7 @@ class garage_quartermile
 			'ORDER_BY'	=>	'q.id'
 		));
 
-	       	$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$data[] = $row;
@@ -490,7 +490,7 @@ class garage_quartermile
 			$data = $this->get_quartermile_by_vehicle_quart($times[$i]['vehicle_id'], $times[$i]['quart']);
 
 			$mph = (empty($data['quartmph'])) ? 'N/A' : $data['quartmph'];
-	            	$quartermile = $data['quart'] .' @ ' . $mph . ' '. $user->lang['QUARTERMILE_SPEED_UNIT'];
+			$quartermile = $data['quart'] .' @ ' . $mph . ' '. $user->lang['QUARTERMILE_SPEED_UNIT'];
 
 			$template->assign_block_vars($template_block_row, array(
 				'U_COLUMN_1' 		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=view_vehicle&amp;VID=".$data['id']),

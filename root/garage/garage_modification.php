@@ -107,9 +107,9 @@ switch ($mode)
 		*/
 		$vehicle	= $garage_vehicle->get_vehicle($vid);
 		$categories = $garage->get_categories();
-		$shops	 	= $garage_business->get_business_by_type(BUSINESS_RETAIL);
-		$garages 	= $garage_business->get_business_by_type(BUSINESS_GARAGE);
-		$manufacturers 	= $garage_business->get_business_by_type(BUSINESS_PRODUCT);
+		$shops		= $garage_business->get_business_by_type(BUSINESS_RETAIL);
+		$garages	= $garage_business->get_business_by_type(BUSINESS_GARAGE);
+		$manufacturers	= $garage_business->get_business_by_type(BUSINESS_PRODUCT);
 
 		/**
 		* Get all required/optional data and check required data is present
@@ -148,28 +148,28 @@ switch ($mode)
 		$garage_template->rating_dropdown('install_rating', $data['install_rating']);
 
 		$template->assign_vars(array(
-			'L_BUTTON' 					=> $user->lang['ADD_MODIFICATION'],
-			'L_TITLE' 					=> $user->lang['ADD_MODIFICATION'],
+			'L_BUTTON'					=> $user->lang['ADD_MODIFICATION'],
+			'L_TITLE'					=> $user->lang['ADD_MODIFICATION'],
 			'U_SUBMIT_PRODUCT'			=> "javascript:add_product('')",
 			'U_SUBMIT_BUSINESS_SHOP'	=> "javascript:add_shop('')",
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('')",
 			'U_SUBMIT_BUSINESS_PRODUCT'	=> "javascript:add_manufacturer('')",
-			'VID' 						=> $vid,
-			'PRICE' 					=> $data['price'],
-			'PRICE_DECIMAL' 			=> $data['price_decimal'],
-			'INSTALL_PRICE' 			=> $data['install_price'],
+			'VID'						=> $vid,
+			'PRICE'					=> $data['price'],
+			'PRICE_DECIMAL'			=> $data['price_decimal'],
+			'INSTALL_PRICE'			=> $data['install_price'],
 			'INSTALL_PRICE_DECIMAL'		=> $data['install_price_decimal'],
-			'MANUFACTURER_ID' 			=> $data['manufacturer_id'],
-			'PRODUCT_ID' 				=> $data['product_id'],
-			'CATEGORY_ID' 				=> $data['category_id'],
-			'MANUFACTURER_ID' 			=> $data['manufacturer_id'],
-			'PRODUCT_ID' 				=> $data['product_id'],
-			'COMMENTS' 					=> $data['comments'],
-			'INSTALL_COMMENTS' 			=> $data['install_comments'],
+			'MANUFACTURER_ID'			=> $data['manufacturer_id'],
+			'PRODUCT_ID'				=> $data['product_id'],
+			'CATEGORY_ID'				=> $data['category_id'],
+			'MANUFACTURER_ID'			=> $data['manufacturer_id'],
+			'PRODUCT_ID'				=> $data['product_id'],
+			'COMMENTS'					=> $data['comments'],
+			'INSTALL_COMMENTS'			=> $data['install_comments'],
 			'URL_IMAGE'					=> $data['url_image'],
 			'CURRENCY'					=> $vehicle['currency'],
 			'S_DISPLAY_SUBMIT_BUSINESS'	=> ($garage_config['enable_user_submit_business'] && $auth->acl_get('u_garage_add_business')) ? true : false,
-			'S_MODE_USER_SUBMIT' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_USER_SUBMIT'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 			'S_MODE_ACTION'				=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=insert_modification&amp;VID=$vid"),
 		));
 		$garage_template->sidemenu();
@@ -272,13 +272,13 @@ switch ($mode)
 		/**
 		* Get vehicle, modification, catgories, gallery, shops, garages & manufacturers data from DB
 		*/
-		$vehicle_data 	= $garage_vehicle->get_vehicle($vid);
-		$data 		= $garage_modification->get_modification($mid);
-		$categories 	= $garage->get_categories();
-		$gallery_data 	= $garage_image->get_modification_gallery($mid);
-		$shops 		= $garage_business->get_business_by_type(BUSINESS_RETAIL);
-		$garages 	= $garage_business->get_business_by_type(BUSINESS_GARAGE);
-		$manufacturers 	= $garage_business->get_business_by_type(BUSINESS_PRODUCT);
+		$vehicle_data	= $garage_vehicle->get_vehicle($vid);
+		$data		= $garage_modification->get_modification($mid);
+		$categories	= $garage->get_categories();
+		$gallery_data	= $garage_image->get_modification_gallery($mid);
+		$shops		= $garage_business->get_business_by_type(BUSINESS_RETAIL);
+		$garages	= $garage_business->get_business_by_type(BUSINESS_GARAGE);
+		$manufacturers	= $garage_business->get_business_by_type(BUSINESS_PRODUCT);
 
 		/**
 		* Handle template declarations & assignments
@@ -309,41 +309,41 @@ switch ($mode)
 		$garage_template->attach_image('modification');
 
 		$template->assign_vars(array(
-			'L_TITLE' 				=> $user->lang['MODIFY_MOD'],
-			'L_BUTTON' 				=> $user->lang['MODIFY_MOD'],
-			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=edit_modification&amp;VID=$vid&amp;MID=$mid"),
-			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=manage_modification_gallery&amp;VID=$vid&amp;MID=$mid"),
+			'L_TITLE'				=> $user->lang['MODIFY_MOD'],
+			'L_BUTTON'				=> $user->lang['MODIFY_MOD'],
+			'U_EDIT_DATA'			=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=edit_modification&amp;VID=$vid&amp;MID=$mid"),
+			'U_MANAGE_GALLERY'		=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=manage_modification_gallery&amp;VID=$vid&amp;MID=$mid"),
 			'U_SUBMIT_PRODUCT'		=> "javascript:add_product('edit')",
 			'U_SUBMIT_BUSINESS_SHOP'	=> "javascript:add_shop('edit')",
 			'U_SUBMIT_BUSINESS_GARAGE'	=> "javascript:add_garage('edit')",
 			'U_SUBMIT_BUSINESS_PRODUCT'	=> "javascript:add_manufacturer('edit')",
-			'MID' 					=> $mid,
-			'VID' 					=> $vid,
-			'PRICE' 				=> (!empty($store['price'])) ? $store['price'] : $data['price'],
-			'PRICE_DECIMAL' 		=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
-			'INSTALL_PRICE'	 		=> (!empty($store['install_price'])) ? $store['install_price'] : $data['install_price'],
+			'MID'					=> $mid,
+			'VID'					=> $vid,
+			'PRICE'					=> (!empty($store['price'])) ? $store['price'] : $data['price'],
+			'PRICE_DECIMAL'			=> (!empty($store['price_decimal'])) ? $store['price_decimal'] : $data['price_decimal'],
+			'INSTALL_PRICE'			=> (!empty($store['install_price'])) ? $store['install_price'] : $data['install_price'],
 			'INSTALL_PRICE_DECIMAL'	=> (!empty($store['install_price_decimal'])) ? $store['install_price_decimal'] : $data['install_price_decimal'],
-			'PRODUCT_ID' 			=> (!empty($store['product_id'])) ? $store['product_id'] : $data['product_id'],
-			'CATEGORY_ID' 			=> (!empty($store['category_id'])) ? $store['category_id'] : $data['category_id'],
-			'MANUFACTURER_ID' 		=> (!empty($store['manufacturer_id'])) ? $store['manufacturer_id'] : $data['manufacturer_id'],
-			'PRODUCT_ID' 			=> (!empty($store['product_id'])) ? $store['product_id'] : $data['product_id'],
-			'COMMENTS' 				=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
-			'INSTALL_COMMENTS' 		=> (!empty($store['install_comments'])) ? $store['install_comments'] : $data['install_comments'],
+			'PRODUCT_ID'			=> (!empty($store['product_id'])) ? $store['product_id'] : $data['product_id'],
+			'CATEGORY_ID'			=> (!empty($store['category_id'])) ? $store['category_id'] : $data['category_id'],
+			'MANUFACTURER_ID'		=> (!empty($store['manufacturer_id'])) ? $store['manufacturer_id'] : $data['manufacturer_id'],
+			'PRODUCT_ID'			=> (!empty($store['product_id'])) ? $store['product_id'] : $data['product_id'],
+			'COMMENTS'				=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
+			'INSTALL_COMMENTS'		=> (!empty($store['install_comments'])) ? $store['install_comments'] : $data['install_comments'],
 			'CURRENCY'				=> $vehicle_data['currency'],
 			'S_DISPLAY_SUBMIT_BUS'	=> $garage_config['enable_user_submit_business'],
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=update_modification"),
-			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=insert_modification_image"),
+			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=update_modification"),
+			'S_IMAGE_MODE_ACTION'	=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=insert_modification_image"),
 		));
 
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
-				'U_IMAGE'		=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
-				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=remove_modification_image&amp;VID=$vid&amp;MID=$mid&amp;image_id=" . $gallery_data[$i]['attach_id']),
-				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=set_modification_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;MID=$mid") : '',
-				'IMAGE' 		=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
-				'IMAGE_TITLE' 	=> $gallery_data[$i]['attach_file']
+				'U_IMAGE'			=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
+				'U_REMOVE_IMAGE'	=> append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=remove_modification_image&amp;VID=$vid&amp;MID=$mid&amp;image_id=" . $gallery_data[$i]['attach_id']),
+				'U_SET_HILITE'		=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=set_modification_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;MID=$mid") : '',
+				'IMAGE'				=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
+				'IMAGE_TITLE'		=> $gallery_data[$i]['attach_file']
 			));
 		}
 		$garage_template->sidemenu();
@@ -463,11 +463,11 @@ switch ($mode)
 			if ((empty($gallery_data[$i]['attach_thumb_location']) == false) && ($gallery_data[$i]['attach_thumb_location'] != $gallery_data[$i]['attach_location']))
 			{
 				$template->assign_vars(array(
-					'S_DISPLAY_GALLERIES' 	=> true,
+					'S_DISPLAY_GALLERIES'	=> true,
 				));
 
 				$template->assign_block_vars('modification_image', array(
-					'U_IMAGE' 		=> append_sid('garage.'.$phpEx.'?mode=view_image&amp;image_id='. $gallery_data[$i]['attach_id']),
+					'U_IMAGE'		=> append_sid('garage.'.$phpEx.'?mode=view_image&amp;image_id='. $gallery_data[$i]['attach_id']),
 					'IMAGE_NAME'	=> $gallery_data[$i]['attach_file'],
 					'IMAGE_SOURCE'	=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location']
 				));
@@ -475,9 +475,9 @@ switch ($mode)
 		}
 
 		$template->assign_vars(array(
-			'U_VIEW_PROFILE' 			=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data['user_id']),
+			'U_VIEW_PROFILE'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data['user_id']),
 			'U_VIEW_GARAGE_BUSINESS'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=garage_review&amp;business_id=" . $data['installer_id']),
-			'U_VIEW_SHOP_BUSINESS' 		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review&amp;business_id=" . $data['shop_id']),
+			'U_VIEW_SHOP_BUSINESS'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=shop_review&amp;business_id=" . $data['shop_id']),
 			'YEAR'				=> $data['made_year'],
 			'MAKE'				=> $data['make'],
 			'MODEL'				=> $data['model'],
@@ -495,9 +495,9 @@ switch ($mode)
 			'PRICE'				=> $data['price'] . $user->lang['DECIMAL_SEPERATOR'] . $data['price_decimal'],
 			'INSTALL_PRICE'		=> $data['install_price'] . $user->lang['DECIMAL_SEPERATOR'] . $data['install_price_decimal'],
 			'INSTALL_COMMENTS'	=> $data['install_comments'],
-			'CURRENCY' 			=> $data['currency'],
-			'CATEGORY' 			=> $data['category_title'],
-			'COMMENTS' 			=> $data['comments']
+			'CURRENCY'			=> $data['currency'],
+			'CATEGORY'			=> $data['category_title'],
+			'COMMENTS'			=> $data['comments']
 		));
 
 		$garage_template->sidemenu();
@@ -640,8 +640,8 @@ switch ($mode)
 
 		//Set Template Files In Use For This Mode
 		$template->set_filenames(array(
-			'header' 	=> 'garage/garage_header.html',
-			'body'   	=> 'garage/garage_user_submit_data.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'  	=> 'garage/garage_user_submit_data.html')
 		);
 
 		$user_submit_action = append_sid("{$phpbb_root_path}garage/garage_modification.$phpEx", "mode=add_modification");

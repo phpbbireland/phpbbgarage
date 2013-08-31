@@ -141,7 +141,7 @@ class garage_blog
 			'SELECT'	=> 'b.*, u.username',
 			'FROM'		=> array(
 				GARAGE_BLOGS_TABLE	=> 'b',
-				USERS_TABLE		=> 'u',
+				USERS_TABLE			=> 'u',
 			),
 			'WHERE'		=>	"b.vehicle_id = $vid
 				AND b.user_id = u.user_id",
@@ -175,6 +175,7 @@ class garage_blog
 		for ($i=0; $i < $tmp = count($data); $i++)
 		{
 			$blog_text = generate_text_for_display($data[$i]['blog_text'], $data[$i]['bbcode_uid'], $data[$i]['bbcode_bitfield'], $data[$i]['bbcode_options']);
+
 			$template->assign_block_vars('blog.entry', array(
 				'U_EDIT'		=> (($owned == 'YES') || ($owned == 'MODERATE')) ? append_sid("{$phpbb_root_path}garage/garage_blog.$phpEx?mode=edit_blog&amp;BID=". $data[$i]['id'] . "&amp;VID=$vehicle_id") : '',
 				'U_DELETE'		=> ((($owned == 'YES') || ($owned == 'MODERATE')) && ((($auth->acl_get('u_garage_delete_blog'))) || ($auth->acl_get('m_garage_delete')))) ? 'javascript:confirm_delete_blog(' . $vehicle_id . ',' . $data[$i]['id'] . ')' : '',

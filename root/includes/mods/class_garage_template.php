@@ -850,7 +850,6 @@ class garage_template
 			$tpl_prefix . 'BASE_URL'		=> $base_url,
 			$tpl_prefix . 'HASH_LOCATION'	=> $hash_location,
 			$tpl_prefix . 'PER_PAGE'		=> $per_page,
-
 			$tpl_prefix . 'PREVIOUS_PAGE'	=> ($on_page == 1) ? '' : $base_url . '&amp;start=' . (($on_page - 2) * $per_page). '#'. $hash_location,
 			$tpl_prefix . 'NEXT_PAGE'		=> ($on_page == $total_pages) ? '' : $base_url . '&amp;start=' . ($on_page * $per_page) .'#'. $hash_location,
 		));

@@ -130,11 +130,12 @@ switch( $mode )
 		}
 		$garage_template->attach_image('quartermile');
 		$template->assign_vars(array(
-			'L_TITLE'  			=> $user->lang['ADD_NEW_TIME'],
-			'L_BUTTON'  			=> $user->lang['ADD_NEW_TIME'],
-			'VID' 				=> $vid,
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=insert_quartermile"))
-         	);
+			'L_TITLE'		=> $user->lang['ADD_NEW_TIME'],
+			'L_BUTTON'		=> $user->lang['ADD_NEW_TIME'],
+			'VID'			=> $vid,
+			'S_MODE_ACTION'	=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=insert_quartermile")
+			));
+
 		$garage_template->sidemenu();
 	break;
 
@@ -295,6 +296,7 @@ switch( $mode )
 			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=update_quartermile"),
 			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=insert_quartermile_image"),
 		));
+
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
@@ -302,8 +304,8 @@ switch( $mode )
 				'U_REMOVE_IMAGE'	=> append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=remove_quartermile_image&amp;VID=$vid&amp;QMID=$qmid&amp;image_id=" . $gallery_data[$i]['attach_id']),
 				'U_SET_HILITE'		=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_quartermile.$phpEx", "mode=set_quartermile_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;QMID=$qmid") : '',
 				'IMAGE' 			=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
-				'IMAGE_TITLE' 		=> $gallery_data[$i]['attach_file'])
-			);
+				'IMAGE_TITLE' 		=> $gallery_data[$i]['attach_file']
+			));
 		}
 		$garage_template->sidemenu();
 	break;
@@ -317,7 +319,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("{phpbb_root_path}garage/garage_quartermile.$phpEx?mode=edit_quartermile&amp;QMID=$qmid&amp;VID=$vid");
+			login_box("{$phpbb_root_path}garage/garage_quartermile.$phpEx?mode=edit_quartermile&amp;QMID=$qmid&amp;VID=$vid");
 		}
 
 		/**
@@ -522,8 +524,8 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage/garage_header.html',
-			'body'   => 'garage_view_quartermile.html'
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage_view_quartermile.html'
 		));
 
 		$template->assign_block_vars('navlinks', array(
@@ -554,14 +556,14 @@ switch( $mode )
 			'YEAR' 				=> $data['made_year'],
 			'MAKE' 				=> $data['make'],
 			'MODEL' 			=> $data['model'],
-            'AVATAR_IMG' 		=> ($user->optionget('viewavatars')) ? get_user_avatar($data['user_avatar'], $data['user_avatar_type'], $data['user_avatar_width'], $data['user_avatar_height']) : '',
-            'DATE_UPDATED'		=> $user->format_date($data['date_updated']),
-            'RT' 				=> $data['rt'] . $user->lang['DECIMAL_SEPERATOR'] . $data['rt_decimal'],
-            'SIXTY' 			=> $data['sixty'] . $user->lang['DECIMAL_SEPERATOR'] . $data['sixty_decimal'],
-            'THREE'	 			=> $data['three'] . $user->lang['DECIMAL_SEPERATOR'] . $data['three_decimal'],
-            'EIGHTH' 			=> $data['eighth'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighth_decimal'],
-            'EIGHTHMPH' 		=> $data['eighthmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighthmph_decimal'],
-            'THOU'	 			=> $data['thou'] . $user->lang['DECIMAL_SEPERATOR'] . $data['thou_decimal'],
+			'AVATAR_IMG' 		=> ($user->optionget('viewavatars')) ? get_user_avatar($data['user_avatar'], $data['user_avatar_type'], $data['user_avatar_width'], $data['user_avatar_height']) : '',
+			'DATE_UPDATED'		=> $user->format_date($data['date_updated']),
+			'RT' 				=> $data['rt'] . $user->lang['DECIMAL_SEPERATOR'] . $data['rt_decimal'],
+			'SIXTY' 			=> $data['sixty'] . $user->lang['DECIMAL_SEPERATOR'] . $data['sixty_decimal'],
+			'THREE'	 			=> $data['three'] . $user->lang['DECIMAL_SEPERATOR'] . $data['three_decimal'],
+			'EIGHTH' 			=> $data['eighth'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighth_decimal'],
+			'EIGHTHMPH' 		=> $data['eighthmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['eighthmph_decimal'],
+			'THOU'	 			=> $data['thou'] . $user->lang['DECIMAL_SEPERATOR'] . $data['thou_decimal'],
 			'QUART' 			=> $data['quart'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quart_decimal'],
 			'QUARTMPH' 			=> $data['quartmph'] . $user->lang['DECIMAL_SEPERATOR'] . $data['quartmph_decimal'],
 		));

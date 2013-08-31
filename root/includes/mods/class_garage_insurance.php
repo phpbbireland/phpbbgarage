@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package garage
 * @version $Id$
 * @copyright (c) 2005 phpBB Garage
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -35,9 +35,9 @@ class garage_insurance
 
 		$sql = 'INSERT INTO ' . GARAGE_PREMIUMS_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 			'vehicle_id'	=> $vid,
-			'premium'	=> $data['premium'] .'.'. $data['premium_decimal'],
+			'premium'		=> $data['premium'] .'.'. $data['premium_decimal'],
 			'cover_type_id'	=> $data['cover_type_id'],
-			'comments'	=> $data['comments'],
+			'comments'		=> $data['comments'],
 			'business_id'	=> $data['business_id'],
 		));
 
@@ -57,9 +57,9 @@ class garage_insurance
 		global $db, $vid, $ins_id;
 
 		$update_sql = array(
-			'premium'	=> $data['premium'] .'.'. $data['premium_decimal'],
+			'premium'		=> $data['premium'] .'.'. $data['premium_decimal'],
 			'cover_type_id'	=> $data['cover_type_id'],
-			'comments'	=> $data['comments'],
+			'comments'		=> $data['comments'],
 			'business_id'	=> $data['business_id']
 		);
 
@@ -82,9 +82,9 @@ class garage_insurance
 	function delete_premium($ins_id)
 	{
 		global $garage;
-	
-		$garage->delete_rows(GARAGE_PREMIUMS_TABLE, 'id', $ins_id);	
-	
+
+		$garage->delete_rows(GARAGE_PREMIUMS_TABLE, 'id', $ins_id);
+
 		return ;
 	}
 
@@ -100,21 +100,21 @@ class garage_insurance
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> "p.*, b.title, v.made_year, mk.make, md.model, v.made_year, mk.make, md.model",
 			'FROM'		=> array(
 				GARAGE_PREMIUMS_TABLE	=> 'p',
-				GARAGE_VEHICLES_TABLE 	=> 'v',
-				GARAGE_MAKES_TABLE 	=> 'mk',
-				GARAGE_MODELS_TABLE 	=> 'md',
-				GARAGE_BUSINESS_TABLE 	=> 'b',
+				GARAGE_VEHICLES_TABLE	=> 'v',
+				GARAGE_MAKES_TABLE 		=>	'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				GARAGE_BUSINESS_TABLE	=> 'b',
 			),
 			'WHERE'		=>  "p.id = $ins_id
-						AND v.id = p.vehicle_id
-						AND v.make_id = mk.id AND mk.pending = 0
-						AND v.model_id = md.id AND md.pending = 0
-						AND b.id = p.business_id"
+				AND v.id = p.vehicle_id
+				AND v.make_id = mk.id AND mk.pending = 0
+				AND v.model_id = md.id AND md.pending = 0
+				AND b.id = p.business_id"
 		));
 
       		$result = $db->sql_query($sql);
@@ -143,25 +143,25 @@ class garage_insurance
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'i.*, v.made_year, b.title, b.id as business_id, mk.make, md.model, u.username, u.user_id, u.user_colour, v.made_year, mk.make, md.model',
 			'FROM'		=> array(
 				GARAGE_PREMIUMS_TABLE	=> 'i',
 				GARAGE_VEHICLES_TABLE 	=> 'v',
-				GARAGE_MAKES_TABLE 	=> 'mk',
-				GARAGE_MODELS_TABLE 	=> 'md',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
 				GARAGE_BUSINESS_TABLE 	=> 'b',
-				USERS_TABLE	 	=> 'u',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=>  "i.business_id = b.id
-		       				AND b.insurance = 1
-						AND b.pending = 0
-						AND b.id = $business_id
-						AND v.id = i.vehicle_id
-						AND v.make_id = mk.id AND mk.pending = 0
-						AND v.model_id = md.id AND md.pending = 0
-						AND v.user_id = u.user_id",
+				AND b.insurance = 1
+				AND b.pending = 0
+				AND b.id = $business_id
+				AND v.id = i.vehicle_id
+				AND v.make_id = mk.id AND mk.pending = 0
+				AND v.model_id = md.id AND md.pending = 0
+				AND v.user_id = u.user_id",
 			'GROUP_BY'	=>  "i.id"
 		));
 
@@ -192,18 +192,18 @@ class garage_insurance
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'round(max( i.premium ),2) AS max, round(min( i.premium ),2) AS min, round(avg( i.premium ),2) AS avg',
 			'FROM'		=> array(
 				GARAGE_BUSINESS_TABLE	=> 'b',
 				GARAGE_PREMIUMS_TABLE	=> 'i',
 			),
-			'WHERE'		=>  "i.business_id = b.id 
-						AND b.id = $business_id 
-						AND b.insurance = 1 
-						AND i.cover_type_id = $cover_type_id 
-						AND i.premium > 0"
+			'WHERE'		=>  "i.business_id = b.id
+				AND b.id = $business_id
+				AND b.insurance = 1
+				AND i.cover_type_id = $cover_type_id
+				AND i.premium > 0"
 		));
 
 		$result = $db->sql_query($sql);
@@ -225,7 +225,7 @@ class garage_insurance
 
 		$data = null;
 
-		$sql = $db->sql_build_query('SELECT', 
+		$sql = $db->sql_build_query('SELECT',
 			array(
 			'SELECT'	=> 'i.*, b.title',
 			'FROM'		=> array(
@@ -233,9 +233,9 @@ class garage_insurance
 				GARAGE_BUSINESS_TABLE	=> 'b',
 			),
 			'WHERE'		=>  "i.vehicle_id = $vid
-						AND i.business_id = b.id"
+				AND i.business_id = b.id"
 		));
-	
+
 	       	$result = $db->sql_query($sql);
 		while($row = $db->sql_fetchrow($result))
 		{

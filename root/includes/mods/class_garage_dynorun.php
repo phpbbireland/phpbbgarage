@@ -183,7 +183,7 @@ class garage_dynorun
 		));
 
 		$result = $db->sql_query($sql);
-	        $data = $db->sql_fetchrow($result);
+		$data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
 		$data['total'] = (empty($data['total'])) ? 0 : $data['total'];
@@ -239,10 +239,10 @@ class garage_dynorun
 			'FROM'		=> array(
 				GARAGE_DYNORUNS_TABLE	=> 'd',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
 				GARAGE_BUSINESS_TABLE	=> 'b',
-				USERS_TABLE		=> 'u',
+				USERS_TABLE				=> 'u',
 			),
 			'LEFT_JOIN'	=> array(
 				array(
@@ -300,10 +300,10 @@ class garage_dynorun
 			'FROM'		=> array(
 				GARAGE_DYNORUNS_TABLE	=> 'd',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
 				GARAGE_BUSINESS_TABLE	=> 'b',
-				USERS_TABLE		=> 'u',
+				USERS_TABLE				=> 'u',
 			),
 			'LEFT_JOIN'	=> array(
 				array(
@@ -356,10 +356,10 @@ class garage_dynorun
 			'FROM'		=> array(
 				GARAGE_DYNORUNS_TABLE	=> 'd',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
 				GARAGE_BUSINESS_TABLE	=> 'b',
-				USERS_TABLE		=> 'u',
+				USERS_TABLE				=> 'u',
 			),
 			'LEFT_JOIN'	=> array(
 				array(
@@ -409,9 +409,9 @@ class garage_dynorun
 			'FROM'		=> array(
 				GARAGE_DYNORUNS_TABLE	=> 'd',
 				GARAGE_VEHICLES_TABLE	=> 'v',
-				GARAGE_MAKES_TABLE	=> 'mk',
-				GARAGE_MODELS_TABLE	=> 'md',
-				USERS_TABLE		=> 'u',
+				GARAGE_MAKES_TABLE		=> 'mk',
+				GARAGE_MODELS_TABLE		=> 'md',
+				USERS_TABLE				=> 'u',
 			),
 			'WHERE'		=> "d.pending = 0
 				AND d.vehicle_id = v.id

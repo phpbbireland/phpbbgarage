@@ -120,8 +120,8 @@ switch( $mode )
 		page_header($user->lang['GARAGE']);
 
 		$template->set_filenames(array(
-			'header' => 'garage/garage_header.html',
-			'body'   => 'garage/garage_dynorun.html'
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_dynorun.html'
 		));
 
 		$template->assign_block_vars('navlinks', array(
@@ -142,24 +142,24 @@ switch( $mode )
 		$garage_template->dynocentre_dropdown($dynocentres, $data['dynocentre_id']);
 
 		$template->assign_vars(array(
-			'L_TITLE'  				=> $user->lang['ADD_NEW_RUN'],
-			'L_BUTTON'  			=> $user->lang['ADD_NEW_RUN'],
-			'VID' 					=> $vid,
-			'BHP' 					=> $data['bhp'],
+			'L_TITLE'				=> $user->lang['ADD_NEW_RUN'],
+			'L_BUTTON'				=> $user->lang['ADD_NEW_RUN'],
+			'VID'					=> $vid,
+			'BHP'					=> $data['bhp'],
 			'BHP_DECIMAL'			=> $data['bhp_decimal'],
-			'TORQUE' 				=> $data['torque'],
+			'TORQUE'				=> $data['torque'],
 			'TORQUE_DECIMAL'		=> $data['torque_decimal'],
-			'BOOST' 				=> $data['boost'],
+			'BOOST'					=> $data['boost'],
 			'BOOST_DECIMAL'			=> $data['boost_decimal'],
-			'NITROUS' 				=> $data['nitrous'],
-			'PEAKPOINT'	 			=> $data['peakpoint'],
-			'PEAKPOINT_DECIMAL' 	=> $data['peakpoint_decimal'],
+			'NITROUS'				=> $data['nitrous'],
+			'PEAKPOINT'				=> $data['peakpoint'],
+			'PEAKPOINT_DECIMAL'		=> $data['peakpoint_decimal'],
 			'URL_IMAGE'				=> $data['url_image'],
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=insert_dynorun"),
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=insert_dynorun"),
+			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 
 			'U_SUBMIT_BUSINESS_DYNOCENTRE'	=> 'javascript:add_dynocentre()',
-         ));
+		));
 
 		$garage_template->sidemenu();
 	break;
@@ -298,8 +298,8 @@ switch( $mode )
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' => 'garage/garage_header.html',
-			'body'   => 'garage/garage_dynorun.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_dynorun.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $vehicle['vehicle'],
@@ -317,27 +317,26 @@ switch( $mode )
 		$garage_template->dynocentre_dropdown($dynocentres, (!empty($store['dynocentre_id'])) ? $store['dynocentre_id'] : $data['dynocentre_id']);
 
 		$template->assign_vars(array(
-			'L_TITLE'  			=> $user->lang['EDIT_RUN'],
-			'L_BUTTON'  		=> $user->lang['EDIT_RUN'],
+			'L_TITLE' 				=> $user->lang['EDIT_RUN'],
+			'L_BUTTON' 				=> $user->lang['EDIT_RUN'],
+			'VID'					=> $vid,
+			'DID'					=> $did,
+			'BHP'					=> (!empty($store['bhp'])) ? $store['bhp'] : $data['bhp'],
+			'BHP_DECIMAL'			=> (!empty($store['bhp_decimal'])) ? $store['bhp_decimal'] : $data['bhp_decimal'],
+			'TORQUE'				=> (!empty($store['torque'])) ? $store['torque'] : $data['torque'],
+			'TORQUE_DECIMAL'		=> (!empty($store['torque_decimal'])) ? $store['torque_decimal'] : $data['torque_decimal'],
+			'BOOST'					=> (!empty($store['boost'])) ? $store['boost'] : $data['boost'],
+			'BOOST_DECIMAL'			=> (!empty($store['boost_decimal'])) ? $store['boost_decimal'] : $data['boost_decimal'],
+			'NITROUS'				=> (!empty($store['nitrous'])) ? $store['nitrous'] : $data['nitrous'],
+			'PEAKPOINT'				=> (!empty($store['peakpoint'])) ? $store['peakpoint'] : $data['peakpoint'],
+			'PEAKPOINT_DECIMAL'		=> (!empty($store['peakpoint_decimal'])) ? $store['peakpoint_decimal'] : $data['peakpoint_decimal'],
+			'REDIRECT'				=> $store['redirect'],
 
-			'VID' 				=> $vid,
-			'DID' 				=> $did,
-			'BHP' 				=> (!empty($store['bhp'])) ? $store['bhp'] : $data['bhp'],
-			'BHP_DECIMAL'		=> (!empty($store['bhp_decimal'])) ? $store['bhp_decimal'] : $data['bhp_decimal'],
-			'TORQUE' 			=> (!empty($store['torque'])) ? $store['torque'] : $data['torque'],
-			'TORQUE_DECIMAL'	=> (!empty($store['torque_decimal'])) ? $store['torque_decimal'] : $data['torque_decimal'],
-			'BOOST' 			=> (!empty($store['boost'])) ? $store['boost'] : $data['boost'],
-			'BOOST_DECIMAL'		=> (!empty($store['boost_decimal'])) ? $store['boost_decimal'] : $data['boost_decimal'],
-			'NITROUS' 			=> (!empty($store['nitrous'])) ? $store['nitrous'] : $data['nitrous'],
-			'PEAKPOINT' 		=> (!empty($store['peakpoint'])) ? $store['peakpoint'] : $data['peakpoint'],
-			'PEAKPOINT_DECIMAL'	=> (!empty($store['peakpoint_decimal'])) ? $store['peakpoint_decimal'] : $data['peakpoint_decimal'],
-			'REDIRECT' 			=> $store['redirect'],
-
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=update_dynorun"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=update_dynorun"),
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=insert_dynorun_image"),
-			'U_EDIT_DATA' 			=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID=$did"),
-			'U_MANAGE_GALLERY' 		=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID=$did#images"),
+			'U_EDIT_DATA'			=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID=$did"),
+			'U_MANAGE_GALLERY'		=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=edit_dynorun&amp;VID=$vid&amp;DID=$did#images"),
 
 			'U_SUBMIT_BUSINESS_DYNOCENTRE'	=> "javascript:add_dynocentre('edit')",
 		));
@@ -347,8 +346,8 @@ switch( $mode )
 				'U_IMAGE'			=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
 				'U_REMOVE_IMAGE'	=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=remove_dynorun_image&amp;&amp;VID=$vid&amp;DID=$did&amp;image_id=" . $gallery_data[$i]['attach_id']),
 				'U_SET_HILITE'		=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=set_dynorun_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid&amp;DID=$did") : '',
-				'IMAGE' 			=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
-				'IMAGE_TITLE' 		=> $gallery_data[$i]['attach_file'])
+				'IMAGE'				=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
+				'IMAGE_TITLE'		=> $gallery_data[$i]['attach_file'])
 			);
 		}
 		$garage_template->sidemenu();
@@ -595,22 +594,22 @@ switch( $mode )
 		}
 		$template->assign_vars(array(
 			'U_VIEW_PROFILE' 	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=" . $data['user_id']),
-			'YEAR' 				=> $data['made_year'],
-			'MAKE' 				=> $data['make'],
-			'MODEL' 			=> $data['model'],
-			'USERNAME' 			=> $data['username'],
+			'YEAR'				=> $data['made_year'],
+			'MAKE'				=> $data['make'],
+			'MODEL'				=> $data['model'],
+			'USERNAME'			=> $data['username'],
 			'USERNAME_COLOUR'	=> get_username_string('colour', $data['user_id'], $data['username'], $data['user_colour']),
-            'AVATAR_IMG' 		=> ($user->optionget('viewavatars')) ? get_user_avatar($data['user_avatar'], $data['user_avatar_type'], $data['user_avatar_width'], $data['user_avatar_height']) : '',
-            'DYNOCENTRE' 		=> $data['title'],
-            'BHP' 				=> $data['bhp'] . $user->lang['DECIMAL_SEPERATOR'] . $data['bhp_decimal'],
-            'BHP_UNIT'	 		=> $data['bhp_unit'],
-            'TORQUE' 			=> $data['torque'] . $user->lang['DECIMAL_SEPERATOR'] . $data['torque_decimal'],
-            'TORQUE_UNIT' 		=> $data['torque_unit'],
-            'NITROUS' 			=> $data['nitrous'],
-            'BOOST' 			=> $data['boost'] . $user->lang['DECIMAL_SEPERATOR'] . $data['boost_decimal'],
-            'BOOST_UNIT' 		=> $data['boost_unit'],
-            'PEAKPOINT' 		=> $data['peakpoint'] . $user->lang['DECIMAL_SEPERATOR'] . $data['peakpoint_decimal'],
-         ));
+			'AVATAR_IMG'		=> ($user->optionget('viewavatars')) ? get_user_avatar($data['user_avatar'], $data['user_avatar_type'], $data['user_avatar_width'], $data['user_avatar_height']) : '',
+			'DYNOCENTRE'		=> $data['title'],
+			'BHP'				=> $data['bhp'] . $user->lang['DECIMAL_SEPERATOR'] . $data['bhp_decimal'],
+			'BHP_UNIT'			=> $data['bhp_unit'],
+			'TORQUE'			=> $data['torque'] . $user->lang['DECIMAL_SEPERATOR'] . $data['torque_decimal'],
+			'TORQUE_UNIT'		=> $data['torque_unit'],
+			'NITROUS'			=> $data['nitrous'],
+			'BOOST'				=> $data['boost'] . $user->lang['DECIMAL_SEPERATOR'] . $data['boost_decimal'],
+			'BOOST_UNIT'		=> $data['boost_unit'],
+			'PEAKPOINT'			=> $data['peakpoint'] . $user->lang['DECIMAL_SEPERATOR'] . $data['peakpoint_decimal'],
+		));
 
 		$garage_template->sidemenu();
 	break;

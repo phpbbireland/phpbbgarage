@@ -124,16 +124,16 @@ switch( $mode )
 		$garage_template->cover_dropdown($data['cover_type_id']);
 
 		$template->assign_vars(array(
-			'L_TITLE' 				=> $user->lang['ADD_PREMIUM'],
-			'L_BUTTON' 				=> $user->lang['ADD_PREMIUM'],
+			'L_TITLE'				=> $user->lang['ADD_PREMIUM'],
+			'L_BUTTON'				=> $user->lang['ADD_PREMIUM'],
 			'CURRENCY'				=> $vehicle['currency'],
-			'PREMIUM' 				=> $data['premium'],
+			'PREMIUM'				=> $data['premium'],
 			'PREMIUM_DECIMAL'		=> $data['premium_decimal'],
-			'COMMENTS' 				=> $data['comments'],
+			'COMMENTS'				=> $data['comments'],
 			'U_SUBMIT_BUSINESS' 	=> "javascript:add_insurer('')",
-			'VID' 					=> $vid,
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=insert_premium"),
+			'VID'					=> $vid,
+			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=insert_premium"),
 		));
 
 		$garage_template->sidemenu();
@@ -192,7 +192,7 @@ switch( $mode )
 		*/
 		if ($user->data['user_id'] == ANONYMOUS)
 		{
-			login_box("garage_premium.$phpEx?mode=edit_premium&amp;INS_ID=$ins_id&amp;VID=$vid");
+			login_box("{$phpbb_root_path}garage/garage_premium.$phpEx?mode=edit_premium&amp;INS_ID=$ins_id&amp;VID=$vid");
 		}
 
 		/**
@@ -238,17 +238,17 @@ switch( $mode )
 		$garage_template->insurance_dropdown($insurance_business, (!empty($store['business_id'])) ? $store['business_id'] : $data['business_id']);
 		$garage_template->cover_dropdown((!empty($store['cover_type_id'])) ? $store['cover_type_id'] : $data['cover_type_id']);
 		$template->assign_vars(array(
-			'L_TITLE' 			=> $user->lang['EDIT_PREMIUM'],
-			'L_BUTTON' 			=> $user->lang['EDIT_PREMIUM'],
+			'L_TITLE'			=> $user->lang['EDIT_PREMIUM'],
+			'L_BUTTON'			=> $user->lang['EDIT_PREMIUM'],
 			'CURRENCY'			=> $vehicle_data['currency'],
-			'INS_ID' 			=> $ins_id,
-			'VID' 				=> $vid,
-			'PREMIUM' 			=> (!empty($store['premium'])) ? $store['premium'] : $data['premium'],
+			'INS_ID'			=> $ins_id,
+			'VID'				=> $vid,
+			'PREMIUM'			=> (!empty($store['premium'])) ? $store['premium'] : $data['premium'],
 			'PREMIUM_DECIMAL'	=> (!empty($store['premium_decimal'])) ? $store['premium_decimal'] : $data['premium_decimal'],
-			'COMMENTS' 			=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
-			'U_SUBMIT_BUSINESS' 	=> "javascript:add_insurer('edit')",
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=update_premium"))
+			'COMMENTS'			=> (!empty($store['comments'])) ? $store['comments'] : $data['comments'],
+			'U_SUBMIT_BUSINESS'		=> "javascript:add_insurer('edit')",
+			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_premium.$phpEx", "mode=update_premium"))
 		);
 		$garage_template->sidemenu();
 	break;
@@ -326,7 +326,7 @@ switch( $mode )
 $garage_template->version_notice();
 
 $template->set_filenames(array(
-	'garage_footer' => 'garage_footer.html'
+	'garage_footer' => 'garage/garage_footer.html'
 ));
 
 page_footer();

@@ -52,7 +52,7 @@ $bid = request_var('BID', '');
 */
 $template->assign_block_vars('navlinks', array(
 	'FORUM_NAME'	=> $user->lang['GARAGE'],
-	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage.$phpEx")
+	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx")
 ));
 
 /**
@@ -79,7 +79,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_add_blog') || !$garage_config['enable_blogs'])
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**
@@ -161,7 +161,7 @@ switch( $mode )
 			'BID'			=> $bid,
 			'BLOG_TITLE'	=> $data['blog_title'],
 			'BLOG_TEXT'		=> $data['blog_text'],
-			'S_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_blog.$phpEx", "mode=update_blog")
+			'S_MODE_ACTION'	=> append_sid("{$phpbb_root_path}garage/garage_blog.$phpEx", "mode=update_blog")
 		));
 
 		$garage_template->sidemenu();
@@ -225,7 +225,7 @@ switch( $mode )
 		*/
 		if (!$auth->acl_get('u_garage_delete_blog'))
 		{
-			redirect(append_sid("{$phpbb_root_path}garage.$phpEx", "mode=error&amp;EID=14"));
+			redirect(append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=error&amp;EID=14"));
 		}
 
 		/**

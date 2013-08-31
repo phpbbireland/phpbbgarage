@@ -214,7 +214,7 @@ switch ($mode)
 		}
 
 		$template->assign_vars(array(
-			'L_BUTTON_LABEL'		=> $user->lang['RETURN_TO_ITEM'],
+			'L_BUTTON_LABEL'			=> $user->lang['RETURN_TO_ITEM'],
 			'S_USER_SUBMIT_SUCCESS'		=> true,
 			'S_USER_SUBMIT_ACTION'		=> $user_submit_action,
 		));
@@ -285,8 +285,8 @@ switch ($mode)
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' 	=> 'garage/garage_header.html',
-			'body'   	=> 'garage/garage_vehicle.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_vehicle.html')
 		);
 		$garage_template->attach_image('vehicle');
 		$garage_template->make_dropdown($makes, $data['make_id']);
@@ -295,24 +295,24 @@ switch ($mode)
 		$garage_template->mileage_dropdown($data['mileage_units']);
 		$garage_template->year_dropdown($years, $data['made_year']);
 		$template->assign_vars(array(
-			'L_TITLE' 				=> $user->lang['CREATE_NEW_VEHICLE'],
-			'L_BUTTON' 				=> $user->lang['CREATE_NEW_VEHICLE'],
-			'U_USER_SUBMIT_MAKE' 	=> "javascript:add_make()",
-			'U_USER_SUBMIT_MODEL' 	=> "javascript:add_model()",
-			'MAKE' 					=> $data['make'],
-			'MAKE_ID' 				=> $data['make_id'],
-			'MODEL' 				=> $data['model'],
-			'MODEL_ID' 				=> $data['model_id'],
-			'COLOUR' 				=> $data['colour'],
-			'MILEAGE' 				=> $data['mileage'],
-			'PRICE' 				=> $data['price'],
+			'L_TITLE'				=> $user->lang['CREATE_NEW_VEHICLE'],
+			'L_BUTTON'				=> $user->lang['CREATE_NEW_VEHICLE'],
+			'U_USER_SUBMIT_MAKE'	=> "javascript:add_make()",
+			'U_USER_SUBMIT_MODEL'	=> "javascript:add_model()",
+			'MAKE'					=> $data['make'],
+			'MAKE_ID'				=> $data['make_id'],
+			'MODEL'					=> $data['model'],
+			'MODEL_ID'				=> $data['model_id'],
+			'COLOUR'				=> $data['colour'],
+			'MILEAGE'				=> $data['mileage'],
+			'PRICE'					=> $data['price'],
 			'PRICE_DECIMAL'			=> $data['price_decimal'],
-			'COMMENTS' 				=> $data['comments'],
+			'COMMENTS'				=> $data['comments'],
 			'URL_IMAGE'				=> $data['url_image'],
 			'S_DISPLAY_SUBMIT_MAKE'	=> $garage_config['enable_user_submit_make'],
 			'S_DISPLAY_SUBMIT_MODEL'=> $garage_config['enable_user_submit_model'],
-			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
-			'S_MODE_ACTION' 		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_vehicle"))
+			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
+			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_vehicle"))
 		);
 		$garage_template->sidemenu();
 	break;
@@ -439,8 +439,8 @@ switch ($mode)
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' 	=> 'garage/garage_header.html',
-			'body'   	=> 'garage/garage_vehicle.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_vehicle.html')
 		);
 		$template->assign_block_vars('navlinks', array(
 			'FORUM_NAME'	=> $data['vehicle'],
@@ -457,7 +457,7 @@ switch ($mode)
 		$garage_template->year_dropdown($years, (!empty($store['made_year'])) ? $store['made_year'] : $data['made_year']);
 		$garage_template->attach_image('vehicle');
 		$template->assign_vars(array(
-       		'L_TITLE'				=> $user->lang['EDIT_VEHICLE'],
+			'L_TITLE'				=> $user->lang['EDIT_VEHICLE'],
 			'L_BUTTON'				=> $user->lang['EDIT_VEHICLE'],
 			'U_EDIT_DATA'			=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=edit_vehicle&amp;VID=$vid"),
 			'U_MANAGE_GALLERY'		=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=manage_vehicle_gallery&amp;VID=$vid"),
@@ -476,16 +476,16 @@ switch ($mode)
 			'S_DISPLAY_SUBMIT_MODEL'=> $garage_config['enable_user_submit_make'],
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=update_vehicle"),
-			'S_IMAGE_MODE_ACTION' 	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_vehicle_image"),
+			'S_IMAGE_MODE_ACTION'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=insert_vehicle_image"),
 		));
 		for ($i = 0, $count = sizeof($gallery_data);$i < $count; $i++)
 		{
 			$template->assign_block_vars('pic_row', array(
-				'U_IMAGE'	=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
+				'U_IMAGE'		=> (($gallery_data[$i]['attach_id']) && ($gallery_data[$i]['attach_is_image']) && (!empty($gallery_data[$i]['attach_thumb_location'])) && (!empty($gallery_data[$i]['attach_location']))) ? append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=view_image&amp;image_id=" . $gallery_data[$i]['attach_id']) : '',
 				'U_REMOVE_IMAGE'=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=remove_vehicle_image&amp;&amp;VID=$vid&amp;image_id=" . $gallery_data[$i]['attach_id']),
 				'U_SET_HILITE'	=> ($gallery_data[$i]['hilite'] == 0) ? append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx", "mode=set_vehicle_hilite&amp;image_id=" . $gallery_data[$i]['attach_id'] . "&amp;VID=$vid") : '',
-				'IMAGE' 	=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
-				'IMAGE_TITLE' 	=> $gallery_data[$i]['attach_file'])
+				'IMAGE'			=> $phpbb_root_path . GARAGE_UPLOAD_PATH . $gallery_data[$i]['attach_thumb_location'],
+				'IMAGE_TITLE'	=> $gallery_data[$i]['attach_file'])
 			);
 		}
 		$garage_template->sidemenu();
@@ -826,7 +826,7 @@ switch ($mode)
 		/**
 		* Get vehicle data from DB
 		*/
-	        $vehicle_data = $garage_vehicle->get_vehicle($vid);
+		$vehicle_data = $garage_vehicle->get_vehicle($vid);
 
 		/**
 		* Create unqiue negative user number for guests
@@ -959,14 +959,14 @@ switch ($mode)
 		*/
 		page_header($user->lang['GARAGE']);
 		$template->set_filenames(array(
-			'header' 	=> 'garage/garage_header.html',
-			'body'   	=> 'garage/garage_votm.html')
+			'header'	=> 'garage/garage_header.html',
+			'body'		=> 'garage/garage_votm.html')
 		);
 
 		$first_rating = $garage_vehicle->get_earliest_rating();
 
 		$time = localtime(time(), 1) ;
-		$start_year =date("Y", $first_rating['rate_date']);
+		$start_year = date("Y", $first_rating['rate_date']);
 		$current_year = $time['tm_year'] + 1900;
 
 		if ( $start_year > $current_year )
@@ -1004,13 +1004,13 @@ switch ($mode)
 				}
 				$template->assign_block_vars('year.month', array(
 					'MONTH'				=> $month,
-					'THUMB' 			=> $thumb_image,
+					'THUMB'				=> $thumb_image,
 					'VEHICLE'			=> $vehicle_data['vehicle'],
-					'USERNAME' 			=> $vehicle_data['username'],
+					'USERNAME'			=> $vehicle_data['username'],
 					'IMAGE_TITLE'		=> $vehicle_data['attach_file'],
 					'U_VIEW_IMAGE'		=> append_sid("{$phpbb_root_path}garage/garage.$phpEx?mode=view_image&amp;image_id=".$vehicle_data['attach_id']),
-					'U_VIEW_VEHICLE' 	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx?mode=view_vehicle&amp;VID=".$vehicle_data['vehicle_id']),
-					'U_VIEW_PROFILE' 	=> append_sid("memberlist.$phpEx?mode=viewprofile&amp;u=".$vehicle_data['user_id']),
+					'U_VIEW_VEHICLE'	=> append_sid("{$phpbb_root_path}garage/garage_vehicle.$phpEx?mode=view_vehicle&amp;VID=".$vehicle_data['vehicle_id']),
+					'U_VIEW_PROFILE'	=> append_sid("memberlist.$phpEx?mode=viewprofile&amp;u=".$vehicle_data['user_id']),
 					'USERNAME_COLOUR'	=> get_username_string('colour', $vehicle_data['user_id'], $vehicle_data['username'], $vehicle_data['user_colour']),
 					'RATING'			=> $vehicle_data['total_ratings'],
 				));

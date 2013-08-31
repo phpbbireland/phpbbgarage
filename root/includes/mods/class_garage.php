@@ -375,9 +375,9 @@ class garage
 				'SELECT_COUNT'	=> "count(DISTINCT v.id) as total",
 				'FROM'		=> array(
 					GARAGE_VEHICLES_TABLE	=> 'v',
-					GARAGE_MAKES_TABLE	=> 'mk',
-					GARAGE_MODELS_TABLE	=> 'md',
-					USERS_TABLE		=> 'u',
+					GARAGE_MAKES_TABLE		=> 'mk',
+					GARAGE_MODELS_TABLE		=> 'md',
+					USERS_TABLE				=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
@@ -435,9 +435,9 @@ class garage
 				'FROM'		=> array(
 					GARAGE_MODIFICATIONS_TABLE	=> 'm',
 					GARAGE_VEHICLES_TABLE		=> 'v',
-					GARAGE_MAKES_TABLE		=> 'mk',
-					GARAGE_MODELS_TABLE		=> 'md',
-					USERS_TABLE			=> 'u',
+					GARAGE_MAKES_TABLE			=> 'mk',
+					GARAGE_MODELS_TABLE			=> 'md',
+					USERS_TABLE					=> 'u',
 				),
 				'LEFT_JOIN'	=> array(
 					array(
@@ -818,7 +818,7 @@ class garage
 			array(
 			'SELECT'	=> 'g.group_id, g.group_name',
 				'FROM'		=> array(
-					USERS_TABLE		=> 'u',
+					USERS_TABLE			=> 'u',
 					GROUPS_TABLE		=> 'g',
 					USER_GROUP_TABLE	=> 'ug',
 				),
