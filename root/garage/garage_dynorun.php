@@ -142,20 +142,20 @@ switch( $mode )
 		$garage_template->dynocentre_dropdown($dynocentres, $data['dynocentre_id']);
 
 		$template->assign_vars(array(
-			'L_TITLE'				=> $user->lang['ADD_NEW_RUN'],
-			'L_BUTTON'				=> $user->lang['ADD_NEW_RUN'],
-			'VID'					=> $vid,
-			'BHP'					=> $data['bhp'],
-			'BHP_DECIMAL'			=> $data['bhp_decimal'],
-			'TORQUE'				=> $data['torque'],
-			'TORQUE_DECIMAL'		=> $data['torque_decimal'],
-			'BOOST'					=> $data['boost'],
-			'BOOST_DECIMAL'			=> $data['boost_decimal'],
-			'NITROUS'				=> $data['nitrous'],
-			'PEAKPOINT'				=> $data['peakpoint'],
-			'PEAKPOINT_DECIMAL'		=> $data['peakpoint_decimal'],
-			'URL_IMAGE'				=> $data['url_image'],
-			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=insert_dynorun"),
+			'L_TITLE'			=> $user->lang['ADD_NEW_RUN'],
+			'L_BUTTON'			=> $user->lang['ADD_NEW_RUN'],
+			'VID'				=> $vid,
+			'BHP'				=> $data['bhp'],
+			'BHP_DECIMAL'		=> $data['bhp_decimal'],
+			'TORQUE'			=> $data['torque'],
+			'TORQUE_DECIMAL'	=> $data['torque_decimal'],
+			'BOOST'				=> $data['boost'],
+			'BOOST_DECIMAL'		=> $data['boost_decimal'],
+			'NITROUS'			=> $data['nitrous'],
+			'PEAKPOINT'			=> $data['peakpoint'],
+			'PEAKPOINT_DECIMAL'	=> $data['peakpoint_decimal'],
+			'URL_IMAGE'			=> $data['url_image'],
+			'S_MODE_ACTION'		=> append_sid("{$phpbb_root_path}garage_dynorun.$phpEx", "mode=insert_dynorun"),
 			'S_MODE_USER_SUBMIT'	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
 
 			'U_SUBMIT_BUSINESS_DYNOCENTRE'	=> 'javascript:add_dynocentre()',
@@ -288,8 +288,8 @@ switch( $mode )
 		/**
 		* Get vehicle, dynorun, dynocentres & gallery data from DB
 		*/
-		$vehicle		= $garage_vehicle->get_vehicle($vid);
-		$data			= $garage_dynorun->get_dynorun($did);
+		$vehicle	= $garage_vehicle->get_vehicle($vid);
+		$data		= $garage_dynorun->get_dynorun($did);
 		$dynocentres 	= $garage_business->get_business_by_type(BUSINESS_DYNOCENTRE);
 		$gallery_data 	= $garage_image->get_dynorun_gallery($did);
 
@@ -317,20 +317,20 @@ switch( $mode )
 		$garage_template->dynocentre_dropdown($dynocentres, (!empty($store['dynocentre_id'])) ? $store['dynocentre_id'] : $data['dynocentre_id']);
 
 		$template->assign_vars(array(
-			'L_TITLE' 				=> $user->lang['EDIT_RUN'],
-			'L_BUTTON' 				=> $user->lang['EDIT_RUN'],
-			'VID'					=> $vid,
-			'DID'					=> $did,
-			'BHP'					=> (!empty($store['bhp'])) ? $store['bhp'] : $data['bhp'],
-			'BHP_DECIMAL'			=> (!empty($store['bhp_decimal'])) ? $store['bhp_decimal'] : $data['bhp_decimal'],
-			'TORQUE'				=> (!empty($store['torque'])) ? $store['torque'] : $data['torque'],
-			'TORQUE_DECIMAL'		=> (!empty($store['torque_decimal'])) ? $store['torque_decimal'] : $data['torque_decimal'],
-			'BOOST'					=> (!empty($store['boost'])) ? $store['boost'] : $data['boost'],
-			'BOOST_DECIMAL'			=> (!empty($store['boost_decimal'])) ? $store['boost_decimal'] : $data['boost_decimal'],
-			'NITROUS'				=> (!empty($store['nitrous'])) ? $store['nitrous'] : $data['nitrous'],
-			'PEAKPOINT'				=> (!empty($store['peakpoint'])) ? $store['peakpoint'] : $data['peakpoint'],
-			'PEAKPOINT_DECIMAL'		=> (!empty($store['peakpoint_decimal'])) ? $store['peakpoint_decimal'] : $data['peakpoint_decimal'],
-			'REDIRECT'				=> $store['redirect'],
+			'L_TITLE' 			=> $user->lang['EDIT_RUN'],
+			'L_BUTTON' 			=> $user->lang['EDIT_RUN'],
+			'VID'				=> $vid,
+			'DID'				=> $did,
+			'BHP'				=> (!empty($store['bhp'])) ? $store['bhp'] : $data['bhp'],
+			'BHP_DECIMAL'		=> (!empty($store['bhp_decimal'])) ? $store['bhp_decimal'] : $data['bhp_decimal'],
+			'TORQUE'			=> (!empty($store['torque'])) ? $store['torque'] : $data['torque'],
+			'TORQUE_DECIMAL'	=> (!empty($store['torque_decimal'])) ? $store['torque_decimal'] : $data['torque_decimal'],
+			'BOOST'				=> (!empty($store['boost'])) ? $store['boost'] : $data['boost'],
+			'BOOST_DECIMAL'		=> (!empty($store['boost_decimal'])) ? $store['boost_decimal'] : $data['boost_decimal'],
+			'NITROUS'			=> (!empty($store['nitrous'])) ? $store['nitrous'] : $data['nitrous'],
+			'PEAKPOINT'			=> (!empty($store['peakpoint'])) ? $store['peakpoint'] : $data['peakpoint'],
+			'PEAKPOINT_DECIMAL'	=> (!empty($store['peakpoint_decimal'])) ? $store['peakpoint_decimal'] : $data['peakpoint_decimal'],
+			'REDIRECT'			=> $store['redirect'],
 
 			'S_MODE_ACTION'			=> append_sid("{$phpbb_root_path}garage/garage_dynorun.$phpEx", "mode=update_dynorun"),
 			'S_MODE_USER_SUBMIT' 	=> append_sid("{$phpbb_root_path}garage/garage.$phpEx", "mode=user_submit_data"),
